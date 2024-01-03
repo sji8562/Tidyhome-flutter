@@ -1,0 +1,13 @@
+참고용으로 만든거라서 지우지 말아줘용
+
+Container(
+                    padding: EdgeInsets.only(left: 20,top: 10,right: 10,bottom: 10),
+                    width: double.infinity,
+                    color: Colors.grey[100],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        textBody3("환불 가능 카드입니다."),
+                      ],
+                    ),
+                  ),
