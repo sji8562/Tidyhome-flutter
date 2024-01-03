@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1001508290866",
+    "project_id": "tidyhome-cac45",
+    "storage_bucket": "tidyhome-cac45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001508290866:android:4a305e6e51e87b73e0572b",
+        "android_client_info": {
+          "package_name": "com.tenco.toyproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLn2RvP3hEjQBHVvyUGmenVgP-sdIZtv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
