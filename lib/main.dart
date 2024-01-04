@@ -25,13 +25,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ChoiceAddressPage(),
       // home: const SplashPage(),
-      // navigatorKey: navigatorKey,
-      // debugShowCheckedModeBanner: false,
-      // initialRoute: Move.MainPage,
-      // routes: getRouters(),
-      // theme: theme(),
+      navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
+      initialRoute: Move.StartPage,
+      routes: getRouters(),
+      theme: theme(),
     );
   }
 }
