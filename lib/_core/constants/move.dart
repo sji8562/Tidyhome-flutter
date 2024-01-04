@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:toyproject/ui/pages/splash_page/splash_page.dart';
-
 import '../../ui/pages/start_page/start_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/choice_address_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_page.dart';
 
 
 class Move {
@@ -19,13 +20,18 @@ class Move {
   static String PayMainPage = "/card";
   static String SplashPage = "/splash";
 
+  // KWON
+  static String ReservationPage = "/reservation";
+  static String ChoiceAddressPage = '/choice-address';
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
     Move.SplashPage: (context) => SplashPage(),
     Move.StartPage: (context) => StartPage(),
-
+    Move.ReservationPage: (context) => ReservationPage(),
+    Move.ChoiceAddressPage: (context) => ChoiceAddressPage(),
+    // Move.MainPage: (context) => MainPage(),
     // Move.LoginPage: (context) => LoginPage(),
     // Move.JoinPage: (context) => JoinPage(),
     // Move.JoinSuccessPage: (context) => JoinSuccessPage(),

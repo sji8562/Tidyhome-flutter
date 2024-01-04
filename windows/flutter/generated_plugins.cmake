@@ -3,6 +3,10 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+<<<<<<< HEAD
+=======
+  firebase_auth
+>>>>>>> dev
   firebase_core
   flutter_secure_storage_windows
 )
