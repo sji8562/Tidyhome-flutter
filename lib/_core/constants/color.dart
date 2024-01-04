@@ -23,7 +23,7 @@ const MaterialColor kPrimaryColor = MaterialColor(
 );
 
 const primaryColor = Color(0xff367DF7);
-const primaryColor02 = Color(0xffF0F7FF);
+const primaryColor02 = Color(0xffe9f4ff);
 const primaryColor03 = Color(0xff4b89e7);
 const pointColor = Color(0xffEBE1F2);
 const accentColor = Color(0xffFC602F);

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../_core/constants/color.dart';
 
-class ColorButton extends StatelessWidget {
+class SoftColorButton extends StatelessWidget {
   final String text;
   final funPageRoute;
 
-  const ColorButton({required this.text, this.funPageRoute});
+  const SoftColorButton({required this.text, this.funPageRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,10 @@ class ColorButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
-          backgroundColor: primaryColor,
+          backgroundColor: primaryColor02,
         ),
         onPressed: funPageRoute,
-        child: Text("$text", style: TextStyle(color: Colors.white, fontSize: 16),),
+        child: Text("$text", style: TextStyle(color: primaryColor, fontSize: 16, fontWeight: FontWeight.bold),),
       ),
     );
   }
