@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ChoiceAddressPage(),
+      // ChoiceAddressPage()
+      home: ReservationPage(),
       // home: const SplashPage(),
       // navigatorKey: navigatorKey,
       // debugShowCheckedModeBanner: false,

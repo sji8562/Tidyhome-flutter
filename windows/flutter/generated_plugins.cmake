@@ -3,11 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-<<<<<<< HEAD
-=======
-  file_selector_windows
   firebase_auth
->>>>>>> c8d96072356d19b7934674f5a22ca37929f78722
   firebase_core
   flutter_secure_storage_windows
 )
