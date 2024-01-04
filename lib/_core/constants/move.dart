@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toyproject/ui/pages/reservation_page/find_address_page.dart';
 import 'package:toyproject/ui/pages/splash_page/splash_page.dart';
 import '../../ui/pages/join_page/join_page.dart';
 import '../../ui/pages/start_page/start_page.dart';
@@ -26,6 +27,7 @@ class Move {
   // KWON
   static String ReservationPage = "/reservation";
   static String ChoiceAddressPage = '/choice-address';
+  static String FindAddressPage = '/find-address';
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -38,6 +40,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.ChoiceAddressPage: (context) => ChoiceAddressPage(),
     Move.ReservationPage: (context) => ReservationPage(),
     Move.ChoiceAddressPage: (context) => ChoiceAddressPage(),
+    Move.FindAddressPage: (context) => FindAddressPage(),
     // Move.MainPage: (context) => MainPage(),
     // Move.LoginPage: (context) => LoginPage(),
     // Move.JoinPage: (context) => JoinPage(),

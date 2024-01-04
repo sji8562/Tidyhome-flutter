@@ -10,35 +10,44 @@ import 'package:toyproject/ui/widget/button/soft_color_button.dart';
 import '../../../_core/constants/style.dart';
 import '../../widget/arrow_app_bar.dart';
 
-class ChoiceAddressPage extends StatefulWidget {
-  const ChoiceAddressPage({super.key});
+class FindAddressPage extends StatefulWidget {
+  const FindAddressPage({super.key});
 
   @override
-  State<ChoiceAddressPage> createState() => _ChoiceAddressPageState();
+  State<FindAddressPage> createState() => _ChoiceAddressPageState();
 }
 
-class _ChoiceAddressPageState extends State<ChoiceAddressPage> {
+class _ChoiceAddressPageState extends State<FindAddressPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: "주소 관리"),
+      appBar: ArrowAppBar(leading: Icons.close, title: "주소 등록"),
       body: Stack(
         children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: '주소를 검색해 주세요',
+              ),
+            ),
+          ),
           ListView.builder(
             itemCount: 10, // length
             itemBuilder: (context, index) {
               return Column(
                 children: [
-                  ChoiceAddressTab(text: '서울 강남구 테헤란로 302 위워크타워 1동1호', isChecked: false),
-                  ChoiceAddressTab(text: '서울 강남구 테헤란로 302 위워크타워 1동1호', isChecked: true),
+                  // AddressWithDetailTab(text: '서울 강남구 테헤란로 302 위워크타워 1동1호', isChecked: false),
+                  // AddressWithDetailTab(text: '서울 강남구 테헤란로 302 위워크타워 1동1호', isChecked: true),
                 ],
               );
             },
           ),
           Positioned(
             bottom: 10,
-            child: SoftColorButton(text: '새 주소 등록', funPageRoute: (){
-              Navigator.pushNamed(context, Move.FindAddressPage);
+            child: ColorButton(text: '확인', funPageRoute: (){
+              Navigator.pushNamed(context, Move.ChoiceAddressPage);
             }),
           )
         ],

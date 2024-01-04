@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/define.dart';
 import 'package:toyproject/_core/constants/move.dart';
+import 'package:toyproject/ui/pages/reservation_page/choice_address_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart';
 
 import '../../../_core/constants/style.dart';
@@ -30,7 +31,13 @@ class ReservationPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
-                    children: [Text('서울 강남구 테헤란로 427 위워크타워 1동 1호'), Icon(Icons.navigate_next, color: disableColor,)],
+                    children: [
+                      Text('서울 강남구 테헤란로 427 위워크타워 1동 1호'),
+                      InkWell(onTap: () {
+                        Navigator.pushNamed(context, Move.ChoiceAddressPage);
+                      },
+                        child: Icon(Icons.navigate_next, color: disableColor)),
+                    ],
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   ),
                 ),
