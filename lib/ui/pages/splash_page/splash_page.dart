@@ -5,6 +5,7 @@ import 'package:toyproject/_core/constants/Define.dart';
 
 import '../../../_core/constants/color.dart';
 import '../home_page/home_page.dart';
+import '../start_page/start_page.dart';
 
 
 class SplashPage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashPage> {
           () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const StartPage(),
         ),
       ),
     ); // Timer
