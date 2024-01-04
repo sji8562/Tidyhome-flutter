@@ -7,13 +7,13 @@ import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart
 import '../../../_core/constants/style.dart';
 import '../../widget/arrow_app_bar.dart';
 
-class ReservationPage extends StatelessWidget {
-  const ReservationPage({super.key});
+class ChoiceAddressPage extends StatelessWidget {
+  const ChoiceAddressPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: "",),
+      appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: "주소관리",),
       body: Column(
         children: [
           Container(
