@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:toyproject/ui/pages/home_page/login.dart';
 import 'package:toyproject/ui/pages/splash_page/splash_page.dart';
 import '_core/constants/move.dart';
 import '_core/constants/theme.dart';
@@ -26,12 +27,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashPage(),
-      navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
-      initialRoute: Move.MainPage,
-      routes: getRouters(),
-      theme: theme(),
+      home: PhoneAuthPage(),
+      // home: const SplashPage(),
+      // navigatorKey: navigatorKey,
+      // debugShowCheckedModeBanner: false,
+      // initialRoute: Move.MainPage,
+      // routes: getRouters(),
+      // theme: theme(),
     );
   }
 }
