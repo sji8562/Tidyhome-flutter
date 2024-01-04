@@ -6,15 +6,15 @@ class ColorButton extends StatelessWidget {
   final String text;
   final funPageRoute;
 
-  const ColorButton({required this.text, this.funPageRoute});
+  const ColorButton({required this.text, required this.funPageRoute, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          minimumSize: Size(double.infinity, 50),
+          minimumSize: Size(345, 50),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),

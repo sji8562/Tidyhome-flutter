@@ -9,21 +9,21 @@ const kAccentColor = Color(0XFF03A963);
 const MaterialColor kPrimaryColor = MaterialColor(
   0XFFFFFF,
   <int, Color>{
-    50: Color(0XFF2D403A),
-    100: Color(0XFF2D403A),
-    200: Color(0XFF2D403A),
-    300: Color(0XFF2D403A),
-    400: Color(0XFF2D403A),
-    500: Color(0XFF2D403A),
-    600: Color(0XFF2D403A),
-    700: Color(0XFF2D403A),
-    800: Color(0XFF2D403A),
-    900: Color(0XFF2D403A),
+    50: Color(0Xff367DF7),
+    100: Color(0Xff367DF7),
+    200: Color(0Xff367DF7),
+    300: Color(0Xff367DF7),
+    400: Color(0Xff367DF7),
+    500: Color(0Xff367DF7),
+    600: Color(0Xff367DF7),
+    700: Color(0Xff367DF7),
+    800: Color(0Xff367DF7),
+    900: Color(0Xff367DF7),
   },
 );
 
 const primaryColor = Color(0xff367DF7);
-const primaryColor02 = Color(0xffF0F7FF);
+const primaryColor02 = Color(0xffc2daf6);
 const primaryColor03 = Color(0xff4b89e7);
 const pointColor = Color(0xffEBE1F2);
 const accentColor = Color(0xffFC602F);
