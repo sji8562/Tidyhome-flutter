@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ArrowAppBar extends StatelessWidget implements PreferredSizeWidget {
-  IconData leading;
-  String title;
+  final IconData leading;
+  final String title;
 
   ArrowAppBar({required this.leading, required this.title, super.key});
 

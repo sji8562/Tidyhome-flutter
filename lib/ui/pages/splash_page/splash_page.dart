@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:toyproject/_core/constants/Define.dart';
 
 import '../../../_core/constants/color.dart';
 import '../home_page/home_page.dart';
@@ -45,7 +46,7 @@ class _SplashScreenState extends State<SplashPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          "assets/images/logo_dark.png",
+                          "${Define.images}logo_white.png",
                           width: 230,
                           height: 230,
                         ),

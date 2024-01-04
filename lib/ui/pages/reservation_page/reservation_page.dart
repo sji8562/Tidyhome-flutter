@@ -34,8 +34,7 @@ class ReservationPage extends StatelessWidget {
                     children: [
                       Text('서울 강남구 테헤란로 427 위워크타워 1동 1호'),
                       InkWell(onTap: () {
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ChoiceAddressPage()));
+                        Navigator.pushNamed(context, Move.ChoiceAddressPage);
                       },
                         child: Icon(Icons.navigate_next, color: disableColor)),
                     ],
