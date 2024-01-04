@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:toyproject/ui/pages/splash_page/splash_page.dart';
+
+import '../../ui/pages/start_page/start_page.dart';
 
 
 class Move {
+  static String StartPage = "/start";
   static String MainPage = "/main";
   static String LoginPage = "/login";
   static String JoinPage = "/join";
@@ -13,11 +17,15 @@ class Move {
   static String FindPasswordNewSetPage = "/find/password/set";
   static String CardSavePage = "/card/save";
   static String PayMainPage = "/card";
+  static String SplashPage = "/splash";
+
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
-    // Move.MainPage: (context) => MainPage(),
+    Move.SplashPage: (context) => SplashPage(),
+    Move.StartPage: (context) => StartPage(),
+
     // Move.LoginPage: (context) => LoginPage(),
     // Move.JoinPage: (context) => JoinPage(),
     // Move.JoinSuccessPage: (context) => JoinSuccessPage(),
