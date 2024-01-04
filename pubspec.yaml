@@ -45,13 +45,13 @@ dependencies:
   flutter_check_box_rounded: any
   flutter_riverpod: ^2.3.6 # 상태관리 Riverpod 라이브러리 입니다.
   flutter_native_splash: ^2.3.4 # splash
-  card_swiper: ^3.0.1 # slider
-  carousel_slider: ^4.0.0 # slider
-  remedi_kopo: ^0.0.2
-  image_picker: ^1.0.1
-  flutter_rating_bar: ^4.0.1 # review_star
-  path_provider: ^2.0.2
-  iamport_flutter: ^0.10.0
+#  card_swiper: ^3.0.1 # slider
+#  carousel_slider: ^4.0.0 # slider
+#  remedi_kopo: ^0.0.2
+#  image_picker: ^1.0.1
+#  flutter_rating_bar: ^4.0.1 # review_star
+#  path_provider: ^2.0.2
+#  iamport_flutter: ^0.10.0
   firebase_core: ^2.24.2
 
 dev_dependencies:
@@ -77,8 +77,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/icons/
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

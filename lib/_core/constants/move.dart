@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_page.dart';
 
 
 class Move {
@@ -13,10 +14,13 @@ class Move {
   static String FindPasswordNewSetPage = "/find/password/set";
   static String CardSavePage = "/card/save";
   static String PayMainPage = "/card";
+  // KWON
+  static String ReservationPage = "/reservation";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
+    Move.ReservationPage: (context) => ReservationPage(),
     // Move.MainPage: (context) => MainPage(),
     // Move.LoginPage: (context) => LoginPage(),
     // Move.JoinPage: (context) => JoinPage(),
