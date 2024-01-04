@@ -26,12 +26,14 @@ class _ChoiceAddressPageState extends State<FindAddressPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: '주소를 검색해 주세요',
-              ),
-            ),
+            child:
+            // CustomTextFormField(),
+            // TextField(
+            //   decoration: InputDecoration(
+            //     border: OutlineInputBorder(),
+            //     hintText: '주소를 검색해 주세요',
+            //   ),
+            // ),
           ),
           ListView.builder(
             itemCount: 10, // length
