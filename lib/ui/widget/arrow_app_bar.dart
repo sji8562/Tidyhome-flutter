@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 class ArrowAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData leading;
   final String title;
+  final moveRoute;
 
-  ArrowAppBar({required this.leading, required this.title, super.key});
+  ArrowAppBar({required this.leading, required this.title, super.key, this.moveRoute});
 
   Size get preferredSize => Size.fromHeight(56);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(leading:
-      InkWell(onTap: () {
+      InkWell(onTap: moveRoute != null ? moveRoute : (){
         Navigator.pop(context);
       },
         // child: Image.asset("assets/icons/arrow_back.png"))
