@@ -8,7 +8,10 @@ class JoinPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: basicColorB5,
-      body: Container(child: ListView(children: [],)),
+      body: Scaffold(
+        backgroundColor: basicColorB3,
+          body: ListView(children: [
+\          ],)),
     );
   }
 }
