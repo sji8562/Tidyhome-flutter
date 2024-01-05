@@ -26,6 +26,7 @@ class _ChoiceAddressPageState extends State<FindAddressPage> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            // child:
             // CustomTextFormField(),
             // TextField(
             //   decoration: InputDecoration(

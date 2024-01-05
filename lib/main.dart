@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_page.dart';
 import 'package:toyproject/ui/pages/home_page/login.dart';
+import 'package:toyproject/ui/pages/service_detail_page/housekeeper_page.dart';
 import 'package:toyproject/ui/pages/splash_page/splash_page.dart';
 import '_core/constants/move.dart';
 import '_core/constants/theme.dart';
