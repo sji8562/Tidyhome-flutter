@@ -1,19 +1,32 @@
 
 import 'package:validators/validators.dart';
 
-String? validateUserId(String? value) {
+String? validateGubun(String? value) {
   if (value == null || value.isEmpty) {
-    return "아이디에 들어갈 수 없습니다.";
-  } else if (!isAlphanumeric(value)) {
-    return "아이디에 한글이나 특수 문자가 들어갈 수 없습니다.";
-  } else if (value.length > 12) {
-    return "아이디의 길이를 초과하였습니다.";
-  } else if (value.length < 3) {
-    return "아이디의 최소 길이는 3자입니다.";
+    return "공백 값이 들어갈 수 없습니다.";
+  } else if (value != "청소업체" && value != "이용자") {
+    return "올바른 값을 입력하세요. (청소업체 또는 이용자)";
   }
   return null; // 유효성 검사 통과
 }
 
+String? validateTel(String? value) {
+  if (value == null || value.isEmpty) {
+    return "공백 값이 들어갈 수 없습니다.";
+  } else if (!RegExp(r'^\d{3}-\d{4}-\d{4}$').hasMatch(value)) {
+    return "올바른 전화번호 형식이 아닙니다. (예: 010-2345-1203)";
+  }
+  return null; // 유효성 검사 통과
+}
+
+String? validateAuthNumber(String? value) {
+  if (value == null || value.isEmpty) {
+    return "공백 값이 들어갈 수 없습니다.";
+  } else if (!RegExp(r'^\d{6}$').hasMatch(value)) {
+    return "올바른 형식의 인증번호가 아닙니다. (숫자 6자리)";
+  }
+  return null; // 유효성 검사 통과
+}
 
 String? validatePassword(String? value) {
   String pattern = r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?~^<>,.&+= ])[A-Za-z\d$@$!%*#?~^<>,.&+=]{8,20}$';
