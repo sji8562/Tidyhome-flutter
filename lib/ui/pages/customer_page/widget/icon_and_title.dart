@@ -19,7 +19,7 @@ class IconAndTitle extends StatelessWidget {
             icon
           ),
           SizedBox(width: 15.0,),
-          InkWell(child: Text('${title}'), onTap: () {},) ],
+          InkWell(child: Text('${title}'), onTap: moveRoute,) ],
       ),
     );
   }
