@@ -38,3 +38,4 @@ const formColor = Color(0xffcccccc);
 const disableColor = Color(0xffc5c5c5);
 const bgAndLineColor = Color(0xffeeeeee);
 const basicColorW = Color(0xffffffff);
+const softRedColor = Color(0xFFfdf1e9);
