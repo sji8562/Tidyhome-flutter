@@ -11,6 +11,7 @@ class UserRepository {
 
 //  회원가입
   Future<ResponseDTO> fetchJoin(JoinReqDTO requestDTO) async {
+    Logger().d("fetchJoin 진입");
     try {
       Response<dynamic> response =
       await dio.post("/api/users/join", data: requestDTO.toJson());
@@ -20,9 +21,42 @@ class UserRepository {
       return responseDTO;
     } catch (e) {
       // 200이 아니면 catch로 감
-      return ResponseDTO(success: false, response: null, error: "중복된 유저명입니다.");
+      return ResponseDTO(success: false, response: null, error: "중복된 전화번호이거나, 서비스되지 않는 전화번호입니다.");
     }
   }
+
+  // sms 인증
+  Future<ResponseDTO> fetchSmsSend(JoinReqDTO requestDTO) async {
+    Logger().d("fetchSmsSend 진입");
+    try {
+      Response<dynamic> response =
+      await dio.post("/api/users/sms-send", data: requestDTO.toJson());
+      Logger().d("sms 요청 통신 진입");
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      // responseDTO.data = User.fromJson(responseDTO.data);
+      return responseDTO;
+    } catch (e) {
+      // 200이 아니면 catch로 감
+      return ResponseDTO(success: false, response: null, error: "문자 발송 실패.");
+    }
+  }
+
+  // sms 인증번호 검사
+  Future<ResponseDTO> fetchSmsCheck(SmsCheckDTO requestDTO) async {
+    Logger().d("fetchSmsSend 진입");
+    try {
+      Response<dynamic> response =
+      await dio.post("/api/users/sms-check", data: requestDTO.toJson());
+      Logger().d("sms 요청 통신 진입");
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      return responseDTO;
+    } catch (e) {
+      // 200이 아니면 catch로 감
+      return ResponseDTO(success: false, response: null, error: "인증번호가 일치하지 않습니다.");
+    }
+  }
+
+
 
 //  로그인
   Future<ResponseDTO> fetchLogin(LoginReqDTO requestDTO) async {

@@ -68,9 +68,9 @@ class JoinChatViewModel extends StateNotifier<JoinChatModel?> {
       joinFields: state!.joinFields.asMap().map((i, joinField) {
         if (i == index && index == 0) {
           return MapEntry(i, joinField.copyWith(inputGubun: answer));
-        } else if (i == index && index == 1){
+        } else if (i == index && index == 1) {
           return MapEntry(i, joinField.copyWith(inputTel: answer));
-        } else if (i == index && index == 2){
+        } else if (i == index && index == 2) {
           return MapEntry(i, joinField.copyWith(inputAuthNumber: answer));
         } else {
           return MapEntry(i, joinField);
@@ -79,7 +79,31 @@ class JoinChatViewModel extends StateNotifier<JoinChatModel?> {
     );
   }
 
+  void changeIsValidated(int index) {
+    print("=========테스트=====");
+    print(state!.joinFields[index].isValidated);
+    state = state?.copyWith(
+      joinFields: state?.joinFields.map((joinField) {
+        return joinField.copyWith(
+          isValidated: index == state!.joinFields.indexOf(joinField)
+              ? !joinField.isValidated
+              : joinField.isValidated,
+        );
+      }).toList(),
+    );
+  }
+
+  void changeResendVisible(int index, bool visible) {
+    state = state?.copyWith(
+      joinFields: state!.joinFields.map((joinField) =>
+          joinField.copyWith(resendVisible: state!.joinFields.indexOf(joinField) == index ? !joinField.resendVisible : joinField.resendVisible)
+      ).toList(),
+    );
+  }
 }
+
+
+
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final joinChatProvider =
 StateNotifierProvider<JoinChatViewModel, JoinChatModel?>((ref) {

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:toyproject/ui/pages/join_page/join_page_view_model.dart';
 
 import '../../_core/constants/http.dart';
 import '../../_core/constants/move.dart';
@@ -16,6 +17,7 @@ class SessionUser {
   User? user;
   String? jwt;
   bool isLogin;
+
   SessionUser({this.user, this.jwt, this.isLogin = false});
 }
 
@@ -23,7 +25,9 @@ class SessionUser {
 class SessionStore extends SessionUser {
   // 1. 화면 context에 접근하는 법
   final mContext = navigatorKey.currentContext;
+  Ref ref;
 
+  SessionStore(this.ref);
 
   Future<void> join(JoinReqDTO joinReqDTO) async {
     Logger().d("여기까지 실행됨");
@@ -32,7 +36,8 @@ class SessionStore extends SessionUser {
     Logger().d("여기까지 실행됨1");
 
     // 2. 비지니스 로직
-    if (responseDTO.response == true) {
+    if (responseDTO.success == true) {
+      Logger().d("응답: 성공");
       Navigator.pushNamed(mContext!, Move.StartPage);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
@@ -81,9 +86,60 @@ class SessionStore extends SessionUser {
     Navigator.pushNamedAndRemoveUntil(
         mContext!, Move.StartPage, (route) => false);
   }
+
+  // sms 발송
+  Future<void> smsSend(JoinReqDTO joinReqDTO) async {
+    // 1. 통신 코드
+    Logger().d("sms발송 응답요청");
+    ResponseDTO responseDTO = await UserRepository().fetchSmsSend(joinReqDTO);
+
+    // 2. 비지니스 로직
+    if (responseDTO.success == true) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(
+          content: Text("발송 완료!"),
+        ),
+      );
+      JoinChatModel? joinChatModel = ref.read(joinChatProvider);
+      if (joinChatModel!.joinFields.length > 2) {
+        return;
+      } else if (joinChatModel!.joinFields.length == 2) {
+        ref.read(joinChatProvider.notifier).addAuthInfo();
+      }
+    } else {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(
+          content: Text("발송 실패!"),
+        ),
+      );
+    }
+  }
+
+  //sms 인증검사
+  Future<void> smsCheck(SmsCheckDTO smsCheckDTO) async {
+    // 1. 통신 코드
+    Logger().d("sms 인증 로직 진입");
+    ResponseDTO responseDTO = await UserRepository().fetchSmsCheck(smsCheckDTO);
+
+    // 2. 비지니스 로직
+    if (responseDTO.success == true) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(
+          content: Text("인증 성공!"),
+        ),
+      );
+      await join(JoinReqDTO(tel: smsCheckDTO.tel));
+    } else {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(
+          content: Text("인증 실패!"),
+        ),
+      );
+    }
+  }
 }
 
 // 3. 창고 관리자
 final sessionProvider = Provider<SessionStore>((ref) {
-  return SessionStore();
+  return SessionStore(ref);
 });

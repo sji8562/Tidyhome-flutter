@@ -5,7 +5,7 @@ String? validateGubun(String? value) {
   if (value == null || value.isEmpty) {
     return "공백 값이 들어갈 수 없습니다.";
   } else if (value != "청소업체" && value != "이용자") {
-    return "올바른 값을 입력하세요. (청소업체 또는 이용자)";
+    return "'청소업체' 또는 '이용자'로 입력";
   }
   return null; // 유효성 검사 통과
 }

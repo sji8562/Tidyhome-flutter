@@ -2,16 +2,13 @@ import 'package:intl/intl.dart';
 
 class JoinReqDTO {
   final String tel;
-  final int level;
 
   JoinReqDTO({required this.tel,
-    required this.level,
   });
 
   Map<String, dynamic> toJson() =>
       {
-        "tel": tel,
-        "level": level
+        "tel": tel
       };
 }
 
@@ -23,5 +20,15 @@ class LoginReqDTO {
 
   Map<String, dynamic> toJson() =>
       {"userId": userId, "userPassword": userPassword};
+}
+
+class SmsCheckDTO {
+  final String tel;
+  final String code;
+
+  SmsCheckDTO({required this.tel, required this.code});
+
+  Map<String, dynamic> toJson() =>
+      {"tel": tel, "code": code};
 }
 

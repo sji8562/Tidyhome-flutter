@@ -11,9 +11,11 @@ class JoinTextFormField extends ConsumerWidget {
   final String? initValue;
   final String? placeholderText;
   final bool obscureText;
+  final FocusNode? focusNode;
   final funValidator;
   final changeFormData;
   final controller;
+  final complete;
 
   const JoinTextFormField({
     Key? key,
@@ -22,9 +24,11 @@ class JoinTextFormField extends ConsumerWidget {
     this.placeholderText,
     this.obscureText = false,
     required this.funValidator,
+    this.focusNode,
     this.changeFormData,
     this.controller,
     this.strong,
+    this.complete,
   }) : super(key: key);
 
   @override
@@ -34,6 +38,8 @@ class JoinTextFormField extends ConsumerWidget {
       children: [
         const SizedBox(height: gap_xs),
         TextFormField(
+          focusNode: focusNode,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           initialValue: initValue,
           enabled: enabled,
           controller: controller,
