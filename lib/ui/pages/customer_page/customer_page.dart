@@ -53,8 +53,7 @@ class CustomerPage extends StatelessWidget {
           Positioned(
             bottom: 10,
             child: SoftColorButton(text: '문의하기', funPageRoute: (){
-              // TODO 경로 수정 필요 -> 실시간 문의 페이지로 이동
-              Navigator.pushNamed(context, Move.FindAddressPage);
+              Navigator.pushNamed(context, Move.LiveChatPage);
             }),
           )
         ],
