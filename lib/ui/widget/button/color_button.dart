@@ -20,7 +20,7 @@ class ColorButton extends StatelessWidget {
           ),
           backgroundColor: primaryColor,
         ),
-        onPressed: funPageRoute,
+        onPressed: funPageRoute ?? () {},
         child: Text("$text", style: TextStyle(color: Colors.white, fontSize: 16),),
       ),
     );
