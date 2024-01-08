@@ -25,6 +25,8 @@ class JoinChatModel  {
       joinFields ?? this.joinFields,
     );
   }
+
+
 }
 
 // 2. 창고
@@ -32,25 +34,75 @@ class JoinChatViewModel extends StateNotifier<JoinChatModel?> {
   JoinChatViewModel(super.state);
 
   void addUserGubun() {
-    JoinField joinField = JoinField(title: "청소업체이신가요? 사용자이신가요?", description: "'청소업체' 또는 '사용자'로 응답", arrowTitle: "");
-    state = state?.copyWith(
-      joinFields: [...state!.joinFields, joinField],
-    );
-  }
-  void addUserTel() {
-    JoinField joinField = JoinField(title: "전화번호를 입력해주세요", description: "서비스 시작을 위해 처음 한 번 전화번호 인증이 필요합니다.", arrowTitle: "전화번호 재입력");
-    state = state?.copyWith(
-      joinFields: [...state!.joinFields, joinField],
-    );
-  }
-  void addAuthInfo() {
-    JoinField joinField = JoinField(title: "인증번호를 입력해주세요", description: "서비스 시작을 위해 처음 한 번 전화번호 인증이 필요합니다.", arrowTitle: "인증번호 재발송");
+    JoinField joinField = JoinField(title: "청소업체이신가요? 사용자이신가요?",
+        description: "회원 구분을 위해 정보가 필요합니다.",
+        arrowTitle: "",
+        placeholder: "청소업체 or 이용자");
     state = state?.copyWith(
       joinFields: [...state!.joinFields, joinField],
     );
   }
 
+  void addUserTel() {
+    JoinField joinField = JoinField(title: "전화번호를 입력해주세요",
+        description: "서비스 시작을 위해 처음 한 번 전화번호 인증이 필요합니다.",
+        arrowTitle: "전화번호 재입력",
+        placeholder: "010-1234-5678");
+    state = state?.copyWith(
+      joinFields: [...state!.joinFields, joinField],
+    );
+  }
+
+  void addAuthInfo() {
+    JoinField joinField = JoinField(title: "인증번호를 입력해주세요",
+        description: "서비스 시작을 위해 처음 한 번 전화번호 인증이 필요합니다.",
+        arrowTitle: "인증번호 재발송",
+        placeholder: "123456");
+    state = state?.copyWith(
+      joinFields: [...state!.joinFields, joinField],
+    );
+  }
+
+  void updateAnswer(int index, String answer) {
+    state = state?.copyWith(
+      joinFields: state!.joinFields.asMap().map((i, joinField) {
+        if (i == index && index == 0) {
+          return MapEntry(i, joinField.copyWith(inputGubun: answer));
+        } else if (i == index && index == 1) {
+          return MapEntry(i, joinField.copyWith(inputTel: answer));
+        } else if (i == index && index == 2) {
+          return MapEntry(i, joinField.copyWith(inputAuthNumber: answer));
+        } else {
+          return MapEntry(i, joinField);
+        }
+      }).values.toList(),
+    );
+  }
+
+  void changeIsValidated(int index) {
+    print("=========테스트=====");
+    print(state!.joinFields[index].isValidated);
+    state = state?.copyWith(
+      joinFields: state?.joinFields.map((joinField) {
+        return joinField.copyWith(
+          isValidated: index == state!.joinFields.indexOf(joinField)
+              ? !joinField.isValidated
+              : joinField.isValidated,
+        );
+      }).toList(),
+    );
+  }
+
+  void changeResendVisible(int index, bool visible) {
+    state = state?.copyWith(
+      joinFields: state!.joinFields.map((joinField) =>
+          joinField.copyWith(resendVisible: state!.joinFields.indexOf(joinField) == index ? !joinField.resendVisible : joinField.resendVisible)
+      ).toList(),
+    );
+  }
 }
+
+
 
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final joinChatProvider =
