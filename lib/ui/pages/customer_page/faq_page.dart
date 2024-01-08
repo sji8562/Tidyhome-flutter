@@ -20,10 +20,10 @@ class FaqPage extends ConsumerStatefulWidget {
   const FaqPage({super.key});
 
   @override
-  ConsumerState<FaqPage> createState() => _HouseKeeperPageState();
+  ConsumerState<FaqPage> createState() => _FaqPageState();
 }
 
-class _HouseKeeperPageState extends ConsumerState<FaqPage> {
+class _FaqPageState extends ConsumerState<FaqPage> {
   ServiceType selectedService = ServiceType.HouseKeeper;
 
   void _changeButtonComponent(value) {
@@ -154,18 +154,12 @@ class _HouseKeeperPageState extends ConsumerState<FaqPage> {
                 ),
                 Positioned(
                   bottom: 10,
-                  child: SoftColorButton(text: '실시간 문의', funPageRoute: (){
-                    // TODO 경로 수정 필요 -> 실시간 문의 페이지로 이동
-                    Navigator.pushNamed(context, Move.FindAddressPage);
+                  child: SoftColorButton(text: '실시간 문의', funPageRoute: () {
+                    Navigator.pushNamed(context, Move.LiveChatPage);
                   }),
                 )
               ],
-              // child:
-                  // child:
-                  //
-                  //       ),
-                ),
-            // )
+            ),
     );
   }
 

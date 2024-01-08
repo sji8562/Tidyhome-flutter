@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toyproject/ui/pages/customer_page/account_closure_page.dart';
 import 'package:toyproject/ui/pages/customer_page/customer_page.dart';
 import 'package:toyproject/ui/pages/customer_page/faq_page.dart';
+import 'package:toyproject/ui/pages/customer_page/live_chat_page.dart';
 import 'package:toyproject/ui/pages/customer_page/notice_detail_page.dart';
 import 'package:toyproject/ui/pages/customer_page/notice_page.dart';
 import 'package:toyproject/ui/pages/customer_page/privacy_policy_page.dart';
@@ -47,11 +48,12 @@ class Move {
   static String CustomerPage = '/customer';
   static String NoticePage = '/customer/notice';
   static String NoticeDetailPage = '/customer/notice/detail';
-  static String AccountClosurePage = '/customer/account-closure-page';
+  static String AccountClosurePage = '/customer/account-closure';
   static String TermsOfService = '/customer/terms-of-service';
   static String TermsAndConditionsPage = '/customer/terms-of-service/detail';
   static String PrivacyPolicyPage = '/customer/terms-of-service/privacy-policy';
   static String FaqPage = '/customer/faq';
+  static String LiveChatPage = '/customer/live-chat';
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -77,6 +79,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.TermsAndConditionsPage: (context) => TermsAndConditionsPage(),
     Move.PrivacyPolicyPage: (context) => PrivacyPolicyPage(),
     Move.FaqPage: (context) => FaqPage(),
+    Move.LiveChatPage: (context) => LiveChatPage(),
 
     // Move.MainPage: (context) => MainPage(),
     // Move.LoginPage: (context) => LoginPage(),
