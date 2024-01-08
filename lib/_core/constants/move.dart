@@ -9,6 +9,7 @@ import 'package:toyproject/ui/pages/customer_page/privacy_policy_page.dart';
 import 'package:toyproject/ui/pages/customer_page/terms_and_conditions_page.dart';
 import 'package:toyproject/ui/pages/customer_page/terms_of_service_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/find_address_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/result_page.dart';
 import 'package:toyproject/ui/pages/service_detail_page/applience_page.dart';
 import 'package:toyproject/ui/pages/service_detail_page/movement_page.dart';
 import 'package:toyproject/ui/pages/splash_page/splash_page.dart';
@@ -54,6 +55,7 @@ class Move {
   static String PrivacyPolicyPage = '/customer/terms-of-service/privacy-policy';
   static String FaqPage = '/customer/faq';
   static String LiveChatPage = '/customer/live-chat';
+  static String ReservationResultPage = '/reservation/result';
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -80,6 +82,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.PrivacyPolicyPage: (context) => PrivacyPolicyPage(),
     Move.FaqPage: (context) => FaqPage(),
     Move.LiveChatPage: (context) => LiveChatPage(),
+    Move.ReservationResultPage: (context) => ReservationResultPage(),
 
     // Move.MainPage: (context) => MainPage(),
     // Move.LoginPage: (context) => LoginPage(),

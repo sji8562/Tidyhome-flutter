@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       // home: const SplashPage(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: Move.LiveChatPage,
+      initialRoute: Move.ReservationResultPage,
       routes: getRouters(),
       theme: theme(),
     );
