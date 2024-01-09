@@ -8,7 +8,10 @@ import 'package:toyproject/ui/pages/customer_page/notice_page.dart';
 import 'package:toyproject/ui/pages/customer_page/privacy_policy_page.dart';
 import 'package:toyproject/ui/pages/customer_page/terms_and_conditions_page.dart';
 import 'package:toyproject/ui/pages/customer_page/terms_of_service_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/find_address_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/list_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/result_page.dart';
 import 'package:toyproject/ui/pages/service_detail_page/applience_page.dart';
 import 'package:toyproject/ui/pages/service_detail_page/movement_page.dart';
@@ -56,6 +59,9 @@ class Move {
   static String FaqPage = '/customer/faq';
   static String LiveChatPage = '/customer/live-chat';
   static String ReservationResultPage = '/reservation/result';
+  static String ReservationLIstPage = '/reservation/list';
+  static String EnterAccessMethodsPage = '/reservation/access-methods';
+  static String EnterOtherRequestsPage = '/reservation/other-requests';
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -83,6 +89,9 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.FaqPage: (context) => FaqPage(),
     Move.LiveChatPage: (context) => LiveChatPage(),
     Move.ReservationResultPage: (context) => ReservationResultPage(),
+    Move.ReservationLIstPage: (context) => ReservationLIstPage(),
+    Move.EnterAccessMethodsPage: (context) => EnterAccessMethodsPage(),
+    Move.EnterOtherRequestsPage: (context) => EnterOtherRequestsPage(),
 
     // Move.MainPage: (context) => MainPage(),
     // Move.LoginPage: (context) => LoginPage(),

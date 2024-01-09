@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toyproject/_core/constants/Define.dart';
 import 'package:toyproject/_core/constants/color.dart';
+import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/icon_text_button.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/reservation_success.dart';
@@ -48,15 +49,13 @@ class ReservationResultPage extends ConsumerWidget {
                   ),
                 ),
                 IconAndTextAndButton(title: '출입방법', icon_name: 'home_icon.PNG',
-                  // TODO 출입 방법 페이지로 이동
-                  // acting: Navigator.pushNamed(context, )
+                  acting: () { Navigator.pushNamed(context, Move.EnterAccessMethodsPage); }
                 ),
 
                 CustomDividerThin(),
 
                 IconAndTextAndButton(title: '기타 요청사항', icon_name: 'message_icon.png',
-                  // TODO 기타 요청사항 페이지로 이동
-                  // acting: Navigator.pushNamed(context, )
+                    acting: () { Navigator.pushNamed(context, Move.EnterOtherRequestsPage); }
                 ),
 
                 const CustomDivider(),
@@ -137,7 +136,9 @@ class ReservationResultPage extends ConsumerWidget {
           Positioned(bottom: 0,
               child: Container(
                   // TODO move to 예약 내역
-                  child: ColorButtonFullWith(text: '확인', action: () {})
+                  child: ColorButtonFullWith(text: '확인', action: (){
+                    Navigator.pushNamed(context, Move.ReservationLIstPage);
+                  })
               )
           ),
         ],
