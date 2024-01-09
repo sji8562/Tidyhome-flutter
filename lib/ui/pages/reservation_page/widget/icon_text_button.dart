@@ -35,7 +35,7 @@ class IconAndTextAndButton extends StatelessWidget {
               ),
               color: bgAndLineColor,
             ),
-            onTap: acting,
+            onTap: acting != null ? acting : () {},
           ),
         ],
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
