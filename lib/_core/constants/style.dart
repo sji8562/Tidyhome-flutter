@@ -45,7 +45,12 @@ Text textBody5(String text) {
     style: TextStyle( fontSize: 15),
   );
 }
-
+Text textBody6(String text) {
+  return Text(
+    "$text",
+    style: TextStyle( fontSize: 16),
+  );
+}
 Text textBody3(String text) {
   return Text("$text", style: TextStyle(color: Colors.black, fontSize: 11));
 }
