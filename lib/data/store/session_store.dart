@@ -38,7 +38,7 @@ class SessionStore extends SessionUser {
     // 2. 비지니스 로직
     if (responseDTO.success == true) {
       Logger().d("응답: 성공");
-      Navigator.pushNamed(mContext!, Move.StartPage);
+      Navigator.pushNamed(mContext!, Move.MainPage);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         SnackBar(
