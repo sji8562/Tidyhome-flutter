@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/ui/pages/customer_page/customer_page.dart';
@@ -40,7 +41,7 @@ class _MainPageState extends State<MainPage> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
             BottomNavigationBarItem(icon: Icon(Icons.list), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.present_to_all_outlined), label: ""),
+            BottomNavigationBarItem(icon: Icon(CupertinoIcons.plus_rectangle), label: ""),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
           ],
         ),
