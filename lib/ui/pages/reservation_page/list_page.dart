@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 
 // TODO 예약내역 페이지
-class ReservationLIstPage extends ConsumerWidget {
-  const ReservationLIstPage({super.key});
+class ReservationListPage extends ConsumerWidget {
+  const ReservationListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
