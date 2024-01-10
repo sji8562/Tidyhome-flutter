@@ -8,6 +8,9 @@ import 'package:toyproject/ui/pages/customer_page/notice_page.dart';
 import 'package:toyproject/ui/pages/customer_page/privacy_policy_page.dart';
 import 'package:toyproject/ui/pages/customer_page/terms_and_conditions_page.dart';
 import 'package:toyproject/ui/pages/customer_page/terms_of_service_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/caution_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/detail_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/find_address_page.dart';
@@ -62,6 +65,9 @@ class Move {
   static String ReservationListPage = '/reservation/list';
   static String EnterAccessMethodsPage = '/reservation/access-methods';
   static String EnterOtherRequestsPage = '/reservation/other-requests';
+  static String ReservationDetailPage = '/reservation/detail';
+  static String CautionPage = '/reservation/caution';
+  static String CompletedServiceListPage = '/completed-service-list';
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -92,6 +98,9 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.ReservationListPage: (context) => ReservationListPage(),
     Move.EnterAccessMethodsPage: (context) => EnterAccessMethodsPage(),
     Move.EnterOtherRequestsPage: (context) => EnterOtherRequestsPage(),
+    Move.ReservationDetailPage: (context) => ReservationDetailPage(),
+    Move.CautionPage: (context) => CautionPage(),
+    Move.CompletedServiceListPage: (context) => CompletedServiceListPage(),
 
     // Move.MainPage: (context) => MainPage(),
     // Move.LoginPage: (context) => LoginPage(),

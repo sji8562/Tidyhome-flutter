@@ -3,14 +3,14 @@ import 'package:toyproject/_core/constants/Define.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/style.dart';
 
-class IconAndTextAndButton extends StatelessWidget {
+class ImageAndTextAndButtonWithLabel extends StatelessWidget {
   final String icon_name;
   final String title;
   final String? button_text;
   final bool is_active;
   final acting;
 
-  const IconAndTextAndButton({super.key, required this.icon_name, required this.title, this.button_text, this.is_active = false, this.acting});
+  const ImageAndTextAndButtonWithLabel({super.key, required this.icon_name, required this.title, this.button_text, this.is_active = false, this.acting});
 
   @override
   Widget build(BuildContext context) {
