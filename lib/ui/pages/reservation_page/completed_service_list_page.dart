@@ -28,7 +28,7 @@ class CompletedServiceListPage extends ConsumerWidget {
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '완료된 서비스',),
       body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child:
           ListView.builder(
               itemCount: 10, // length
@@ -44,8 +44,7 @@ class CompletedServiceListPage extends ConsumerWidget {
                     ),
                     ReservationListTab(service_type: '가사도우미', service_date: '2024년 1월 25일(금) 오전 9시', is_done: false,),
                   ],
-                )
-                ;
+                );
               })
       ),
     );
