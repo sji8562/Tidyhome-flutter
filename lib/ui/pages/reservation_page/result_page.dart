@@ -137,7 +137,7 @@ class ReservationResultPage extends ConsumerWidget {
               child: Container(
                   // TODO move to 예약 내역
                   child: ColorButtonFullWith(text: '확인', action: (){
-                    Navigator.pushNamed(context, Move.ReservationLIstPage);
+                    Navigator.pushNamed(context, Move.ReservationListPage);
                   })
               )
           ),

@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       // home: const SplashPage(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: Move.CompletedServiceListPage,
+      initialRoute: Move.ReservationListPage,
       routes: getRouters(),
       theme: theme(),
     );
