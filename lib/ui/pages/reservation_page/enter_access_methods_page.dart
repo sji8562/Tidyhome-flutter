@@ -8,7 +8,6 @@ import 'package:toyproject/ui/widget/button/color_button_full_width.dart';
 import 'package:toyproject/ui/widget/button/soft_color_red_button.dart';
 import 'package:toyproject/ui/widget/text_form_field/common_text_form_field.dart';
 
-// TODO 출입 방법 페이지
 class EnterAccessMethodsPage extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
 
