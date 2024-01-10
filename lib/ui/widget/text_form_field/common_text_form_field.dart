@@ -41,7 +41,7 @@ class CommonTextFormField extends ConsumerWidget {
           validator: funValidator,
           obscureText: obscureText,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             hintText: "$placeholderText",
             hintStyle: TextStyle(
               color: formColor,

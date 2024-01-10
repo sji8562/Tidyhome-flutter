@@ -26,9 +26,13 @@ class CustomerPage extends StatelessWidget {
                     child: Text('서비스 안내'),
                   ),
                 ),
-                IconAndTitle(icon: CupertinoIcons.question_circle, title: '자주 묻는 질문'),
-                IconAndTitle(icon: CupertinoIcons.tags, title: '서비스 상세정보'),
-                IconAndTitle(icon: CupertinoIcons.news, title: '계정 탈퇴', moveRoute: () {
+                IconAndTitle(icon: CupertinoIcons.question_circle, title: '자주 묻는 질문', moveRoute: () {
+                Navigator.pushNamed(context, Move.FaqPage);
+                }),
+                IconAndTitle(icon: CupertinoIcons.tags, title: '서비스 상세정보', moveRoute: () {
+                  Navigator.pushNamed(context, Move.HouseKeeperPage);
+                }),
+                IconAndTitle(icon: CupertinoIcons.delete_left, title: '계정 탈퇴', moveRoute: () {
                   Navigator.pushNamed(context, Move.AccountClosurePage);
                 } ),
                 SizedBox(height: 30.0,),
@@ -39,7 +43,9 @@ class CustomerPage extends StatelessWidget {
                       child: Text('기타 안내')
                   ),
                 ),
-                IconAndTitle(icon: CupertinoIcons.news, title: '서비스 약관'),
+                IconAndTitle(icon: CupertinoIcons.doc, title: '서비스 약관', moveRoute: (){
+                  Navigator.pushNamed(context, Move.TermsOfService);
+                }),
                 // IconAndTitle(icon: CupertinoIcons.info_circle, title: '버전 정보'),
               ],
             ),
@@ -47,8 +53,7 @@ class CustomerPage extends StatelessWidget {
           Positioned(
             bottom: 10,
             child: SoftColorButton(text: '문의하기', funPageRoute: (){
-              // TODO 경로 수정 필요 -> 실시간 문의 페이지로 이동
-              Navigator.pushNamed(context, Move.FindAddressPage);
+              Navigator.pushNamed(context, Move.LiveChatPage);
             }),
           )
         ],

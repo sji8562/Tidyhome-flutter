@@ -47,6 +47,7 @@ class AccountClosurePage extends StatelessWidget {
                     ),
                     TextField(
                       maxLines: null, // 다중 행으로 설정하려면 null 또는 원하는 줄 수를 지정
+                      maxLength: 300,
                       decoration: InputDecoration(
                         hintText: '내용을 입력해주세요',
                         hintStyle: TextStyle(color: disableColor),

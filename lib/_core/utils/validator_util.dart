@@ -140,3 +140,32 @@ String? validatePinNumber(String? value) {
   // }
   return null; // 유효성 검사 통과
 }
+
+// KWON
+String? validateAccountClosureReason(String? value) {
+  if (value == null) {
+    return null;
+  } else if (value.length > 500) {
+    return "내용의 길이를 초과하였습니다.";
+  }
+
+  return null; // 유효성 검사 통과
+}
+
+String? validateEnterMethod(String? value) {
+  if (value == null || value.isEmpty) {
+    return null;
+  } else if (value.length > 20) {
+    return "길이를 초과하였습니다.";
+  }
+  return null; // 유효성 검사 통과
+}
+
+String? validateOthers(String? value) {
+  if (value == null || value.isEmpty) {
+    return null;
+  } else if (value.length > 150) {
+    return "길이를 초과하였습니다.";
+  }
+  return null; // 유효성 검사 통과
+}
