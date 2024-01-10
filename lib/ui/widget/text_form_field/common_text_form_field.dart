@@ -6,7 +6,6 @@ import 'package:toyproject/ui/widget/text_form_field/text/JoinRichTextItem.dart'
 import '../../../_core/constants/color.dart';
 
 class CommonTextFormField extends ConsumerWidget {
-  final String text;
   final String? strong;
   final bool? enabled;
   final String? initValue;
@@ -20,7 +19,6 @@ class CommonTextFormField extends ConsumerWidget {
     Key? key,
     this.enabled,
     this.initValue,
-    required this.text,
     this.placeholderText,
     this.obscureText = false,
     required this.funValidator,
@@ -43,7 +41,7 @@ class CommonTextFormField extends ConsumerWidget {
           validator: funValidator,
           obscureText: obscureText,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
             hintText: "$placeholderText",
             hintStyle: TextStyle(
               color: formColor,
