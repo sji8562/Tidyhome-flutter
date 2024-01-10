@@ -4,6 +4,9 @@ import 'package:toyproject/_core/constants/style.dart';
 import 'package:toyproject/ui/pages/company_update_info_page/company_code_table/company_code_table.dart';
 import 'package:toyproject/ui/pages/company_update_info_page/company_update_info_pages_view_model.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
+import 'package:toyproject/ui/widget/button/color_button.dart';
+
+import '../../../_core/constants/move.dart';
 
 class CompanyUpdateInfoFourthPage extends ConsumerWidget {
   const CompanyUpdateInfoFourthPage({super.key});
@@ -13,7 +16,7 @@ class CompanyUpdateInfoFourthPage extends ConsumerWidget {
     CompanyUpdateInfoPagesModel? companyUpdateInfoPagesModel =
         ref.read(companyUpdateInfoProvider);
     List<ServiceType> serviceTypes = companyUpdateInfoPagesModel!.serviceType;
-    List<ServiceLocation> serviceLocations = companyUpdateInfoPagesModel!.serviceLocation;
+    List<String> serviceLocations = ref.read(companyUpdateInfoProvider.notifier).extractCheckedSubCities();
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.arrow_back, title: ""),
       body: Column(
@@ -47,7 +50,7 @@ class CompanyUpdateInfoFourthPage extends ConsumerWidget {
                 Text("서비스 종류"),
                 Text(
                   serviceTypes.length > 1
-                      ? "${serviceTypes[0].service} 외 1개"
+                      ? "${serviceTypes[0].service} 외 ${serviceTypes.length}개"
                       : serviceTypes[0].service,
                   style: descriptionDisableStyle(),
                 ),
@@ -63,17 +66,45 @@ class CompanyUpdateInfoFourthPage extends ConsumerWidget {
                 Text("일 가능한 지역"),
                 Text(
                   serviceLocations.length > 1
-                      ? "${serviceLocations[0].subCity} 외 1개"
-                      : "${serviceLocations[0].subCity}",
+                      ? "${serviceLocations[0]} 외 ${serviceLocations.length}개"
+                      : "${serviceLocations[0]}",
                   style: descriptionDisableStyle(),
                 ),
               ],
             ),
           ),
-          Container(),
-          Container(),
+          Divider(),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 7, horizontal: 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("상호명"),
+                Text(companyUpdateInfoPagesModel.companyName,style: descriptionDisableStyle(),
+                ),
+              ],
+            ),
+          ),
+          Divider(),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 7, horizontal: 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("사업자번호"),
+                Text(companyUpdateInfoPagesModel.companyBusinessNumber,style: descriptionDisableStyle(),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
+    bottomNavigationBar: Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: ColorButton(text: "확인", funPageRoute: (){
+        Navigator.pushNamed(context, Move.CompanyUpdateInfoLastPage);
+      },),
+    )
     );
   }
 }

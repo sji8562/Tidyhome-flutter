@@ -74,11 +74,11 @@ class CompanyUpdateInfoPage extends ConsumerWidget {
                     ),
           ),
           Positioned(
-            bottom: 10,
+            bottom: 20,
             child: ColorButton(text: "다음", funPageRoute: (){
               if (_formKey.currentState!.validate()) {
                 ref.read(companyUpdateInfoProvider.notifier).setCompanyName(_companyNameController.text);
-                ref.read(companyUpdateInfoProvider.notifier).setCompanyBusinessName(_companyBusinessNumberController.text);
+                ref.read(companyUpdateInfoProvider.notifier).setCompanyBusinessNumber(_companyBusinessNumberController.text);
                 Navigator.pushNamed(context, Move.CompanyUpdateInfoSecondPage);
               }
             }),

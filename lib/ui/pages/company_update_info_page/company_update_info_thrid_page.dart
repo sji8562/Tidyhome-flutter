@@ -147,7 +147,7 @@ class CompanyUpdateInfoThirdPage extends ConsumerWidget {
         ),
       ]),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.only(bottom: 20),
         child: ColorButton(text: "다음", funPageRoute: (){
           Navigator.pushNamed(context, Move.CompanyUpdateInfoFourthPage);
         }),
