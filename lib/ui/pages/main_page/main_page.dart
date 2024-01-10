@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/ui/pages/main_page/home/main_home_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/list_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -21,7 +22,8 @@ class _MainPageState extends State<MainPage> {
           index: _selectedIndex,
           children: [
             MainHomePage(),
-            Container(color: Colors.blue,),
+            ReservationListPage(),
+            // Container(color: Colors.blue,),
             Container(color: Colors.white,),
             Container(color: Colors.greenAccent,),
         ],),
