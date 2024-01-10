@@ -45,6 +45,7 @@ dependencies:
   flutter_check_box_rounded: any
   flutter_riverpod: ^2.4.9 # 상태관리 Riverpod 라이브러리 입니다.
   flutter_native_splash: ^2.3.4 # splash
+  calendar_date_picker2: ^0.5.3 # calendar 
 #  card_swiper: ^3.0.1 # slider
 #  carousel_slider: ^4.0.0 # slider
 #  remedi_kopo: ^0.0.2

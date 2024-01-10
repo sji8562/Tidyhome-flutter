@@ -19,6 +19,7 @@ import 'package:toyproject/ui/pages/reservation_page/result_page.dart';
 import 'package:toyproject/ui/pages/service_detail_page/applience_page.dart';
 import 'package:toyproject/ui/pages/service_detail_page/movement_page.dart';
 import 'package:toyproject/ui/pages/splash_page/splash_page.dart';
+import 'package:toyproject/ui/pages/test_calendar_page.dart';
 import '../../ui/pages/join_page/join_page.dart';
 import '../../ui/pages/service_detail_page/housekeeper_page.dart';
 import '../../ui/pages/service_detail_page/office_page.dart';
@@ -68,6 +69,7 @@ class Move {
   static String ReservationDetailPage = '/reservation/detail';
   static String CautionPage = '/reservation/caution';
   static String CompletedServiceListPage = '/completed-service-list';
+  static String CalendarTestPage = '/test/calendar';
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -101,6 +103,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.ReservationDetailPage: (context) => ReservationDetailPage(),
     Move.CautionPage: (context) => CautionPage(),
     Move.CompletedServiceListPage: (context) => CompletedServiceListPage(),
+    Move.CalendarTestPage: (context) => CalendarTestPage(),
 
     // Move.MainPage: (context) => MainPage(),
     // Move.LoginPage: (context) => LoginPage(),
