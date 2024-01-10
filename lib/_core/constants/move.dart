@@ -59,7 +59,7 @@ class Move {
   static String FaqPage = '/customer/faq';
   static String LiveChatPage = '/customer/live-chat';
   static String ReservationResultPage = '/reservation/result';
-  static String ReservationLIstPage = '/reservation/list';
+  static String ReservationListPage = '/reservation/list';
   static String EnterAccessMethodsPage = '/reservation/access-methods';
   static String EnterOtherRequestsPage = '/reservation/other-requests';
 }
@@ -89,7 +89,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.FaqPage: (context) => FaqPage(),
     Move.LiveChatPage: (context) => LiveChatPage(),
     Move.ReservationResultPage: (context) => ReservationResultPage(),
-    Move.ReservationLIstPage: (context) => ReservationLIstPage(),
+    Move.ReservationListPage: (context) => ReservationListPage(),
     Move.EnterAccessMethodsPage: (context) => EnterAccessMethodsPage(),
     Move.EnterOtherRequestsPage: (context) => EnterOtherRequestsPage(),
 
