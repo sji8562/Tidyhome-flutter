@@ -20,8 +20,7 @@ class Reservation {
     required this.icon,
   });
 }
-// moveRoute: Move.MainPage <---- 수정해야함!!!!!!!!!!
-// TODO 예약내역 페이지
+
 class ReservationListPage extends StatelessWidget {
 
   const ReservationListPage({super.key});
@@ -88,7 +87,7 @@ class ReservationListPage extends StatelessWidget {
                       child: ColorButton(
                           text: '예약하기',
                           funPageRoute: () {
-                            Navigator.pushNamed(context, Move.MainPage);
+                            Navigator.pushNamed(context, Move.ReservationPage);
                           }
                       )
                   ),
@@ -97,7 +96,7 @@ class ReservationListPage extends StatelessWidget {
                   child: SoftColorButton(
                     text: '완료된 서비스',
                     funPageRoute: () {
-                      Navigator.pushNamed(context, Move.MainPage);
+                      Navigator.pushNamed(context, Move.CompletedServiceListPage);
                     },
                   ),
                 ),
