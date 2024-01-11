@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:toyproject/_core/constants/color.dart';
-import 'package:toyproject/ui/pages/customer_page/customer_page.dart';
+import 'package:toyproject/ui/pages/customer_page/customer_main_page/customer_main_page.dart';
 import 'package:toyproject/ui/pages/main_page/home/main_home_page.dart';
-import 'package:toyproject/ui/pages/reservation_page/list_page.dart';
-import 'package:toyproject/ui/pages/reservation_page/reservation_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_list_page/reservation_list_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_page/reservation_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
             MainHomePage(),
             ReservationListPage(),
             ReservationPage(),
-            CustomerPage(),
+            CustomerMainPage(),
         ],),
         bottomNavigationBar:
         BottomNavigationBar(
