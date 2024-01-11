@@ -73,7 +73,7 @@ class ReservationListPage extends StatelessWidget {
                             icon: reservations[index].icon,
                             upText: reservations[index].category,
                             downText: reservations[index].date,
-                            moveRoute: Move.MainPage,
+                            moveRoute: Move.ReservationDetailPage,
                           ),
                           const CustomDividerThin(),
                         ],

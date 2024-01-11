@@ -66,7 +66,7 @@ class Move {
   static String AppliencePage = '/applience';
   static String CustomerPage = '/customer';
   static String NoticePage = '/customer/notice';
-  static String NoticeDetailPage = '/customer/notice/detail';
+  // static String NoticeDetailPage = '/customer/notice/detail';
   static String AccountClosurePage = '/customer/account-closure';
   static String TermsOfService = '/customer/terms-of-service';
   static String TermsAndConditionsPage = '/customer/terms-of-service/detail';
@@ -106,7 +106,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.AppliencePage: (context) => AppliencePage(),
     Move.CustomerPage: (context) => CustomerMainPage(),
     Move.NoticePage: (context) => NoticePage(),
-    Move.NoticeDetailPage: (context) => NoticeDetailPage(),
+    // Move.NoticeDetailPage: (context) => NoticeDetailPage(),
     Move.AccountClosurePage: (context) => AccountClosurePage(),
     Move.TermsOfService: (context) => TermsOfService(),
     Move.TermsAndConditionsPage: (context) => TermsAndConditionsPage(),
