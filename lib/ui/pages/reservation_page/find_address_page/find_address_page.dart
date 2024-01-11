@@ -7,8 +7,8 @@ import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart
 import 'package:toyproject/ui/widget/button/color_button.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
 
-import '../../../_core/constants/style.dart';
-import '../../widget/arrow_app_bar.dart';
+import '../../../../_core/constants/style.dart';
+import '../../../widget/arrow_app_bar.dart';
 
 class FindAddressPage extends StatefulWidget {
   const FindAddressPage({super.key});
