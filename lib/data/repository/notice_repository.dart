@@ -21,7 +21,20 @@ class NoticeRepository {
       return responseDTO;
     } catch (e) {
       // 200이 아니면 catch로 감
-      return ResponseDTO(success: false, response: null, error: "공지사항 조회 에러");
+      return ResponseDTO(success: false, response: null, error: "공지사항 목록 조회 에러");
     }
+  }
+
+  // 공지사항 상세보기
+  Future<ResponseDTO> fetchNoticeDetail(id) async {
+    Logger().d("fetchNoticeDetail 진입");
+    try {
+      Response<dynamic> response = await dio.get("/api/notice/${id}");
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      responseDTO.response = Notice.fromJson(responseDTO.response);
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(success: false, response: null, error: "공지사항 상세 조회 에러");
+  }
   }
 }

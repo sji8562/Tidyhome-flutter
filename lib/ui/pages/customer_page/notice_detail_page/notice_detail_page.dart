@@ -1,17 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:toyproject/_core/constants/Define.dart';
 import 'package:toyproject/_core/constants/move.dart';
+import 'package:toyproject/data/model/notice.dart';
+import 'package:toyproject/ui/pages/customer_page/notice_detail_page/notice_detail_page_view_model.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
 
 import '../widget/icon_and_title.dart';
 
-class NoticeDetailPage extends StatelessWidget {
-  const NoticeDetailPage({super.key});
+class NoticeDetailPage extends ConsumerWidget {
+  int id;
+
+  NoticeDetailPage({super.key, required this.id});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    NoticeDetailPageModel? noticeDetailPageModel = ref.watch(noticeDetailProvider(id));
+    Logger().d("**********************");
+    Logger().d(noticeDetailPageModel!.notice.toString());
+
+    //null 처리 : 상태값이 null일 경우, gif가 출력됨
+    if(noticeDetailPageModel?.notice == null) {
+      return Center(
+        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
+      );
+    }
+
+    Notice notice = noticeDetailPageModel!.notice!;
+
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: ''),
       body: Padding(
@@ -24,14 +43,14 @@ class NoticeDetailPage extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 5.0),
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    child: Text('생활청소 등 일부 서비스 선불 결제 도입 안내',
+                    child: Text(notice.title,
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26.0)),
                   ),
                 ),
                 SizedBox(height: 30.0,),
                 Container(
                   alignment: Alignment.centerLeft,
-                  child: Text('2023년 6월 07일'),
+                  child: Text(notice.getFormattedDate()),
                 ),
                 SizedBox(height: 50.0,),
                 Container(
@@ -39,14 +58,11 @@ class NoticeDetailPage extends StatelessWidget {
                   child: Column(
                     children: [
                       // 이미지 있을 수도 있고 없을 수도 있음
-                      Image(
-                          image: AssetImage(
-                              "${Define.images}airconditioner.PNG")),
+                      // Image(
+                      //     image: AssetImage(
+                      //         "${Define.images}airconditioner.PNG")),
                       SizedBox(height: 50.0,),
-                      Text('안녕하세요, 고객님\n'
-                          '항상 미소를 믿고 이용해 주셔서 감사의 말씀 드립니다.\n'
-                          '\n'
-                          '원활한 서비스 제공을 위해 일부 서비스가 선불 결제 방식으로 변경되어 사전 안내드립니다.'),
+                      Text(notice.content),
                     ],
                   ),
                 )
