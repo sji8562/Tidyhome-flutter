@@ -66,7 +66,7 @@ class MainHomePage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('ㅇㅇㅇ', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                        Text('나의 정보', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                         SizedBox(height: 10,),
                         Text('010-0000-0000'),
                       ],
