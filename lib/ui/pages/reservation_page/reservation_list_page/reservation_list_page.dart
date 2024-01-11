@@ -4,10 +4,10 @@ import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 import 'package:toyproject/ui/widget/button/color_button.dart';
 
-import '../../../_core/constants/move.dart';
-import '../../widget/button/soft_color_button.dart';
-import '../../widget/divider/custom_divider_thin.dart';
-import '../../widget/exclamationmark_title.dart';
+import '../../../../_core/constants/move.dart';
+import '../../../widget/button/soft_color_button.dart';
+import '../../../widget/divider/custom_divider_thin.dart';
+import '../../../widget/exclamationmark_title.dart';
 
 class Reservation {
   String category;
