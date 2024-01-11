@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:toyproject/ui/pages/company_update_info_page/company_update_info_page.dart';
-import 'package:toyproject/ui/pages/customer_page/account_closure_page.dart';
-import 'package:toyproject/ui/pages/customer_page/customer_page.dart';
-import 'package:toyproject/ui/pages/customer_page/faq_page.dart';
-import 'package:toyproject/ui/pages/customer_page/live_chat_page.dart';
-import 'package:toyproject/ui/pages/customer_page/notice_detail_page.dart';
-import 'package:toyproject/ui/pages/customer_page/notice_page.dart';
-import 'package:toyproject/ui/pages/customer_page/privacy_policy_page.dart';
-import 'package:toyproject/ui/pages/customer_page/terms_and_conditions_page.dart';
-import 'package:toyproject/ui/pages/customer_page/terms_of_service_page.dart';
-import 'package:toyproject/ui/pages/reservation_page/caution_page.dart';
-import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page.dart';
-import 'package:toyproject/ui/pages/reservation_page/detail_page.dart';
+import 'package:toyproject/ui/pages/customer_page/account_closure_page/account_closure_page.dart';
+import 'package:toyproject/ui/pages/customer_page/customer_main_page/customer_main_page.dart';
+import 'package:toyproject/ui/pages/customer_page/faq_page/faq_page.dart';
+import 'package:toyproject/ui/pages/customer_page/live_chat_page/live_chat_page.dart';
+import 'package:toyproject/ui/pages/customer_page/notice_detail_page/notice_detail_page.dart';
+import 'package:toyproject/ui/pages/customer_page/notice_page/notice_page.dart';
+import 'package:toyproject/ui/pages/customer_page/privacy_policy_page/privacy_policy_page.dart';
+import 'package:toyproject/ui/pages/customer_page/term_and_conditions_page/terms_and_conditions_page.dart';
+import 'package:toyproject/ui/pages/customer_page/term_of_service_page/terms_of_service_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/caution_page/caution_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page/completed_service_list_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/find_address_page.dart';
@@ -29,7 +29,7 @@ import '../../ui/pages/main_page/main_page.dart';
 import '../../ui/pages/service_detail_page/housekeeper_page.dart';
 import '../../ui/pages/service_detail_page/office_page.dart';
 import '../../ui/pages/start_page/start_page.dart';
-import 'package:toyproject/ui/pages/reservation_page/choice_address_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_page.dart';
 
 import '../../ui/pages/test_calendar_page.dart';
@@ -104,7 +104,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.OfficePage: (context) => OfficePage(),
     Move.MovementPage: (context) => MovementPage(),
     Move.AppliencePage: (context) => AppliencePage(),
-    Move.CustomerPage: (context) => CustomerPage(),
+    Move.CustomerPage: (context) => CustomerMainPage(),
     Move.NoticePage: (context) => NoticePage(),
     Move.NoticeDetailPage: (context) => NoticeDetailPage(),
     Move.AccountClosurePage: (context) => AccountClosurePage(),
