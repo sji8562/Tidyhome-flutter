@@ -21,6 +21,8 @@ import 'package:toyproject/ui/pages/service_detail_page/applience_page/applience
 import 'package:toyproject/ui/pages/service_detail_page/movement_page/movement_page.dart';
 import 'package:toyproject/ui/pages/splash_page/splash_page.dart';
 import '../../ui/pages/company_update_info_page/company_update_info_fourth_page.dart';
+import '../../ui/pages/company_update_info_page/company_update_info_last_page.dart';
+import '../../ui/pages/company_update_info_page/company_update_info_pic_page.dart';
 import '../../ui/pages/company_update_info_page/company_update_info_second_page.dart';
 import '../../ui/pages/company_update_info_page/company_update_info_thrid_page.dart';
 import '../../ui/pages/join_page/join_page.dart';
@@ -55,6 +57,8 @@ class Move {
   static String CompanyUpdateInfoSecondPage = "/join/company/update/second-info";
   static String CompanyUpdateInfoThirdPage = "/join/company/update/third-info";
   static String CompanyUpdateInfoFourthPage = "/join/company/update/fourth-info";
+  static String CompanyUpdateInfoLastPage = "/join/company/update/last-info";
+  static String CompanyUpdateInfoPicPage = "/join/company/update/pic-info";
 
   // KWON
   static String ReservationPage = "/reservation";
@@ -95,6 +99,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.CompanyUpdateInfoSecondPage: (context) => CompanyUpdateInfoSecondPage(),
     Move.CompanyUpdateInfoThirdPage: (context) => CompanyUpdateInfoThirdPage(),
     Move.CompanyUpdateInfoFourthPage: (context) => CompanyUpdateInfoFourthPage(),
+    Move.CompanyUpdateInfoLastPage: (context) => CompanyUpdateInfoLastPage(),
+    Move.CompanyUpdateInfoPicPage : (context) => CompanyUpdateInfoPicPage(),
     // KWON
     Move.ChoiceAddressPage: (context) => ChoiceAddressPage(),
     Move.ReservationPage: (context) => ReservationPage(),

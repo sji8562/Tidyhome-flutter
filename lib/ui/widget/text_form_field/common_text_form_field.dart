@@ -11,6 +11,7 @@ class CommonTextFormField extends ConsumerWidget {
   final String? initValue;
   final String? placeholderText;
   final bool obscureText;
+  final int? maxLength;
   final funValidator;
   final changeFormData;
   final controller;
@@ -25,6 +26,7 @@ class CommonTextFormField extends ConsumerWidget {
     this.changeFormData,
     this.controller,
     this.strong,
+    this.maxLength
   }) : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class CommonTextFormField extends ConsumerWidget {
       children: [
         const SizedBox(height: gap_xs),
         TextFormField(
+          maxLength: maxLength,
           initialValue: initValue,
           enabled: enabled,
           controller: controller,

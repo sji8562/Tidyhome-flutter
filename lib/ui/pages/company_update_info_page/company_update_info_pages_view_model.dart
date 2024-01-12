@@ -5,43 +5,47 @@ import 'company_code_table/company_code_table.dart';
 
 class CompanyUpdateInfoPagesModel {
   String companyName;
-  String companyBusinessName;
+  String companyBusinessNumber;
   List<ServiceType> serviceType;
   List<ServiceLocation> serviceLocation;
   Gender? gender;
   String? whereFrom;
   String? birthYear;
   String? animal;
+  String? userPic;
 
   CompanyUpdateInfoPagesModel(
       {required this.companyName,
-      required this.companyBusinessName,
+      required this.companyBusinessNumber,
       required this.serviceType,
       required this.serviceLocation,
       this.gender,
       this.whereFrom,
       this.birthYear,
-      this.animal});
+      this.animal, this.userPic
+      });
 
   CompanyUpdateInfoPagesModel copyWith({
     String? companyName,
-    String? companyBusinessName,
+    String? companyBusinessNumber,
     List<ServiceType>? serviceType,
     List<ServiceLocation>? serviceLocation,
     Gender? gender,
     String? whereFrom,
     String? birthYear,
     String? animal,
+    String? userPic
   }) {
     return CompanyUpdateInfoPagesModel(
       companyName: companyName ?? this.companyName,
-      companyBusinessName: companyBusinessName ?? this.companyBusinessName,
+      companyBusinessNumber: companyBusinessNumber ?? this.companyBusinessNumber,
       serviceType: serviceType ?? this.serviceType,
       serviceLocation: serviceLocation ?? this.serviceLocation,
       gender: gender ?? this.gender,
       whereFrom: whereFrom ?? this.whereFrom,
       birthYear: birthYear ?? this.birthYear,
       animal: animal ?? this.animal,
+      userPic: userPic ?? this.userPic
     );
   }
 
@@ -51,12 +55,16 @@ class CompanyUpdateInfoPagesViewModel
     extends StateNotifier<CompanyUpdateInfoPagesModel?> {
   CompanyUpdateInfoPagesViewModel(super._state);
 
-  void setCompanyName(String newCompanyName) {
-    state = state?.copyWith(companyName: newCompanyName);
+  void setCompanyName(String companyName) {
+    state = state?.copyWith(companyName: companyName);
   }
 
-  void setCompanyBusinessName(String newCompanyBusinessName) {
-    state = state?.copyWith(companyBusinessName: newCompanyBusinessName);
+  void setCompanyBusinessNumber(String businessNumber) {
+    state = state?.copyWith(companyBusinessNumber: businessNumber);
+  }
+
+  void setUserPic(String userPic) {
+    state = state?.copyWith(userPic: userPic);
   }
 
   void toggleServiceType(String service) {
@@ -149,7 +157,7 @@ final companyUpdateInfoProvider = StateNotifierProvider<
     CompanyUpdateInfoPagesViewModel, CompanyUpdateInfoPagesModel?>((ref) {
   return CompanyUpdateInfoPagesViewModel(CompanyUpdateInfoPagesModel(
       companyName: "",
-      companyBusinessName: "",
+      companyBusinessNumber: "",
       serviceType: serviceTypes,
       serviceLocation: koreaCity));
 });

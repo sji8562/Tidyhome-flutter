@@ -76,6 +76,10 @@ Text orderText(String text) => Text("$text ",style: TextStyle(fontSize: 11,fontW
 //   return Text orderText() => Text("",style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),);
 // }
 
+TextStyle titleStyleBig(){
+  return const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
+}
+
 TextStyle titleStyle1(){
   return const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 }

@@ -1,24 +1,24 @@
 class User {
-  String id;
-  String tel;
-  String level;
+  int? id;
+  String? tel;
+  // String? createdAt;
 
-  User({required this.id, required this.tel, required this.level});
+
+  User(this.id, this.tel);
 
 Map<String, dynamic> toJson() => {
   "id": id,
   "tel": tel,
-  "level": level
 };
 
 User.fromJson(Map<String, dynamic> json)
     : id = json["id"],
-      tel = json["tel"],
-      level = json["level"];
+      tel = json["tel"];
+      // createdAt = json["createdAt"];
 
 @override
 String toString() {
-return 'User{tel: $tel, level: $level}';
+return 'User{tel: $tel}';
 }
 
 }

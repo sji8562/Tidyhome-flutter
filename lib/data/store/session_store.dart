@@ -48,9 +48,9 @@ class SessionStore extends SessionUser {
     }
   }
 
-  Future<void> login(LoginReqDTO loginReqDTO) async {
+  Future<void> login(JoinReqDTO joinReqDTO) async {
     // 1. 통신 코드
-    ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
+    ResponseDTO responseDTO = await UserRepository().fetchLogin(joinReqDTO);
 
     // 2. 비지니스 로직
     if (responseDTO.success == true) {
@@ -128,7 +128,7 @@ class SessionStore extends SessionUser {
           content: Text("인증 성공!"),
         ),
       );
-      await join(JoinReqDTO(tel: smsCheckDTO.tel));
+      await login(JoinReqDTO(tel: smsCheckDTO.tel));
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         SnackBar(
