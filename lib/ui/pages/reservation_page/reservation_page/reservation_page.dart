@@ -1,18 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/define.dart';
 import 'package:toyproject/_core/constants/move.dart';
+import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart';
 
 import '../../../../_core/constants/style.dart';
 import '../../../widget/arrow_app_bar.dart';
 
-class ReservationPage extends StatelessWidget {
+class ReservationPage extends ConsumerWidget {
   const ReservationPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(sessionProvider).setUser();
+    ChoiceAddressPageModel? choiceAddressPageModel = ref.watch(choiceAddressProvider);
+    if (choiceAddressPageModel?.addressList == null) {
+      return Center(
+        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
+      );
+    }
+    String firstAddress =
+        (ref.read(choiceAddressProvider.notifier).findFirstAddress()?.address ?? "기본 주소") +
+            " " +
+            (ref.read(choiceAddressProvider.notifier).findFirstAddress()?.addressDetail ?? "설정");
+
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: "",),
       body: Column(
@@ -32,7 +47,7 @@ class ReservationPage extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Row(
                     children: [
-                      Text('서울 강남구 테헤란로 427 위워크타워 1동 1호'),
+                      Text(firstAddress),
                       InkWell(onTap: () {
                         Navigator.pushNamed(context, Move.ChoiceAddressPage);
                       },

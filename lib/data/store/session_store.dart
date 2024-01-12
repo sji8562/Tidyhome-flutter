@@ -29,6 +29,14 @@ class SessionStore extends SessionUser {
 
   SessionStore(this.ref);
 
+  void setUser(){
+    this.user = User(1, "1234");
+    this.jwt = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b2sta2V5IiwiaWQiOjEsInRlbCI6IjEyMzQiLCJleHAiOjE3MjM3Nzk5NDB9.y43ng2W_NWFqOyeIHvh2oMSI6SSPvvaUXt1CeWM9XdOXfqCve3WAc2XnRwg3Snc4yjI3JA4FO6SIVkpgFIhFQg";
+    this.isLogin = true;
+  }
+
+
+
   Future<void> join(JoinReqDTO joinReqDTO) async {
     Logger().d("여기까지 실행됨");
     // 1. 통신 코드
