@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:toyproject/_core/constants/Define.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
+import 'package:toyproject/data/model/reservationDetail.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/icon_text.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button_with_label.dart';
@@ -20,7 +23,9 @@ import 'package:toyproject/ui/widget/divider/custom_divider_thin.dart';
 import 'package:toyproject/ui/widget/exclamationmark_title.dart';
 
 class ReservationDetailPage extends ConsumerWidget {
-  const ReservationDetailPage({super.key});
+  int id;
+
+  ReservationDetailPage({super.key, required this.id});
 
   // 모달을 표시하는 함수
   Future<void> _showFeeRuleModal(BuildContext context, String type) async {
@@ -34,6 +39,18 @@ class ReservationDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ReservationDetailPageModel? reservationDetailPageModel = ref.watch(reservationDetailProvider(id));
+
+    //null 처리 : 상태값이 null일 경우, gif가 출력됨
+    if(reservationDetailPageModel?.reservationDetail == null) {
+      return Center(
+        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
+      );
+    }
+
+    ReservationDetail reservationDetail = reservationDetailPageModel!.reservationDetail!;
+    Logger().d("여기여기여기 =======", reservationDetail);
+
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '',),
       body: Stack(
@@ -52,7 +69,7 @@ class ReservationDetailPage extends ConsumerWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
-                              Text('가사도우미', style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text(reservationDetail.firstCategory, style: TextStyle(fontWeight: FontWeight.bold),),
                               SizedBox(height: 8,),
                               TextLabel(text: '예약 완료', is_active: true,),
                             ],

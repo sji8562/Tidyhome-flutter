@@ -4,14 +4,14 @@ import '../../../../_core/constants/color.dart';
 import '../../../../_core/constants/define.dart';
 
 class ReservationTab extends StatelessWidget {
-  String icon;
-  String upText;
-  String downText;
-  String moveRoute;
+  final String icon;
+  final String upText;
+  final String downText;
+  final moveRoute;
 
 
   ReservationTab({required this.icon, required this.upText, required this.downText,
-    required this.moveRoute, super.key}); // const ReservationTap({super.key});
+    this.moveRoute, super.key}); // const ReservationTap({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +38,7 @@ class ReservationTab extends StatelessWidget {
               ),
               // >
               InkWell(
-                  onTap: () {
-                    // Navigator.push(context, moveRoute); //4
-                  },
+                  onTap: moveRoute == null ? () {} : moveRoute,
                   child: Icon(Icons.navigate_next))
             ],
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

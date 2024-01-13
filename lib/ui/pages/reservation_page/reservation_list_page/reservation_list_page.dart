@@ -1,38 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart';
-import 'package:toyproject/ui/widget/arrow_app_bar.dart';
-import 'package:toyproject/ui/widget/button/color_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_list_page/reservation_list_page_view_model.dart';
 
 import '../../../../_core/constants/move.dart';
+import '../../../../data/model/reservation.dart';
+import '../../../../data/store/session_store.dart';
+import '../../../widget/arrow_app_bar.dart';
+import '../../../widget/button/color_button.dart';
 import '../../../widget/button/soft_color_button.dart';
 import '../../../widget/divider/custom_divider_thin.dart';
 import '../../../widget/exclamationmark_title.dart';
+import '../widget/reservation_tab.dart';
 
-class Reservation {
-  String category;
-  String date;
-  String icon;
 
-  Reservation({
-    required this.category,
-    required this.date,
-    required this.icon,
-  });
-}
 
-class ReservationListPage extends StatelessWidget {
+class ReservationListPage extends ConsumerWidget {
 
   const ReservationListPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // 가상의 예약 데이터
-    List<Reservation> reservations = [
-      Reservation(category: '가사도우미', date: '6월 19일(일) 오전 9시', icon: 'cleaning_assistant_icon.png'),
-      Reservation(category: '이사청소', date: '5월 12일(화) 오후2시', icon: 'moving_cleaning_icon.PNG'),
-      Reservation(category: '사무실 청소', date: '4월 28일(목) 오후 6시', icon: 'office_cleaning_icon.png'),
-    ];
+  Widget build(BuildContext context, WidgetRef ref) {
+    // ref.read(sessionProvider).setUser();
+    ReservationPageModel? reservationPageModel = ref.watch(reservationProvider);
+    Logger().d("*-*-*-*-*-*-*");
+    Logger().d(reservationPageModel!.reservationList.toString());
+
+    List<Reservation> reservations = reservationPageModel!.reservationList;
+
+    String _setServiceIconName(category) {
+      if(category == '가사도우미') {
+        return 'cleaning_assistant_icon.png';
+      }
+      if(category == '이사청소') {
+        return 'moving_cleaning_icon.PNG';
+      }
+      if(category == '사무실청소') {
+        return 'office_cleaning_icon.png';
+      }
+      return 'air_conditioner_cleaning_icon.png';
+    };
 
     return Scaffold(
       appBar: ArrowAppBar(
@@ -70,10 +78,13 @@ class ReservationListPage extends StatelessWidget {
                       return Column(
                         children: [
                           ReservationTab(
-                            icon: reservations[index].icon,
-                            upText: reservations[index].category,
-                            downText: reservations[index].date,
-                            moveRoute: Move.ReservationDetailPage,
+                            icon: _setServiceIconName(reservations[index].firstCategory),
+                            upText: reservations[index].firstCategory,
+                            downText: '${reservations[index].getFormattedDate()} ${reservations[index].getFormattedTime()}',
+                            // TODO 값 안넘어감
+                            moveRoute: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationDetailPage(id: reservations[index].reservationId)));
+                            },
                           ),
                           const CustomDividerThin(),
                         ],
