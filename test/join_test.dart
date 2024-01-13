@@ -24,3 +24,5 @@ Future<ResponseDTO> fetchJoin(JoinReqDTO requestDTO) async {
     return ResponseDTO(success: false, response: null, error: "중복된 유저명입니다.");
   }
 }
+
+

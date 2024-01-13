@@ -1,44 +1,93 @@
 import 'package:flutter/material.dart';
-import 'package:toyproject/_core/constants/color.dart';
-import 'package:toyproject/_core/constants/define.dart';
-import 'package:toyproject/_core/constants/move.dart';
-import 'package:toyproject/ui/pages/reservation_page/widget/choice_address_tab.dart';
-import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart';
-import 'package:toyproject/ui/widget/button/color_button.dart';
-import 'package:toyproject/ui/widget/button/soft_color_button.dart';
-
-import '../../../../_core/constants/style.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:remedi_kopo/remedi_kopo.dart';
+import 'package:toyproject/data/store/session_store.dart';
+import 'package:toyproject/ui/pages/reservation_page/choice_address_page/widget/address_detail_setting.dart';
+import '../../../../data/model/Address.dart';
 import '../../../widget/arrow_app_bar.dart';
+import '../../../widget/button/soft_color_button.dart';
+import '../widget/choice_address_tab.dart';
+import 'choice_address_page_view_model.dart';
 
-class ChoiceAddressPage extends StatefulWidget {
+class ChoiceAddressPage extends ConsumerWidget {
   const ChoiceAddressPage({super.key});
 
-  @override
-  State<ChoiceAddressPage> createState() => _ChoiceAddressPageState();
-}
 
-class _ChoiceAddressPageState extends State<ChoiceAddressPage> {
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Map<String, String> formData = {};
+
+    /// Controller
+    // _postcodeController 지번을 받음
+    final TextEditingController _postcodeController = TextEditingController();
+    // _postcodeController 주소를 받음
+    final TextEditingController _addressController = TextEditingController();
+    // _addressDetailController 상세 주소를 받음
+    final TextEditingController _addressDetailController =
+    TextEditingController();
+
+
+    ref.read(sessionProvider).setUser();
+    ChoiceAddressPageModel? choiceAddressPageModel = ref.watch(choiceAddressProvider);
+    if (choiceAddressPageModel?.addressList == null) {
+      return Center(
+        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover,
+            width: 200,
+            height: 200),
+      );
+    }
+    List<Address> addresses = choiceAddressPageModel!.addressList!;
+
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: "주소 관리"),
       body: Stack(
         children: [
           ListView.builder(
-            itemCount: 10, // length
+            itemCount: addresses.length, // length
             itemBuilder: (context, index) {
               return Column(
                 children: [
-                  ChoiceAddressTab(text: '서울 강남구 테헤란로 302 위워크타워 1동1호', isChecked: false),
-                  ChoiceAddressTab(text: '서울 강남구 테헤란로 302 위워크타워 1동1호', isChecked: true),
+                  ChoiceAddressTab(text: addresses[index].address + "  "+ addresses[index].addressDetail, index: index),
                 ],
               );
             },
           ),
           Positioned(
             bottom: 10,
-            child: SoftColorButton(text: '새 주소 등록', funPageRoute: (){
-              Navigator.pushNamed(context, Move.FindAddressPage);
+            child: SoftColorButton(text: '새 주소 등록', funPageRoute: () async {
+              KopoModel? model = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RemediKopo(),
+                ),
+              );
+              if (model != null) {
+                final postcode = model.zonecode ?? '';
+                _postcodeController.value = TextEditingValue(
+                  text: postcode,
+                );
+                formData['postcode'] = postcode;
+
+                final address = model.address ?? '';
+                _addressController.value = TextEditingValue(
+                  text: address,
+                );
+                formData['address'] = address;
+
+                final buildingName = model.buildingName ?? '';
+                _addressDetailController.value = TextEditingValue(
+                  text: buildingName,
+                );
+                formData['address_detail'] = buildingName;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          AddressDetailSetForm(model: model,)
+                  ),
+                );
+              }
             }),
           )
         ],

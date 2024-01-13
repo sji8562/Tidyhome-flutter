@@ -55,11 +55,6 @@ class JoinPageBody extends ConsumerWidget {
       child: ListView.builder(
         itemCount: joinFields.length,
         itemBuilder: (context, index) {
-          // 컨트롤러 초기화
-          // if (index >= _gubunControllers.length) {
-          //   _gubunControllers.add(TextEditingController());
-          // }
-          // 컨트롤러 초기화
           _gubunControllers.addAll(List.generate(3, (_) => TextEditingController()));
           // 포커스 노드 초기화
           _gubunFocusNodes.addAll(List.generate(3, (_) => FocusNode()));

@@ -51,7 +51,7 @@ class StartPageBody extends StatelessWidget {
                           CheckedTapNoArrow(text: "[필수] 만 14세 이상이에요", moveRoute: Move.StartPage),
                           SizedBox(height: 20,),
                           ColorButton(text: "동의 후 시작하기", funPageRoute: (){
-                            Navigator.pushNamed(context, Move.StartPage);
+                            Navigator.pushNamed(context, Move.JoinPage);
                           })
                         ],
                       ),
