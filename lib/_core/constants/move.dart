@@ -4,13 +4,13 @@ import 'package:toyproject/ui/pages/customer_page/account_closure_page/account_c
 import 'package:toyproject/ui/pages/customer_page/customer_main_page/customer_main_page.dart';
 import 'package:toyproject/ui/pages/customer_page/faq_page/faq_page.dart';
 import 'package:toyproject/ui/pages/customer_page/live_chat_page/live_chat_page.dart';
-import 'package:toyproject/ui/pages/customer_page/notice_detail_page/notice_detail_page.dart';
 import 'package:toyproject/ui/pages/customer_page/notice_page/notice_page.dart';
 import 'package:toyproject/ui/pages/customer_page/privacy_policy_page/privacy_policy_page.dart';
 import 'package:toyproject/ui/pages/customer_page/term_and_conditions_page/terms_and_conditions_page.dart';
 import 'package:toyproject/ui/pages/customer_page/term_of_service_page/terms_of_service_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/caution_page/caution_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page/completed_service_list_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/office_cleaning_apply_page/office_cleaning_apply_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page/enter_other_requests_page.dart';
@@ -28,6 +28,8 @@ import '../../ui/pages/company_update_info_page/company_update_info_thrid_page.d
 import '../../ui/pages/join_page/join_page.dart';
 import '../../ui/pages/main_page/home/main_home_page.dart';
 import '../../ui/pages/main_page/main_page.dart';
+import '../../ui/pages/reservation_page/reservation_apply_page/home_work_apply_page/home_work_apply_page.dart';
+import '../../ui/pages/reservation_page/reservation_apply_page/moving_cleaning_apply_page/moving_cleaning_apply_page.dart';
 import '../../ui/pages/service_detail_page/housekeeper_page/housekeeper_page.dart';
 import '../../ui/pages/service_detail_page/office_page/office_page.dart';
 import '../../ui/pages/start_page/start_page.dart';
@@ -59,6 +61,9 @@ class Move {
   static String CompanyUpdateInfoFourthPage = "/join/company/update/fourth-info";
   static String CompanyUpdateInfoLastPage = "/join/company/update/last-info";
   static String CompanyUpdateInfoPicPage = "/join/company/update/pic-info";
+  static String HomeWorkApplyPage = "/apply/homeWork";
+  static String MovingCleaningApplyPage = "/apply/moving-cleaning";
+  static String OfficeCleaningApplyPage = "/apply/office-cleaning";
 
   // KWON
   static String ReservationPage = "/reservation";
@@ -101,6 +106,9 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.CompanyUpdateInfoFourthPage: (context) => CompanyUpdateInfoFourthPage(),
     Move.CompanyUpdateInfoLastPage: (context) => CompanyUpdateInfoLastPage(),
     Move.CompanyUpdateInfoPicPage : (context) => CompanyUpdateInfoPicPage(),
+    Move.HomeWorkApplyPage : (context) => HomeWorkApplyPage(),
+    Move.MovingCleaningApplyPage : (context) => MovingCleaningApplyPage(),
+    Move.OfficeCleaningApplyPage : (context) => OfficeCleaningApplyPage(),
     // KWON
     Move.ChoiceAddressPage: (context) => ChoiceAddressPage(),
     Move.ReservationPage: (context) => ReservationPage(),

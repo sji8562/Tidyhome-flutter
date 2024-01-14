@@ -169,3 +169,17 @@ String? validateOthers(String? value) {
   }
   return null; // 유효성 검사 통과
 }
+
+String? validateArea(String? value) {
+  if (value == null || value.isEmpty) {
+    return "공백 값이 들어갈 수 없습니다.";
+  }
+
+  // 정규 표현식을 사용하여 1부터 1000까지의 숫자인지 확인
+  RegExp regExp = RegExp(r'^([1-9]|[1-9]\d{0,2}|1000)$');
+  if (!regExp.hasMatch(value)) {
+    return "1부터 1000까지의 숫자만 입력해주세요.";
+  }
+
+  return null; // 유효성 검사 통과
+}
