@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../../widget/check_box/check_box_item.dart';
+import 'package:toyproject/ui/widget/check_box/check_box_item.dart';
 
 
 class AddressDetail extends StatelessWidget {
