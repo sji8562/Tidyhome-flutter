@@ -90,7 +90,7 @@ class Move {
   static String ReservationListPage = '/reservation/list';
   static String EnterAccessMethodsPage = '/reservation/access-methods';
   static String EnterOtherRequestsPage = '/reservation/other-requests';
-  static String ReservationDetailPage = '/reservation/detail';
+  // static String ReservationDetailPage = '/reservation/detail';
   static String CautionPage = '/reservation/caution';
   static String CompletedServiceListPage = '/completed-service-list';
   static String CalendarTestPage = '/test/calendar';
@@ -137,7 +137,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.ReservationListPage: (context) => ReservationListPage(),
     Move.EnterAccessMethodsPage: (context) => EnterAccessMethodsPage(),
     Move.EnterOtherRequestsPage: (context) => EnterOtherRequestsPage(),
-    Move.ReservationDetailPage: (context) => ReservationDetailPage(),
+    // Move.ReservationDetailPage: (context) => ReservationDetailPage(),
     Move.CautionPage: (context) => CautionPage(),
     Move.CompletedServiceListPage: (context) => CompletedServiceListPage(),
     Move.CalendarTestPage: (context) => CalendarTestPage(),

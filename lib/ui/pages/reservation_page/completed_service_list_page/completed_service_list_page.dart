@@ -5,6 +5,8 @@ import 'package:toyproject/_core/constants/Define.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
+import 'package:toyproject/data/model/reservation.dart';
+import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page/completed_service_list_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/icon_text.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button_with_label.dart';
@@ -20,29 +22,34 @@ import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 import 'package:toyproject/ui/widget/divider/custom_divider_thin.dart';
 import 'package:toyproject/ui/widget/exclamationmark_title.dart';
 
+import '../reservation_detail_page/reservation_detail_page.dart';
+
 class CompletedServiceListPage extends ConsumerWidget {
   const CompletedServiceListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    CompletedReservationPageModel? completedReservationPageModel = ref.watch(completedReservationProvider);
+    List<Reservation> reservations = completedReservationPageModel!.reservationList;
+
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '완료된 서비스',),
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child:
           ListView.builder(
-              itemCount: 10, // length
+              itemCount: reservations.length,
               itemBuilder: (context, index) {
                 return
                   Column(
                   children: [
                     InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, Move.ReservationDetailPage);
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationDetailPage(id: reservations[index].reservationId)));
                         },
-                        child: ReservationListTab(service_type: '가사도우미', service_date: '2024년 1월 25일(금) 오전 9시', is_done: true,)
+                        child: ReservationListTab(service_type: reservations[index].firstCategory, service_date: reservations[index].getFormattedDate() + ' ' + reservations[index].getFormattedTime(), is_done: true,)
                     ),
-                    ReservationListTab(service_type: '가사도우미', service_date: '2024년 1월 25일(금) 오전 9시', is_done: false,),
                   ],
                 );
               })
