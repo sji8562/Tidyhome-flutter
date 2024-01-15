@@ -18,7 +18,6 @@ class ReservationDetailPageViewModel extends StateNotifier<ReservationDetailPage
   Future<void> fetchReservationDetail(id) async {
     // 1. 통신 코드
     ResponseDTO responseDTO = await ReservationRepository().fetchReservationDetail(id);
-    Logger().d("reservation detail id");
     state = ReservationDetailPageModel(responseDTO.response);
   }
 
