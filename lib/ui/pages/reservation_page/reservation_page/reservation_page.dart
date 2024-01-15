@@ -7,6 +7,7 @@ import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 import '../../../../_core/constants/style.dart';
 import '../../../widget/arrow_app_bar.dart';
@@ -19,9 +20,7 @@ class ReservationPage extends ConsumerWidget {
     ref.read(sessionProvider).setUser();
     ChoiceAddressPageModel? choiceAddressPageModel = ref.watch(choiceAddressProvider);
     if (choiceAddressPageModel?.addressList == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return const Loading();
     }
     String firstAddress =
         (ref.read(choiceAddressProvider.notifier).findFirstAddress()?.address ?? "기본 주소") +
@@ -59,10 +58,18 @@ class ReservationPage extends ConsumerWidget {
               ),
             ),
           ),
-          ReservationTab(icon: "cleaning_assistant_icon.png", upText: '가사도우미', downText: '2시간 29,200원부터', moveRoute: Move.MainPage),
-          ReservationTab(icon: "moving_cleaning_icon.PNG", upText: '이사청소', downText: '평당 10,900원부터', moveRoute: Move.MainPage),
-          ReservationTab(icon: "air_conditioner_cleaning_icon.png", upText: '세탁기/침대/에어컨 청소', downText: '에어컨, 세탁기, 매트리스', moveRoute: Move.MainPage),
-          ReservationTab(icon: "office_cleaning_icon.png", upText: '사무실 청소', downText: '학원/매장/모든 사업장 즉시 예약!', moveRoute: Move.MainPage)
+          ReservationTab(icon: "cleaning_assistant_icon.png", upText: '가사도우미', downText: '2시간 29,200원부터', moveRoute: () {
+            Navigator.pushNamed(context, Move.MainPage);
+          }),
+          ReservationTab(icon: "moving_cleaning_icon.PNG", upText: '이사청소', downText: '평당 10,900원부터', moveRoute: () {
+            Navigator.pushNamed(context, Move.MainPage);
+          }),
+          ReservationTab(icon: "air_conditioner_cleaning_icon.png", upText: '세탁기/침대/에어컨 청소', downText: '에어컨, 세탁기, 매트리스', moveRoute: () {
+            Navigator.pushNamed(context, Move.MainPage);
+          }),
+          ReservationTab(icon: "office_cleaning_icon.png", upText: '사무실 청소', downText: '학원/매장/모든 사업장 즉시 예약!', moveRoute: () {
+            Navigator.pushNamed(context, Move.MainPage);
+          })
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 import '../../../../_core/constants/color.dart';
 import '../../../../_core/utils/validator_util.dart';
@@ -44,9 +45,7 @@ class JoinPageBody extends ConsumerWidget {
     SessionStore sessionStore = ref.read(sessionProvider);
     //null 처리 : 상태값이 null일 경우, gif가 출력됨
     if (joinChatModel?.joinFields == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return const Loading();
     }
     List<JoinField> joinFields = joinChatModel!.joinFields;
     bool resendVisible = false;

@@ -88,4 +88,21 @@ class UserRepository {
       return ResponseDTO(success: false, response: null, error: "로그인실패.");
     }
   }
+
+  // 회원 탈퇴
+  Future<ResponseDTO> fetchCloseAccount() async {
+    try {
+      Logger().d("회원 탈퇴 호출");
+      Response<dynamic> response = await dio.post("/api/users/delete"
+          // , data: {"tel" : "1234"}
+      );
+      Logger().d("결과 ================ 1111111");
+      Logger().d(response);
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("결과 ================ 22222222222");
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(success: false, response: null, error: "회원 탈퇴 실패");
+    }
+  }
 }

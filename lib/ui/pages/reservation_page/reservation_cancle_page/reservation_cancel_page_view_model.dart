@@ -2,15 +2,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../data/model/home_work_apply_field.dart';
 
 // 1. 창고 데이터
-class ReservationChangePageModel  {
+class ReservationCanclePageModel  {
   List<HomeWorkApplyField>? homeWorkFields;
 
-  ReservationChangePageModel(this.homeWorkFields);
+  ReservationCanclePageModel(this.homeWorkFields);
 
-  ReservationChangePageModel copyWith({
+  ReservationCanclePageModel copyWith({
     List<HomeWorkApplyField>? homeWorkFields,
   }) {
-    return ReservationChangePageModel(
+    return ReservationCanclePageModel(
       homeWorkFields ?? this.homeWorkFields,
     );
   }
@@ -19,13 +19,18 @@ class ReservationChangePageModel  {
 }
 
 // 2. 창고
-class ReservationChangePageViewModel extends StateNotifier<ReservationChangePageModel?> {
-  ReservationChangePageViewModel(super.state);
+class ReservationCanclePageViewModel extends StateNotifier<ReservationCanclePageModel?> {
+  ReservationCanclePageViewModel(super.state);
 
 
   void addWhyChange(){
-    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "어떤 이유 때문에 변경하시나요?", selectList: ["일정이 생겨서", "날짜, 시간 입력 실수", "기타"]);
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "어떤 이유 때문에 취소 하시나요?", selectList: ["일정이 생겨서", "날짜, 시간 입력 실수", "기타"]);
     state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+  }
+
+  void addChangeOrCancel(){
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "다른 일정으로 변경도 가능합니다. 예약을 변경해드릴까요?", selectList: ["네, 변경할게요.", "아니오, 취소할게요."]);
+    state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
   }
 
   void addWhenChange(){
@@ -89,7 +94,7 @@ class ReservationChangePageViewModel extends StateNotifier<ReservationChangePage
   }
 
   void addNotice(){
-    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "아래 버튼을 누르시면 예약변경이 진행됩니다.");
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "아래 버튼을 누르시면 예약취소가 진행됩니다.");
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
   }
 
@@ -111,7 +116,7 @@ class ReservationChangePageViewModel extends StateNotifier<ReservationChangePage
 
 
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
-final reservationChangeProvider =
-StateNotifierProvider<ReservationChangePageViewModel, ReservationChangePageModel?>((ref) {
-  return ReservationChangePageViewModel(ReservationChangePageModel([]))..addWhyChange();
+final reservationCancelProvider =
+StateNotifierProvider<ReservationCanclePageViewModel, ReservationCanclePageModel?>((ref) {
+  return ReservationCanclePageViewModel(ReservationCanclePageModel([]))..addWhyChange();
 });

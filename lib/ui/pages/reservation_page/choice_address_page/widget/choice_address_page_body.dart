@@ -7,6 +7,7 @@ import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/widget/address_detail_setting.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/choice_address_tab.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 class ChoiceAddressPageBody extends ConsumerWidget {
   /// Controller
@@ -25,11 +26,7 @@ class ChoiceAddressPageBody extends ConsumerWidget {
     ref.read(sessionProvider).setUser();
     ChoiceAddressPageModel? choiceAddressPageModel = ref.watch(choiceAddressProvider);
     if (choiceAddressPageModel?.addressList == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover,
-            width: 200,
-            height: 200),
-      );
+      return const Loading();
     }
     List<Address> addresses = choiceAddressPageModel!.addressList!;
     return Stack(

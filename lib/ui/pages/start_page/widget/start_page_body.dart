@@ -45,9 +45,9 @@ class StartPageBody extends StatelessWidget {
                               ),
                             ],
                           ),
-                          CheckedTap(text: "[필수] 서비스 이용 약관", moveRoute: Move.StartPage),
-                          CheckedTap(text: "[필수] 개인정보 수집 및 이용동의", moveRoute: Move.StartPage),
-                          CheckedTap(text: "[필수] 개인정보 제3자 제공 동의", moveRoute: Move.StartPage),
+                          CheckedTap(text: "[필수] 서비스 이용 약관", moveRoute: Move.TermsAndConditionsPage),
+                          CheckedTap(text: "[필수] 개인정보 수집 및 이용동의", moveRoute: Move.PrivacyPolicyPage),
+                          CheckedTap(text: "[필수] 개인정보 제3자 제공 동의", moveRoute: Move.SharingPersonalInformationPage),
                           CheckedTapNoArrow(text: "[필수] 만 14세 이상이에요", moveRoute: Move.StartPage),
                           SizedBox(height: 20,),
                           ColorButton(text: "동의 후 시작하기", funPageRoute: (){

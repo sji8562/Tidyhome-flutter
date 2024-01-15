@@ -8,7 +8,9 @@ import 'package:toyproject/data/model/notice.dart';
 import 'package:toyproject/ui/pages/customer_page/notice_detail_page/notice_detail_page_view_model.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
+import '../../../../_core/constants/color.dart';
 import '../widget/icon_and_title.dart';
 
 class NoticeDetailPage extends ConsumerWidget {
@@ -24,9 +26,7 @@ class NoticeDetailPage extends ConsumerWidget {
 
     //null 처리 : 상태값이 null일 경우, gif가 출력됨
     if(noticeDetailPageModel?.notice == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return Loading();
     }
 
     Notice notice = noticeDetailPageModel!.notice!;

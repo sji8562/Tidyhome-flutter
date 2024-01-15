@@ -14,7 +14,9 @@ class ReservationRepository {
       await dio.get("/reservation/list");
       Logger().d("예약내역 리스트 요청 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("예약내역 리스트 요청 통신 진입1111111111111111");
       List<dynamic> mapList = responseDTO.response;
+      Logger().d("예약내역 리스트 요청 통신 진입 2222222222222222");
       List<Reservation> reservations = mapList.map((e) => Reservation.fromJson(e)).toList();
       responseDTO.response = reservations;
       Logger().d("통신 =========", responseDTO.response.toString());
@@ -48,10 +50,11 @@ class ReservationRepository {
   Future<ResponseDTO> fetchReservationDetail(id) async {
     Logger().d("fetchReservationDetail 진입");
       try {
-        Response<dynamic> response = await dio.get("/reservation/list/${id}");
+        Response<dynamic> response = await dio.get("/reservation/list/$id");
         Logger().d("fetchReservationDetail 진입 111111111111");
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        Logger().d("fetchReservationDetail 진입 222222222222", responseDTO.toString());
+        Logger().d("fetchReservationDetail 진입 222222222222");
+        Logger().d(responseDTO.response.toString());
         responseDTO.response = ReservationDetail.fromJson(responseDTO.response);
         Logger().d("fetchReservationDetail 진입 333333333333");
         return responseDTO;

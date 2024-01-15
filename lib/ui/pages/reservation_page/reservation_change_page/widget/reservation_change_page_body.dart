@@ -10,6 +10,7 @@ import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/movi
 import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page_view_model.dart';
 import 'package:toyproject/ui/widget/button/color_button.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 class ReservationChangePageBody extends ConsumerStatefulWidget {
   const ReservationChangePageBody({super.key});
@@ -51,9 +52,7 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
   Widget build(BuildContext context) {
     ReservationChangePageModel? reservationChangePageModel = ref.watch(reservationChangeProvider);
     if (reservationChangePageModel?.homeWorkFields == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return Loading();
     }
     List<HomeWorkApplyField> homeWorkFields = reservationChangePageModel!.homeWorkFields!;
 

@@ -6,6 +6,7 @@ import 'package:toyproject/ui/pages/customer_page/faq_page/faq_page.dart';
 import 'package:toyproject/ui/pages/customer_page/live_chat_page/live_chat_page.dart';
 import 'package:toyproject/ui/pages/customer_page/notice_page/notice_page.dart';
 import 'package:toyproject/ui/pages/customer_page/privacy_policy_page/privacy_policy_page.dart';
+import 'package:toyproject/ui/pages/customer_page/sharing_personal_Information_page/terms_and_conditions_page.dart';
 import 'package:toyproject/ui/pages/customer_page/term_and_conditions_page/terms_and_conditions_page.dart';
 import 'package:toyproject/ui/pages/customer_page/term_of_service_page/terms_of_service_page.dart';
 import 'package:toyproject/ui/pages/pay_ment_page/pay_ment_page.dart';
@@ -85,6 +86,7 @@ class Move {
   static String TermsOfService = '/customer/terms-of-service';
   static String TermsAndConditionsPage = '/customer/terms-of-service/detail';
   static String PrivacyPolicyPage = '/customer/terms-of-service/privacy-policy';
+  static String SharingPersonalInformationPage = '/customer/sharing-personal-information';
   static String FaqPage = '/customer/faq';
   static String LiveChatPage = '/customer/live-chat';
   static String ReservationResultPage = '/reservation/result';
@@ -136,6 +138,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.TermsOfService: (context) => TermsOfService(),
     Move.TermsAndConditionsPage: (context) => TermsAndConditionsPage(),
     Move.PrivacyPolicyPage: (context) => PrivacyPolicyPage(),
+    Move.SharingPersonalInformationPage: (context) => SharingPersonalInformationPage(),
     Move.FaqPage: (context) => FaqPage(),
     Move.LiveChatPage: (context) => LiveChatPage(),
     Move.ReservationResultPage: (context) => ReservationResultPage(),

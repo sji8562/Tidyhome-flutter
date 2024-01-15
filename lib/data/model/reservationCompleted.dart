@@ -1,23 +1,25 @@
 import 'package:intl/intl.dart';
 
-class Reservation {
+class ReservationCompleted {
   int reservationId;
   DateTime reservationDate;
   String reservationTime;
   String firstCategory;
+  int status;
 
-  Reservation(this.reservationId, this.reservationDate, this.reservationTime, this.firstCategory);
+  ReservationCompleted(this.reservationId, this.reservationDate, this.reservationTime, this.firstCategory, this.status);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
-  Reservation.fromJson(Map<String, dynamic> json)
+  ReservationCompleted.fromJson(Map<String, dynamic> json)
       : reservationId = json["reservationId"],
         reservationDate = DateTime.parse(json["reservationDate"]),
         reservationTime = json["reservationTime"],
-        firstCategory = json["firstCategory"];
+        firstCategory = json["firstCategory"],
+        status = json["status"];
 
   @override
   String toString() {
-    return 'Reservation{reservationId: $reservationId, reservationDate: $reservationDate, reservationTime: $reservationTime, firstCategory: $firstCategory';
+    return 'Reservation{reservationId: $reservationId, reservationDate: $reservationDate, reservationTime: $reservationTime, firstCategory: $firstCategory, status: $status}';
   }
 
 // Formatted date for data binding
