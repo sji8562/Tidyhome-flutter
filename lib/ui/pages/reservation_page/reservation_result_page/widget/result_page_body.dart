@@ -118,7 +118,11 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
                         child: Row(
                           children: [
                             textBody6('결제 예정 금액'),
-                            textBody6(extractPrice(resultPageModel!.cleaningDate?.soYoTime ?? "0원") + "원"),
+
+                            textBody6(
+                                resultPageModel!.cleaningDate!.areaSize > 0 ?
+                                "${formatNumberWithComma(extractPrice(resultPageModel!.cleaningDate!.soYoTime) * resultPageModel!.cleaningDate!.areaSize)} 원"
+                                    : "${formatNumberWithComma(extractPrice(resultPageModel!.cleaningDate?.soYoTime ?? "0원"))}원")
                           ],
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         ),

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/ui/pages/join_page/widget/join_text_form_field.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/moving_cleaning_apply_page/moving_cleaning_apply_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_result_page/result_page_view_model.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
 
 import '../../../../../../_core/constants/color.dart';
@@ -201,7 +203,9 @@ class _MovingCleaningApplyPageBodyState extends ConsumerState<MovingCleaningAppl
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ColorButton(text: "예약 신청", funPageRoute: (){
-
+              ref.read(resultPageProvider.notifier).setCleaningDate(homeWorkFields[2]!.inputAnswer!,
+                  homeWorkFields[0]!.inputAnswer!, homeWorkFields[3]!.inputAnswer!, homeWorkFields[4]!.inputAnswer! == "예" ? true : false, parseInt(homeWorkFields[1]!.inputAnswer!));
+              Navigator.pushNamed(context, Move.ReservationResultPage);
             }),
           )
       ],

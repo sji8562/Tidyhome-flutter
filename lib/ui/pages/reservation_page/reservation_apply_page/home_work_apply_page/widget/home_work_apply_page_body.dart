@@ -167,7 +167,9 @@ class _HomeWorkApplyPageBodyState extends ConsumerState<HomeWorkApplyPageBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: ColorButton(text: "예약 신청", funPageRoute: (){
-                ref.read(resultPageProvider.notifier).setCleaningDate(homeWorkFields[1]!.inputAnswer!, homeWorkFields[0]!.inputAnswer!, homeWorkFields[2]!.inputAnswer!, homeWorkFields[3]!.inputAnswer! == "예" ? true : false);
+                ref.read(resultPageProvider.notifier).
+                setCleaningDate(homeWorkFields[1]!.inputAnswer!, homeWorkFields[0]!.inputAnswer!,
+                    homeWorkFields[2]!.inputAnswer!, homeWorkFields[3]!.inputAnswer! == "예" ? true : false, 0);
                 Navigator.pushNamed(context, Move.ReservationResultPage);
               }),
             )
