@@ -35,6 +35,12 @@ class SessionStore extends SessionUser {
     this.isLogin = true;
   }
 
+  void delUser(){
+    this.user = null;
+    this.jwt = null;
+    this.isLogin = false;
+  }
+
 
 
   Future<void> join(JoinReqDTO joinReqDTO) async {

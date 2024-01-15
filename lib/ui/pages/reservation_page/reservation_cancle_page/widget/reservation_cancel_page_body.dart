@@ -9,6 +9,7 @@ import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/movi
 import 'package:toyproject/ui/pages/reservation_page/reservation_cancle_page/reservation_cancel_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page_view_model.dart';
 import 'package:toyproject/ui/widget/button/color_button.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 class ReservationCancelPageBody extends ConsumerStatefulWidget {
   const ReservationCancelPageBody({super.key});
@@ -52,9 +53,7 @@ class _ReservationCancelPageBodyState extends ConsumerState<ReservationCancelPag
   Widget build(BuildContext context) {
     ReservationCanclePageModel? reservationCancelPageModel = ref.watch(reservationCancelProvider);
     if (reservationCancelPageModel?.homeWorkFields == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return Loading();
     }
     List<HomeWorkApplyField> homeWorkFields = reservationCancelPageModel!.homeWorkFields!;
 

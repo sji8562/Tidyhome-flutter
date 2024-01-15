@@ -11,9 +11,10 @@ class PrivacyPolicyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '개인정보 보호정책',
+      appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '개인정보 보호 정책',
         moveRoute: (){
-          Navigator.pushNamed(context, Move.TermsOfService);
+          Navigator.pop(context);
+          // Navigator.pushNamed(context, Move.TermsOfService);
         }
       ),
       body: SingleChildScrollView(
@@ -24,10 +25,15 @@ class PrivacyPolicyPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
               child: Column(
                 children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text('개인정보처리방침',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
+                    ),
+                  ),
+                  SizedBox(height: 20,),
                   Text(
                   '''
-개인정보처리방침
-
 유한회사 타이디홈(이하 “회사”)는 「개인정보보호법」등을 비롯한 개인정보 보호 관련 법령을 준수하며, 개인정보처리방침을 정하여 이용자 권익 보호에 최선을 다하고 있습니다. 본 개인정보처리방침은 회사가 제공하는 미소 서비스(웹사이트, 모바일웹, 모바일앱)에 적용되며 다음과 같은 내용을 포함하고 있습니다.
 
 1. 개인정보 처리 목적 및 처리하는 개인정보의 항목

@@ -8,6 +8,7 @@ import 'package:toyproject/ui/pages/customer_page/notice_page/notice_page_view_m
 import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 import '../../../../data/model/notice.dart';
 import '../widget/icon_and_title.dart';
@@ -25,9 +26,7 @@ class NoticePage extends ConsumerWidget {
 
     //null 처리 : 상태값이 null일 경우, gif가 출력됨
     if(noticePageModel?.noticeList == null || noticePageModel?.noticeList.length == 0) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return const Loading();
     }
     List<Notice> notices = noticePageModel!.noticeList;
 

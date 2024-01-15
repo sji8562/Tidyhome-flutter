@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:toyproject/ui/pages/join_page/widget/join_text_form_field.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/moving_cleaning_apply_page/moving_cleaning_apply_page_view_model.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 import '../../../../../../_core/constants/color.dart';
 import '../../../../../../_core/utils/extract_time_util.dart';
@@ -60,9 +61,7 @@ class _MovingCleaningApplyPageBodyState extends ConsumerState<MovingCleaningAppl
   Widget build(BuildContext context) {
     MovingCleaningApplyPageModel? movingCleaningApplyPageModel = ref.watch(movingCleaningApplyProvider);
     if (movingCleaningApplyPageModel?.homeWorkFields == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return Loading();
     }
     List<HomeWorkApplyField> homeWorkFields = movingCleaningApplyPageModel!.homeWorkFields!;
 

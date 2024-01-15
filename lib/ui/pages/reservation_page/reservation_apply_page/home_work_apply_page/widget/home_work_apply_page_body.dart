@@ -6,6 +6,7 @@ import 'package:toyproject/data/model/home_work_apply_field.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/home_work_apply_page/home_work_apply_page_view_model.dart';
 import 'package:toyproject/ui/widget/button/color_button.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 import '../../../../../../_core/constants/color.dart';
 import '../../../../../../_core/utils/validator_util.dart';
@@ -54,9 +55,7 @@ class _HomeWorkApplyPageBodyState extends ConsumerState<HomeWorkApplyPageBody> {
   Widget build(BuildContext context) {
     HomeWorkApplyPageModel? homeWorkApplyPageModel = ref.watch(homeWorkApplyProvider);
     if (homeWorkApplyPageModel?.homeWorkFields == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return const Loading();
     }
     List<HomeWorkApplyField> homeWorkFields = homeWorkApplyPageModel!.homeWorkFields!;
 

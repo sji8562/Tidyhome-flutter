@@ -7,6 +7,7 @@ import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/reservation_tab.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 import '../../../../_core/constants/style.dart';
 import '../../../widget/arrow_app_bar.dart';
@@ -19,9 +20,7 @@ class ReservationPage extends ConsumerWidget {
     ref.read(sessionProvider).setUser();
     ChoiceAddressPageModel? choiceAddressPageModel = ref.watch(choiceAddressProvider);
     if (choiceAddressPageModel?.addressList == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return const Loading();
     }
     String firstAddress =
         (ref.read(choiceAddressProvider.notifier).findFirstAddress()?.address ?? "기본 주소") +
