@@ -10,3 +10,21 @@ int extractHour(String data) {
     return 0;
   }
 }
+
+String extractHoursToString(String input) {
+  // 정규 표현식을 사용하여 '숫자 + 시간' 형태의 문자열을 찾습니다.
+  RegExp regex = RegExp(r'(\d+시간)');
+  Match? match = regex.firstMatch(input);
+
+  // 매치된 부분이 있으면 해당 부분을 반환하고, 없으면 빈 문자열을 반환합니다.
+  return match?.group(0) ?? '';
+}
+
+String extractPrice(String input) {
+  // 정규 표현식을 사용하여 '숫자 + , + 숫자 + 원' 형태의 문자열을 찾습니다.
+  RegExp regex = RegExp(r'(\d{1,3},\d+)원');
+  Match? match = regex.firstMatch(input);
+
+  // 매치된 부분이 있으면 해당 부분을 반환하고, 없으면 빈 문자열을 반환합니다.
+  return match?.group(1) ?? '';
+}

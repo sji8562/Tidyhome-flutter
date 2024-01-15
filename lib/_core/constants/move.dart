@@ -90,7 +90,7 @@ class Move {
   static String ReservationListPage = '/reservation/list';
   static String EnterAccessMethodsPage = '/reservation/access-methods';
   static String EnterOtherRequestsPage = '/reservation/other-requests';
-  // static String ReservationDetailPage = '/reservation/detail';
+  static String ReservationDetailPage = '/reservation/detail';
   static String CautionPage = '/reservation/caution';
   static String CompletedServiceListPage = '/completed-service-list';
   static String CalendarTestPage = '/test/calendar';
@@ -114,7 +114,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.MovingCleaningApplyPage : (context) => MovingCleaningApplyPage(),
     Move.OfficeCleaningApplyPage : (context) => OfficeCleaningApplyPage(),
     Move.ReservationChangePage : (context) => ReservationChangePage(),
-    Move.ReservationCancelPage : (context) => ReservationCancelPage(),
     // KWON
     Move.ChoiceAddressPage: (context) => ChoiceAddressPage(),
     Move.ReservationPage: (context) => ReservationPage(),

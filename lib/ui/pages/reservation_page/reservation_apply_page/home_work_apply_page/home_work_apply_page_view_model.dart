@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:toyproject/data/dto/response_dto/response_dto.dart';
+import 'package:toyproject/data/repository/reservation_repository.dart';
 
 import '../../../../../data/model/home_work_apply_field.dart';
 
@@ -26,7 +28,7 @@ class HomeWorkApplyPageViewModel extends StateNotifier<HomeWorkApplyPageModel?> 
   HomeWorkApplyPageViewModel(super.state);
 
   void addServiceTime() {
-    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: ["2시간/36,400원", "3시간/48,600원", "4시간/61,400원", "8시간/112,600원", "9시간/108,300원", "10시간/110,9000원"]);
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: ["2시간/38,900원", "4시간/51,900원", "6시간/64,900원", "8시간/112,900원"]);
     state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
   }
 
@@ -96,6 +98,7 @@ class HomeWorkApplyPageViewModel extends StateNotifier<HomeWorkApplyPageModel?> 
       }).values.toList(),
     );
   }
+
 
 
 }
