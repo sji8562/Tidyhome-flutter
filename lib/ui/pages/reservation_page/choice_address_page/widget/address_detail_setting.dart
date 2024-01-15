@@ -6,11 +6,11 @@ import 'package:toyproject/_core/constants/size.dart';
 import 'package:toyproject/data/dto/request_dto/address/address_request.dart';
 import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/choice_address_page/widget/address_detail_text_form.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 
 import '../../../../../_core/constants/color.dart';
 import '../../../../widget/button/color_button.dart';
-import '../../../address_page/widget/address_detail_text_form.dart';
 
 class AddressDetailSetForm extends ConsumerStatefulWidget {
   final KopoModel? model;

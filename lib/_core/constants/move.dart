@@ -11,6 +11,8 @@ import 'package:toyproject/ui/pages/customer_page/term_of_service_page/terms_of_
 import 'package:toyproject/ui/pages/reservation_page/caution_page/caution_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page/completed_service_list_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/office_cleaning_apply_page/office_cleaning_apply_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_cancle_page/reservation_cancel_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page/enter_other_requests_page.dart';
@@ -64,6 +66,8 @@ class Move {
   static String HomeWorkApplyPage = "/apply/homeWork";
   static String MovingCleaningApplyPage = "/apply/moving-cleaning";
   static String OfficeCleaningApplyPage = "/apply/office-cleaning";
+  static String ReservationChangePage = "/reservation/change";
+  static String ReservationCancelPage = "/reservation/cancel";
 
   // KWON
   static String ReservationPage = "/reservation";
@@ -109,6 +113,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.HomeWorkApplyPage : (context) => HomeWorkApplyPage(),
     Move.MovingCleaningApplyPage : (context) => MovingCleaningApplyPage(),
     Move.OfficeCleaningApplyPage : (context) => OfficeCleaningApplyPage(),
+    Move.ReservationChangePage : (context) => ReservationChangePage(),
+    Move.ReservationCancelPage : (context) => ReservationCancelPage(),
     // KWON
     Move.ChoiceAddressPage: (context) => ChoiceAddressPage(),
     Move.ReservationPage: (context) => ReservationPage(),

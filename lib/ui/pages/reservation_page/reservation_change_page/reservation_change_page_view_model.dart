@@ -22,9 +22,20 @@ class ReservationChangePageModel  {
 class ReservationChangePageViewModel extends StateNotifier<ReservationChangePageModel?> {
   ReservationChangePageViewModel(super.state);
 
-  void addServiceTime() {
-    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: ["2시간/36,400원", "3시간/48,600원", "4시간/61,400원", "8시간/112,600원", "9시간/108,300원", "10시간/110,9000원"]);
+
+  void addWhyChange(){
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "어떤 이유 때문에 변경하시나요?", selectList: ["일정이 생겨서", "날짜, 시간 입력 실수", "기타(직접 입력)"]);
     state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+  }
+
+  void addWhenChange(){
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "언제로 변경해드릴까요?");
+    state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
+  }
+
+  void addServiceChangeTime() {
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "시작 시간은 언제가 좋으세요?", selectList: ["오전 7시 ~ 10시", "오전 9시 ~ 정오", "오전 10시 ~ 오후 1시", "오후 2시 ~ 5시", "오후 6시 ~ 9시"]);
+    state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
   }
 
   void addServiceDate() {
@@ -78,7 +89,7 @@ class ReservationChangePageViewModel extends StateNotifier<ReservationChangePage
   }
 
   void addNotice(){
-    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "아래 버튼을 누르시면 예약신청이 진행됩니다.");
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "아래 버튼을 누르시면 예약변경이 진행됩니다.");
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
   }
 
@@ -102,5 +113,5 @@ class ReservationChangePageViewModel extends StateNotifier<ReservationChangePage
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final reservationChangeProvider =
 StateNotifierProvider<ReservationChangePageViewModel, ReservationChangePageModel?>((ref) {
-  return ReservationChangePageViewModel(ReservationChangePageModel([]))..addServiceTime();
+  return ReservationChangePageViewModel(ReservationChangePageModel([]))..addWhyChange();
 });

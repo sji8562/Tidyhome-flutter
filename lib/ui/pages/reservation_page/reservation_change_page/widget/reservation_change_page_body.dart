@@ -6,8 +6,10 @@ import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/utils/extract_time_util.dart';
 import 'package:toyproject/_core/utils/validator_util.dart';
 import 'package:toyproject/data/model/home_work_apply_field.dart';
-import 'package:toyproject/ui/pages/reservation_change_page/reservation_change_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/moving_cleaning_apply_page/widget/j_soft_color_button.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page_view_model.dart';
 import 'package:toyproject/ui/widget/button/color_button.dart';
+import 'package:toyproject/ui/widget/button/soft_color_button.dart';
 
 class ReservationChangePageBody extends ConsumerStatefulWidget {
   const ReservationChangePageBody({super.key});
@@ -77,12 +79,14 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          InkWell(onTap: () {
+                          Text(homeWorkFields[index].question, style: TextStyle(fontWeight: FontWeight.bold)),
+                          if(index == 1)
+                          JSoftColorButton(text: "날짜 선택하기", funPageRoute: (){
                             if(index == 1 && isButtonEnabled4){
                               _showCalendarPicker(context, ref, index);
                               isButtonEnabled4 = false;
                             }
-                          }, child: Text(homeWorkFields[index].question, style: TextStyle(fontWeight: FontWeight.bold))),
+                          }, customColor: primaryColor02,),
                           SizedBox(height: 15),
                           if(homeWorkFields[index].selectList != null)
                             SizedBox(height: homeWorkFields[index].selectList!.length * 45,
@@ -99,25 +103,17 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
                                         if(index == 0 && isButtonEnabled1){
                                           ref.read(reservationChangeProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                           Future.delayed(Duration(seconds: 2), () {
-                                            ref.read(reservationChangeProvider.notifier).addServiceDate();
+                                            ref.read(reservationChangeProvider.notifier).addWhenChange();
                                           });
                                           isButtonEnabled1 = false;
                                         }
                                         if(index == 2 && isButtonEnabled2){
                                           ref.read(reservationChangeProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                           isButtonEnabled2 = false;
-                                          Future.delayed(Duration(seconds: 2), () {
-                                            ref.read(reservationChangeProvider.notifier).addHasPet();
-                                          });
-                                        }
-                                        if(index == 3 && isButtonEnabled3){
-                                          ref.read(reservationChangeProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
-                                          isButtonEnabled3 = false;
                                           Future.delayed(Duration(seconds: 1), () {
                                             ref.read(reservationChangeProvider.notifier).addNotice();
                                           });
                                         }
-
                                       },child: Text(homeWorkFields[index].selectList![index2], style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold),)),),
                                     SizedBox(height: 10,),
                                   ],
@@ -153,10 +149,10 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
             },
           ),
         ),
-        if(homeWorkFields.length == 5)
+        if(homeWorkFields.length == 4)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ColorButton(text: "예약 신청", funPageRoute: (){
+            child: ColorButton(text: "예약 변경", funPageRoute: (){
 
             }),
           )
@@ -198,11 +194,8 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
           String formattedDate = DateFormat('yyyy년 MM월 dd일(EEE)', 'ko_KR').format(date);
           ref.read(reservationChangeProvider.notifier).updateAnswer(index, formattedDate);
           Navigator.pop(context);
-          ReservationChangePageModel? reservationChangePageModel = ref.read(reservationChangeProvider);
-          String answerData = reservationChangePageModel!.homeWorkFields![0].inputAnswer!;
-          int serviceHour = extractHour(answerData);
           await Future.delayed(Duration(seconds: 1), () {
-            ref.read(reservationChangeProvider.notifier).addServiceStartTime(serviceHour);
+            ref.read(reservationChangeProvider.notifier).addServiceChangeTime();
           });
         }
       },

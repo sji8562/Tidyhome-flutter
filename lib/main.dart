@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       // home: const SplashPage(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: Move.OfficeCleaningApplyPage,
+      initialRoute: Move.ReservationCancelPage,
       routes: getRouters(),
       theme: theme(),
     );
