@@ -1,20 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
+import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/ui/pages/customer_page/widget/icon_and_title.dart';
 import 'package:toyproject/ui/pages/main_page/widget/drawer_text_tab.dart';
 import 'package:toyproject/ui/pages/main_page/widget/drawer_text_tab_icon.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/icon_text.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button.dart';
 import 'package:toyproject/ui/widget/divider/custom_divider_thin.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
-class MainHomePage extends StatelessWidget {
+class MainHomePage extends ConsumerWidget {
   const MainHomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    ref.read(sessionProvider).setUser();
+    SessionStore sessionStore = ref.watch(sessionProvider);
+
+    //null 처리 : 상태값이 null일 경우, gif가 출력됨
+    if(sessionStore.user == null) {
+      return const Loading();
+    }
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -68,7 +80,7 @@ class MainHomePage extends StatelessWidget {
                       children: [
                         Text('나의 정보', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                         SizedBox(height: 10,),
-                        Text('010-0000-0000'),
+                        // Text(sessionStore.user!.tel!),
                       ],
                     ),
                   ),
@@ -81,7 +93,6 @@ class MainHomePage extends StatelessWidget {
                     acting: () {
                       Navigator.pushNamed(context, Move.ReservationListPage);
                     }),
-                DrawerTextTab(icon_name: 'menu_card_icon.PNG', title: '결제 수단 관리'),
                 DrawerTextTabWithIcon(icon_name: CupertinoIcons.speaker_2, title: '공지사항',
                     acting: () {
                       Navigator.pushNamed(context, Move.NoticePage);

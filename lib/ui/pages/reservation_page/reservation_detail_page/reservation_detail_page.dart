@@ -21,6 +21,7 @@ import 'package:toyproject/ui/widget/divider/custom_divider.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 import 'package:toyproject/ui/widget/divider/custom_divider_thin.dart';
 import 'package:toyproject/ui/widget/exclamationmark_title.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
 class ReservationDetailPage extends ConsumerWidget {
   int id;
@@ -43,9 +44,7 @@ class ReservationDetailPage extends ConsumerWidget {
 
     //null 처리 : 상태값이 null일 경우, gif가 출력됨
     if(reservationDetailPageModel?.reservationDetail == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return Loading();
     }
 
     ReservationDetail reservationDetail = reservationDetailPageModel!.reservationDetail!;
