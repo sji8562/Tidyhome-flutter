@@ -8,6 +8,7 @@ import 'package:toyproject/ui/pages/customer_page/notice_page/notice_page.dart';
 import 'package:toyproject/ui/pages/customer_page/privacy_policy_page/privacy_policy_page.dart';
 import 'package:toyproject/ui/pages/customer_page/term_and_conditions_page/terms_and_conditions_page.dart';
 import 'package:toyproject/ui/pages/customer_page/term_of_service_page/terms_of_service_page.dart';
+import 'package:toyproject/ui/pages/pay_ment_page/pay_ment_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/caution_page/caution_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page/completed_service_list_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/office_cleaning_apply_page/office_cleaning_apply_page.dart';
@@ -94,10 +95,14 @@ class Move {
   static String CautionPage = '/reservation/caution';
   static String CompletedServiceListPage = '/completed-service-list';
   static String CalendarTestPage = '/test/calendar';
+  //Song
+  static String PaymentPage = '/payment/';
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
+    //SONG
+    Move.PaymentPage: (context) => PayMentPage(),
     //JEONG
     Move.SplashPage: (context) => SplashPage(),
     Move.StartPage: (context) => StartPage(),
