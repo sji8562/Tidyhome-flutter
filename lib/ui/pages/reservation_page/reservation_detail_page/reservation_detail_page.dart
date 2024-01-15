@@ -51,6 +51,19 @@ class ReservationDetailPage extends ConsumerWidget {
     ReservationDetail reservationDetail = reservationDetailPageModel!.reservationDetail!;
     Logger().d("여기여기여기 =======", reservationDetail);
 
+    String _setServiceIconName(category) {
+      if(category == '가사도우미') {
+        return 'cleaning_assistant_icon.png';
+      }
+      if(category == '이사청소') {
+        return 'moving_cleaning_icon.PNG';
+      }
+      if(category == '사무실청소') {
+        return 'office_cleaning_icon.png';
+      }
+      return 'air_conditioner_cleaning_icon.png';
+    };
+
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '',),
       body: Stack(
@@ -64,7 +77,7 @@ class ReservationDetailPage extends ConsumerWidget {
                     width: double.infinity,
                     child: Row(
                       children: [
-                        Image.asset('${Define.icons}cleaning_assistant_icon.png'),
+                        Image.asset('${Define.icons + _setServiceIconName(reservationDetail.firstCategory)}'),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -87,19 +100,19 @@ class ReservationDetailPage extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('서비스 일정'),
-                        textBody6('2022년 4월 9일(토)'),
-                        textBody6('2시간(오후 2시~오후 4시)'),
+                        textBody6(reservationDetail.getFormattedDateWithYear()),
+                        textBody6(reservationDetail.option + '(${reservationDetail.getFormattedTime()} 부터)'),
 
                         SizedBox(height: 15.0,),
 
                         Text('내 주소'),
-                        textBody6('서울 성북구 보문로'),
-                        textBody6('170 서울성북경찰서'),
+                        textBody6(reservationDetail.address),
+                        textBody6(reservationDetail.addressDetail),
 
                         SizedBox(height: 15.0,),
 
                         Text('반려동물'),
-                        textBody6('있음'),
+                        textBody6(reservationDetail.pet ? '있음' : '없음'),
                       ],
                     ),
                   ),
@@ -147,7 +160,7 @@ class ReservationDetailPage extends ConsumerWidget {
                             children: [
                               // TODO 완료 여부에 따라 텍스트 변경 필요
                               textBody6('결제 예정 금액'),
-                              textBody6('61,400원'),
+                              textBody6(reservationDetail.getFormattedPrice()),
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),
@@ -178,6 +191,7 @@ class ReservationDetailPage extends ConsumerWidget {
             ),
           ),
           // TODO 서비스 완료 혹은 취소된 내용이면 '확인' 버튼 없애기
+          // TODO 결제 해야하면 결제하기 버튼이 노출되도록 하기
           Positioned(bottom: 0,
               child: Container(
                   // TODO move to 예약 내역

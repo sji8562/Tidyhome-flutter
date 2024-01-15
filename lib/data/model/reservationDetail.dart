@@ -31,6 +31,10 @@ class ReservationDetail {
     return 'ReservationDetail{address: $address, addressDetail: $addressDetail, reservationDate: $reservationDate, reservationTime: $reservationTime, pet: $pet, price: $price, firstCategory: $firstCategory, secondCategory: $secondCategory, option: $option}';
   }
 
+  String getFormattedDateWithYear() {
+    return DateFormat("yyyy년 M월 d일").format(reservationDate);
+  }
+
   String getFormattedDate() {
     return DateFormat("M월 d일").format(reservationDate);
   }
@@ -39,7 +43,20 @@ class ReservationDetail {
     final timeFormat = DateFormat('HH:mm:ss');
     final time = timeFormat.parse(reservationTime);
 
-    final ampmFormat = DateFormat('a h시');
+    final ampmFormat = DateFormat('H시');
     return ampmFormat.format(time);
+  }
+
+  String getFormattedPrice() {
+    // "#,###" 형식으로 숫자 포맷을 설정합니다.
+    final format = NumberFormat("#,###", "ko_KR");
+
+    // 숫자를 포맷에 맞게 문자열로 변환합니다.
+    String formattedPrice = format.format(price);
+
+    // "원"을 추가합니다.
+    formattedPrice += "원";
+
+    return formattedPrice;
   }
 }
