@@ -83,7 +83,7 @@ class Move {
   static String AppliencePage = '/applience';
   static String CustomerPage = '/customer';
   static String NoticePage = '/customer/notice';
-  // static String NoticeDetailPage = '/customer/notice/detail';
+  static String NoticeDetailPage = '/customer/notice/detail';
   static String AccountClosurePage = '/customer/account-closure';
   static String TermsOfService = '/customer/terms-of-service';
   static String TermsAndConditionsPage = '/customer/terms-of-service/detail';
