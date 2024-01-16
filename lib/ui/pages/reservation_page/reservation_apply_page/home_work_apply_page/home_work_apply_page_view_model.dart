@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:toyproject/data/dto/response_dto/response_dto.dart';
+import 'package:toyproject/data/model/option_price.dart';
 import 'package:toyproject/data/repository/reservation_repository.dart';
 
 import '../../../../../data/model/home_work_apply_field.dart';
@@ -9,14 +10,16 @@ import '../../../../../data/model/home_work_apply_field.dart';
 // 1. 창고 데이터
 class HomeWorkApplyPageModel  {
   List<HomeWorkApplyField>? homeWorkFields;
-
-  HomeWorkApplyPageModel(this.homeWorkFields);
+  List<OptionPrice>? options;
+  HomeWorkApplyPageModel(this.homeWorkFields, this.options);
 
   HomeWorkApplyPageModel copyWith({
     List<HomeWorkApplyField>? homeWorkFields,
+    List<OptionPrice>? options
   }) {
     return HomeWorkApplyPageModel(
       homeWorkFields ?? this.homeWorkFields,
+      options ?? this.options
     );
   }
 
@@ -27,7 +30,7 @@ class HomeWorkApplyPageModel  {
 class HomeWorkApplyPageViewModel extends StateNotifier<HomeWorkApplyPageModel?> {
   HomeWorkApplyPageViewModel(super.state);
 
-  void addServiceTime() {
+    void addServiceTime() {
     HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: ["2시간/38,900원", "4시간/51,900원", "6시간/64,900원", "8시간/112,900원"]);
     state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
   }
@@ -108,5 +111,5 @@ class HomeWorkApplyPageViewModel extends StateNotifier<HomeWorkApplyPageModel?> 
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final homeWorkApplyProvider =
 StateNotifierProvider<HomeWorkApplyPageViewModel, HomeWorkApplyPageModel?>((ref) {
-  return HomeWorkApplyPageViewModel(HomeWorkApplyPageModel([]))..addServiceTime();
+  return HomeWorkApplyPageViewModel(HomeWorkApplyPageModel([], []))..addServiceTime();
 });

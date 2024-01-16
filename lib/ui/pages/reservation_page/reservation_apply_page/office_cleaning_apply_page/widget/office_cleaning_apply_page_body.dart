@@ -11,6 +11,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 import '../../../../../../_core/constants/color.dart';
 import '../../../../../../_core/utils/validator_util.dart';
+import '../../../../../widget/loading.dart';
 import '../office_cleaning_apply_page_view_model.dart';
 
 class OfficeCleaningApplyPageBody extends ConsumerStatefulWidget  {
@@ -57,9 +58,7 @@ class _OfficeCleaningApplyPageBodyState extends ConsumerState<OfficeCleaningAppl
   Widget build(BuildContext context) {
     OfficeCleaningApplyPageModel? officeCleaningApplyPageModel = ref.watch(officeCleaningApplyProvider);
     if (officeCleaningApplyPageModel?.homeWorkFields == null) {
-      return Center(
-        child: Image.asset('assets/images/giphy.gif', fit: BoxFit.cover, width: 200, height: 200),
-      );
+      return Loading();
     }
     List<HomeWorkApplyField> homeWorkFields = officeCleaningApplyPageModel!.homeWorkFields!;
 

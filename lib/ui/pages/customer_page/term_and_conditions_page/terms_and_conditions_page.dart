@@ -12,7 +12,8 @@ class TermsAndConditionsPage extends StatelessWidget {
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '이용약관',
           moveRoute: (){
-            Navigator.pushNamed(context, Move.TermsOfService);
+            Navigator.pop(context);
+            // Navigator.pushNamed(context, Move.TermsOfService);
           }
       ),
       body: SingleChildScrollView(
@@ -21,10 +22,18 @@ class TermsAndConditionsPage extends StatelessWidget {
             SizedBox(height: 20.0,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text('서비스 이용약관',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24.0),
+                ),
+              ),
+            ),
+            SizedBox(height: 40.0,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Text(
 '''
-서비스 이용약관
-
 제 1 조(목적)
 이 약관은 유한회사 미소(이하 "당사"라 한다)가 운영, 제공하는 인터넷 웹사이트(이하 “웹사이트”라 합니다) 및 모바일 어플리케이션(이하 “앱”이라 합니다)에서 제공하는 모든 서비스(이하 “미소 서비스”라 합니다)를 이용함에 있어 당사와 회원의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.
 

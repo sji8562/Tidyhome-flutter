@@ -13,6 +13,7 @@ import '../../../../../_core/constants/color.dart';
 import '../../../../widget/button/color_button.dart';
 
 class AddressDetailSetForm extends ConsumerStatefulWidget {
+
   final KopoModel? model;
   const AddressDetailSetForm({Key? key, required this.model}) : super(key: key);
 

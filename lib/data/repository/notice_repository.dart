@@ -11,7 +11,7 @@ class NoticeRepository {
     Logger().d("fetchNotice 진입");
     try {
       Response<dynamic> response =
-      await dio.get("/api/notice");
+      await dio.get("/api/notice/list");
       Logger().d("공지사항 리스트 요청 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapList = responseDTO.response;
@@ -29,7 +29,7 @@ class NoticeRepository {
   Future<ResponseDTO> fetchNoticeDetail(id) async {
     Logger().d("fetchNoticeDetail 진입");
     try {
-      Response<dynamic> response = await dio.get("/api/notice/${id}");
+      Response<dynamic> response = await dio.get("/api/notice/list/$id");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       responseDTO.response = Notice.fromJson(responseDTO.response);
       return responseDTO;
