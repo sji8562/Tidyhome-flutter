@@ -10,9 +10,11 @@ import 'package:toyproject/ui/widget/button/soft_color_red_button.dart';
 import 'package:toyproject/ui/widget/text_form_field/common_text_form_field.dart';
 
 class EnterOtherRequestsPage extends ConsumerWidget {
+  int reservationId;
+
   final _formKey = GlobalKey<FormState>();
 
-  EnterOtherRequestsPage({super.key});
+  EnterOtherRequestsPage({super.key, required this.reservationId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

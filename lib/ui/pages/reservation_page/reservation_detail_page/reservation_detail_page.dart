@@ -7,6 +7,8 @@ import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
 import 'package:toyproject/data/model/reservationDetail.dart';
+import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page/enter_other_requests_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/icon_text.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button.dart';
@@ -133,14 +135,15 @@ class ReservationDetailPage extends ConsumerWidget {
                       child: Text('부가정보 입력')
                   ),
                 ),
-                ImageAndTextAndButtonWithLabel(title: '출입방법', icon_name: 'home_icon.PNG', button_text: '등록됨', is_active: true,
-                  acting: () { Navigator.pushNamed(context, Move.EnterAccessMethodsPage); }
+                ImageAndTextAndButtonWithLabel(title: '출입방법', icon_name: 'home_icon.PNG',
+                    // button_text: '등록됨', is_active: true,
+                  acting: () { Navigator.push(context, MaterialPageRoute(builder: (context) => EnterAccessMethodsPage(reservationId: id))); }
                 ),
 
                 CustomDividerThin(),
 
                 ImageAndTextAndButtonWithLabel(title: '기타 요청사항', icon_name: 'message_icon.png',
-                    acting: () { Navigator.pushNamed(context, Move.EnterOtherRequestsPage); }
+                    acting: () { Navigator.push(context, MaterialPageRoute(builder: (context) => EnterOtherRequestsPage(reservationId: id))); }
                 ),
 
                 const CustomDivider(),
@@ -169,11 +172,12 @@ class ReservationDetailPage extends ConsumerWidget {
                     ),
                   ),
                 ),
-                CustomDividerThin(),
-                ImageAndTextAndButtonWithLabel(title: '결제수단', icon_name: 'card_icon.PNG', button_text: '카카오페이', is_active: true,
-                  // TODO
-                  // acting: Navigator.pushNamed(context, )
-                ),
+                // CustomDividerThin(),
+                // ImageAndTextAndButtonWithLabel(title: '결제수단', icon_name: 'card_icon.PNG',
+                //   // button_text: '카카오페이', is_active: true,
+                //   // TODO
+                //   // acting: Navigator.pushNamed(context, )
+                // ),
                 CustomDivider(),
 
                 IconWithText(icon_name: Icons.info_outline, title: '주의 사항', acting: () {

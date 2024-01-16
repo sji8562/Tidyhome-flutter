@@ -62,4 +62,15 @@ class ReservationRepository {
         return ResponseDTO(success: false, response: null, error: "예약 내역 상세 조회 에러");
     }
   }
+
+  // 등록된 출입 방법 조회
+  // Future<ResponseDTO> fetchEnterAccessMethod(id) async {
+  //   Logger().d("fetchEnterAccessMethod 진입");
+  //   try {
+  //     Response<dynamic> response = await dio.get("/api/enter/inquiry");
+  //
+  //   } catch (e) {
+  //     return ResponseDTO(success: false, response: null, error: "등록된 출입 방법 조회 에러");
+  //   }
+  // }
 }

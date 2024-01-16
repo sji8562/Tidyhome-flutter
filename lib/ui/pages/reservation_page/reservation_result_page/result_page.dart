@@ -112,7 +112,8 @@ class ReservationResultPage extends ConsumerWidget {
                   ),
                 ),
                 CustomDividerThin(),
-                ImageAndTextAndButtonWithLabel(title: '결제수단', icon_name: 'card_icon.PNG', button_text: 'KB국민카드', is_active: true,
+                ImageAndTextAndButtonWithLabel(title: '결제수단', icon_name: 'card_icon.PNG',
+                  // button_text: 'KB국민카드', is_active: true,
                   // TODO 출입 방법 페이지로 이동
                   // acting: Navigator.pushNamed(context, )
                 ),

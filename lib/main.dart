@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       // home: const SplashPage(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: Move.MainHomePage,
+      initialRoute: Move.FaqPage,
       routes: getRouters(),
       theme: theme(),
     );

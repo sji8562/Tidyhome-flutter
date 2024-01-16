@@ -9,9 +9,11 @@ import 'package:toyproject/ui/widget/button/soft_color_red_button.dart';
 import 'package:toyproject/ui/widget/text_form_field/common_text_form_field.dart';
 
 class EnterAccessMethodsPage extends ConsumerWidget {
+  int reservationId;
+
   final _formKey = GlobalKey<FormState>();
 
-  EnterAccessMethodsPage({super.key});
+  EnterAccessMethodsPage({super.key, required this.reservationId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
