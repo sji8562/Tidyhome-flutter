@@ -6,6 +6,7 @@ import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
 import 'package:toyproject/_core/utils/extract_time_util.dart';
+import 'package:toyproject/ui/pages/pay_ment_page/pay_ment_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page_view_model.dart';
@@ -18,15 +19,16 @@ import 'package:toyproject/ui/widget/custom_modal/information_modal.dart';
 import 'package:toyproject/ui/widget/divider/custom_divider.dart';
 import 'package:toyproject/ui/widget/divider/custom_divider_thin.dart';
 import 'package:toyproject/ui/widget/exclamationmark_title.dart';
+import 'package:toyproject/ui/widget/loading.dart';
 
-class ResultPageBody extends ConsumerStatefulWidget {
-  const ResultPageBody({super.key});
+class ResultConfirmBody extends ConsumerStatefulWidget {
+  const ResultConfirmBody({super.key});
 
   @override
-  ConsumerState<ResultPageBody> createState() => _ResultPageBodyState();
+  ConsumerState<ResultConfirmBody> createState() => _ResultPageBodyState();
 }
 
-class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
+class _ResultPageBodyState extends ConsumerState<ResultConfirmBody> {
 
 
   // 모달을 표시하는 함수
@@ -42,8 +44,11 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
   @override
   Widget build(BuildContext context) {
    ResultPageModel? resultPageModel = ref.watch(resultPageProvider);
+   PaymentPageModel? paymentPageModel = ref.watch(paymentProvider);
 
-
+   if (resultPageModel == null || paymentPageModel == null){
+     const Loading();
+   }
     return Stack(
       children: [
         SingleChildScrollView(
@@ -57,7 +62,7 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
                 child: Container(
                     alignment: Alignment.centerLeft,
-                    child: Text('부가정보 입력')
+                    child: Text('부가정보')
                 ),
               ),
               ImageAndTextAndButtonWithLabel(title: '출입방법', icon_name: 'home_icon.PNG',
@@ -85,19 +90,19 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('청소 일정'),
-                      textBody6(resultPageModel!.cleaningDate!.dateTime),
-                      textBody6(extractHoursToString(resultPageModel!.cleaningDate!.soYoTime) + "(" + resultPageModel!.cleaningDate!.startToEndTime + ")"),
+                      textBody6(paymentPageModel!.reservationResult!.reservationDate),
+                      textBody6(extractHoursToString(resultPageModel!.cleaningDate!.soYoTime) + "(" + paymentPageModel!.reservationResult!.reservationTime + ")"),
 
                       SizedBox(height: 15.0,),
 
                       Text('내 주소'),
-                      textBody6(ref.read(choiceAddressProvider.notifier).findFirstAddress()?.address ?? ""),
-                      textBody6(ref.read(choiceAddressProvider.notifier).findFirstAddress()?.addressDetail ?? ""),
+                      textBody6(paymentPageModel!.reservationResult!.address),
+                      textBody6(paymentPageModel!.reservationResult!.addressDetail),
 
                       SizedBox(height: 15.0,),
 
                       Text('반려동물'),
-                      textBody6(resultPageModel!.cleaningDate!.hasPet ? "있음" : "없음"),
+                      textBody6(paymentPageModel!.reservationResult!.pet ? "있음" : "없음"),
                     ],
                   ),
                 ),
@@ -117,7 +122,7 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
                         padding: const EdgeInsets.symmetric(vertical: 5.0),
                         child: Row(
                           children: [
-                            textBody6('결제 예정 금액'),
+                            textBody6('결제 완료 금액'),
 
                             textBody6(
                                 resultPageModel!.cleaningDate!.areaSize > 0 ?
@@ -127,7 +132,7 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         ),
                       ),
-                      Text('결제는 서비스가 완료된 후 진행됩니다', style: TextStyle(fontSize: 13, color: disableColor),),
+                      Text('결제가 완료되었습니다.', style: TextStyle(fontSize: 13, color: disableColor),),
                     ],
                   ),
                 ),
@@ -158,7 +163,7 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
             child: Container(
               // TODO move to 예약 내역
                 child: ColorButtonFullWith(text: '확인', action: (){
-                  Navigator.pushNamed(context, Move.PaymentPage);
+                  Navigator.pushNamed(context, Move.ReservationListPage);
                 })
             )
         ),

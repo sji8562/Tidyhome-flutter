@@ -79,7 +79,7 @@ class SessionStore extends SessionUser {
       await secureStorage.write(key: "jwt", value: responseDTO.token);
       Logger().d("여기까지 실행됨");
       // 3. 페이지 이동
-      Navigator.pushNamed(mContext!, Move.StartPage);
+      Navigator.pushNamed(mContext!, Move.MainPage);
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text(responseDTO.error!)));

@@ -9,8 +9,9 @@ class ImageAndTextAndButtonWithLabel extends StatelessWidget {
   final String? button_text;
   final bool is_active;
   final acting;
+  final jColor;
 
-  const ImageAndTextAndButtonWithLabel({super.key, required this.icon_name, required this.title, this.button_text, this.is_active = false, this.acting});
+  const ImageAndTextAndButtonWithLabel({super.key, required this.icon_name, required this.title, this.button_text, this.is_active = false, this.acting, this.jColor});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class ImageAndTextAndButtonWithLabel extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
-                  button_text ?? '없음', style: TextStyle(color: !is_active ? disableColor : primaryColor),
+                  button_text ?? '없음', style: TextStyle(color: jColor),
                 ),
               ),
               color: bgAndLineColor,

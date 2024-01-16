@@ -9,7 +9,7 @@ class HomeWorkApplyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '가사 도우미 예약'),
-        body: HomeWorkApplyPageBody()
+        body: const HomeWorkApplyPageBody()
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:iamport_flutter/iamport_payment.dart';
 import 'package:iamport_flutter/model/payment_data.dart';
 import 'package:logger/logger.dart';
+import 'package:toyproject/_core/utils/extract_time_util.dart';
 import 'package:toyproject/data/dto/response_dto/response_dto.dart';
 import 'package:toyproject/data/store/session_store.dart';
+import 'package:toyproject/ui/pages/pay_ment_page/pay_ment_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_result_page/result_page_view_model.dart';
 
 import '../../../../_core/constants/move.dart';
 import '../../../../data/dto/request_dto/payment/payment_request.dart';
@@ -65,27 +67,17 @@ class PayMentPageBody extends ConsumerWidget {
       callback: (Map<String, String> result) async {
         if (result['imp_success'] == 'true') {
           PaymentRequestDTO requestDTO =
-          // PaymentRequestDTO(session.user!.id, name);
-          PaymentRequestDTO(1, "가전청소");
-          Logger().d("들어왔나");
-          ResponseDTO responseDTO =
-          await paymentRepository().fetchPayment(requestDTO);
+          PaymentRequestDTO(ref.read(choiceAddressProvider.notifier).findFirstAddress()!.id,
+              (extractHour(ref.read(resultPageProvider)!.cleaningDate!.soYoTime) / 2).toInt(), ref.read(resultPageProvider)!.cleaningDate!.dateTime,
+              ref.read(resultPageProvider)!.cleaningDate!.startToEndTime, ref.read(resultPageProvider)!.cleaningDate!.hasPet);
+          ref.read(paymentProvider.notifier).fetchPayment(requestDTO);
           Logger().d("니가 문제냐?");
-          if (responseDTO.success == true) {
-            // Navigator.pushNamed(context, Move.cartOrderCancelScreen);
-            Logger().d("성공이가");
-            return AlertDialog(content: Text("결제 완료"));
-            
-          } else {
-            Logger().d("실패가");
-            return AlertDialog(content: Text("결제는 완료, 서버 통신 실패"));
-          }
           //서버에 실패했다는 alert창 띄우기
         } else {
           //결제에 실패했다는 alert 창 띄우기
           Navigator.pushReplacementNamed(
             context,
-            Move.MainPage,
+            Move.ReservationResultPage,
             arguments: result,
           );
         }
