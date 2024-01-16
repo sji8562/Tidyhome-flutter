@@ -1,14 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toyproject/data/model/cleaning_date.dart';
 
-class ResultPageModel {
+class ConfirmPageModel {
   CleaningDate? cleaningDate;
   String howToOpen;
   String doorPassword;
   String carefulETC;
   String requestETC;
 
-  ResultPageModel({
+  ConfirmPageModel({
     this.cleaningDate,
     required this.howToOpen,
     required this.doorPassword,
@@ -16,14 +16,14 @@ class ResultPageModel {
     required this.requestETC,
   });
 
-  ResultPageModel copyWith({
+  ConfirmPageModel copyWith({
     CleaningDate? cleaningDate,
     String? howToOpen,
     String? doorPassword,
     String? carefulETC,
     String? requestETC,
   }) {
-    return ResultPageModel(
+    return ConfirmPageModel(
       cleaningDate: cleaningDate ?? this.cleaningDate,
       howToOpen: howToOpen ?? this.howToOpen,
       doorPassword: doorPassword ?? this.doorPassword,
@@ -33,8 +33,8 @@ class ResultPageModel {
   }
 }
 
-class ResultPageViewModel extends StateNotifier<ResultPageModel?> {
-  ResultPageViewModel(ResultPageModel initialState) : super(initialState);
+class ConfirmPageViewModel extends StateNotifier<ConfirmPageModel?> {
+  ConfirmPageViewModel(ConfirmPageModel initialState) : super(initialState);
 
   void setHowToOpen(String value1, String value2) {
     state = state?.copyWith(howToOpen: value1, doorPassword: value2);
@@ -50,6 +50,6 @@ class ResultPageViewModel extends StateNotifier<ResultPageModel?> {
 
 }
 
-final resultPageProvider = StateNotifierProvider<ResultPageViewModel, ResultPageModel?>((ref) {
-  return ResultPageViewModel(ResultPageModel(howToOpen: "없음", doorPassword: "없음", carefulETC: "없음", requestETC: "없음"));
+final confirmPageProvider = StateNotifierProvider<ConfirmPageViewModel, ConfirmPageModel?>((ref) {
+  return ConfirmPageViewModel(ConfirmPageModel(howToOpen: "없음", doorPassword: "없음", carefulETC: "없음", requestETC: "없음"));
 });

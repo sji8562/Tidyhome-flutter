@@ -63,14 +63,19 @@ class ReservationRepository {
     }
   }
 
-  // 등록된 출입 방법 조회
-  // Future<ResponseDTO> fetchEnterAccessMethod(id) async {
-  //   Logger().d("fetchEnterAccessMethod 진입");
-  //   try {
-  //     Response<dynamic> response = await dio.get("/api/enter/inquiry");
-  //
-  //   } catch (e) {
-  //     return ResponseDTO(success: false, response: null, error: "등록된 출입 방법 조회 에러");
-  //   }
-  // }
+  Future<ResponseDTO> fetchReservationSave() async {
+    try {
+      Response<dynamic> response = await dio.get("/reservation");
+      Logger().d("fetchReservationSave진입 111111111111");
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("fetchReservationSave진입 222222222222");
+      Logger().d(responseDTO.response.toString());
+      responseDTO.response = ReservationDetail.fromJson(responseDTO.response);
+      Logger().d("fetchReservationSave진입 333333333333");
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(success: false, response: null, error: "예약 내역 상세 조회 에러");
+    }
+
+  }
 }

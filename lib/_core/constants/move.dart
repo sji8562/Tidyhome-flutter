@@ -15,6 +15,7 @@ import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page
 import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/office_cleaning_apply_page/office_cleaning_apply_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_cancle_page/reservation_cancel_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_confirm_page/reservation_confirm_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page/enter_other_requests_page.dart';
@@ -70,6 +71,7 @@ class Move {
   static String OfficeCleaningApplyPage = "/apply/office-cleaning";
   static String ReservationChangePage = "/reservation/change";
   static String ReservationCancelPage = "/reservation/cancel";
+  static String ReservationConfirmPage = "/reservation/confirm";
 
   // KWON
   static String ReservationPage = "/reservation";
@@ -121,7 +123,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.MovingCleaningApplyPage : (context) => MovingCleaningApplyPage(),
     Move.OfficeCleaningApplyPage : (context) => OfficeCleaningApplyPage(),
     Move.ReservationChangePage : (context) => ReservationChangePage(),
-    Move.ReservationCancelPage : (context) => ReservationCancelPage(),
+    Move.ReservationConfirmPage : (context) => ReservationConfirmPage(),
     // KWON
     Move.ChoiceAddressPage: (context) => ChoiceAddressPage(),
     Move.ReservationPage: (context) => ReservationPage(),
@@ -143,8 +145,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.LiveChatPage: (context) => LiveChatPage(),
     Move.ReservationResultPage: (context) => ReservationResultPage(),
     Move.ReservationListPage: (context) => ReservationListPage(),
-    // Move.EnterAccessMethodsPage: (context) => EnterAccessMethodsPage(),
-    // Move.EnterOtherRequestsPage: (context) => EnterOtherRequestsPage(),
+    Move.EnterAccessMethodsPage: (context) => EnterAccessMethodsPage(),
+    Move.EnterOtherRequestsPage: (context) => EnterOtherRequestsPage(),
     // Move.ReservationDetailPage: (context) => ReservationDetailPage(),
     Move.CautionPage: (context) => CautionPage(),
     Move.CompletedServiceListPage: (context) => CompletedServiceListPage(),

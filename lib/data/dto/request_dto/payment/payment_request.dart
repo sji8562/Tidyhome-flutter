@@ -1,11 +1,19 @@
 class PaymentRequestDTO {
-  int userId;
-  String productName;
+  int addressInfoId;
+  int optionId;
+  String reservationDate;
+  String reservationTime;
+  bool pet;
 
-  PaymentRequestDTO(this.userId, this.productName);
+
+  PaymentRequestDTO(this.addressInfoId, this.optionId, this.reservationDate,
+      this.reservationTime, this.pet);
 
   Map<String, dynamic> toJson() => {
-    "userId": userId,
-    "productName": productName,
+    "addressInfoId": addressInfoId,
+    "optionId": optionId,
+    "reservationDate": reservationDate,
+    "reservationTime": reservationTime,
+    "pet": pet,
   };
 }

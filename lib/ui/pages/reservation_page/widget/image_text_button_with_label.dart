@@ -6,12 +6,13 @@ import 'package:toyproject/_core/constants/style.dart';
 class ImageAndTextAndButtonWithLabel extends StatelessWidget {
   final String icon_name;
   final String title;
-  // final String? button_text;
-  // final bool is_active;
+  final String? button_text;
+  final bool is_active;
   final acting;
+  final jColor;
 
-  // const ImageAndTextAndButtonWithLabel({super.key, required this.icon_name, required this.title, this.button_text, this.is_active = false, this.acting});
-  const ImageAndTextAndButtonWithLabel({super.key, required this.icon_name, required this.title, this.acting});
+
+  const ImageAndTextAndButtonWithLabel({super.key, required this.icon_name, required this.title, this.button_text, this.is_active = false, this.acting, this.jColor});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class ImageAndTextAndButtonWithLabel extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
-                  '등록하기', style: TextStyle(color: primaryColor),
+                  button_text ?? '없음', style: TextStyle(color: jColor),
                 ),
               ),
               color: bgAndLineColor,

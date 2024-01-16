@@ -137,13 +137,13 @@ class ReservationDetailPage extends ConsumerWidget {
                 ),
                 ImageAndTextAndButtonWithLabel(title: '출입방법', icon_name: 'home_icon.PNG',
                     // button_text: '등록됨', is_active: true,
-                  acting: () { Navigator.push(context, MaterialPageRoute(builder: (context) => EnterAccessMethodsPage(reservationId: id))); }
+                  acting: () { Navigator.pushNamed(context, Move.EnterAccessMethodsPage); }
                 ),
 
                 CustomDividerThin(),
 
                 ImageAndTextAndButtonWithLabel(title: '기타 요청사항', icon_name: 'message_icon.png',
-                    acting: () { Navigator.push(context, MaterialPageRoute(builder: (context) => EnterOtherRequestsPage(reservationId: id))); }
+                    acting: () { Navigator.pushNamed(context, Move.EnterOtherRequestsPage); }
                 ),
 
                 const CustomDivider(),
