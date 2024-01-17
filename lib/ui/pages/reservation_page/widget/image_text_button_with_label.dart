@@ -11,6 +11,7 @@ class ImageAndTextAndButtonWithLabel extends StatelessWidget {
   final acting;
   final jColor;
 
+
   const ImageAndTextAndButtonWithLabel({super.key, required this.icon_name, required this.title, this.button_text, this.is_active = false, this.acting, this.jColor});
 
   @override

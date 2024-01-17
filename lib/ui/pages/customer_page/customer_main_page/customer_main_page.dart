@@ -50,12 +50,12 @@ class CustomerMainPage extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            bottom: 10,
-            child: SoftColorButton(text: '문의하기', funPageRoute: (){
-              Navigator.pushNamed(context, Move.LiveChatPage);
-            }),
-          )
+          // Positioned(
+          //   bottom: 10,
+          //   child: SoftColorButton(text: '문의하기', funPageRoute: (){
+          //     Navigator.pushNamed(context, Move.LiveChatPage);
+          //   }),
+          // )
         ],
       ),
     );
