@@ -78,4 +78,18 @@ class ReservationRepository {
     }
 
   }
+
+  Future<ResponseDTO> deleteEnterAccessMethods(reservationId) async {
+    try {
+      Logger().d("출입 방법 삭제 호출");
+      Response<dynamic> response = await dio.post("/reservation/list/$reservationId/enter/delete");
+      Logger().d("결과 ================ 1111111");
+      Logger().d(response);
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("결과 ================ 22222222222");
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(success: false, response: null, error: "출입 방법 삭제 에러");
+    }
+  }
 }

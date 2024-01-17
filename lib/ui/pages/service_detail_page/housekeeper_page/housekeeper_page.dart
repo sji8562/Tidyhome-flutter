@@ -32,7 +32,8 @@ class _HouseKeeperPageState extends State<HouseKeeperPage>
           appBar:
               ArrowAppBar(leading: Icons.keyboard_backspace, title: '서비스 상세정보',
                   moveRoute: (){
-                    Navigator.pushNamed(context, Move.CustomerPage);
+                    Navigator.pop(context);
+                    // Navigator.pushNamed(context, Move.CustomerPage);
                   }
               ),
           body: ListView(children: [

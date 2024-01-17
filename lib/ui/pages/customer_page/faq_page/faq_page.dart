@@ -57,7 +57,8 @@ class _FaqPageState extends ConsumerState<FaqPage> {
             appBar:
                 ArrowAppBar(leading: Icons.keyboard_backspace, title: '자주 묻는 질문',
                     moveRoute: (){
-                      Navigator.pushNamed(context, Move.CustomerPage);
+                      Navigator.pop(context);
+                      // Navigator.pushNamed(context, Move.CustomerPage);
                     }),
             body: Stack(
               children: [

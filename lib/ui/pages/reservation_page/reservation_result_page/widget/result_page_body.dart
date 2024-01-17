@@ -61,7 +61,7 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
                 ),
               ),
               ImageAndTextAndButtonWithLabel(title: '출입방법', icon_name: 'home_icon.PNG',
-                  button_text: resultPageModel!.howToOpen != "" ? resultPageModel!.howToOpen : "없음", jColor: resultPageModel!.howToOpen != "" ? primaryColor : basicColorB9,
+                  button_text: resultPageModel!.howToOpen != "" ? "등록됨" : "없음", jColor: resultPageModel!.howToOpen != "" ? primaryColor : basicColorB9,
                   acting: () {
                     Navigator.pushNamed(context, Move.EnterAccessMethodsPage);
                  }
@@ -70,7 +70,7 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
               CustomDividerThin(),
 
               ImageAndTextAndButtonWithLabel(title: '기타 요청사항', icon_name: 'message_icon.png',
-                  button_text: resultPageModel!.requestETC != "" ? resultPageModel!.requestETC : "없음", jColor: resultPageModel!.requestETC != "" ? primaryColor : basicColorB9,
+                  button_text: resultPageModel!.requestETC != "" ? "등록됨" : "없음", jColor: resultPageModel!.requestETC != "" ? primaryColor : basicColorB9,
                   acting: () {
                 Navigator.pushNamed(context, Move.EnterOtherRequestsPage); }
               ),
@@ -154,9 +154,8 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
             ],
           ),
         ),
-        Positioned(bottom: 20,
+        Positioned(bottom: 0,
             child: Container(
-              // TODO move to 예약 내역
                 child: ColorButtonFullWith(text: '확인', action: (){
                   Navigator.pushNamed(context, Move.PaymentPage);
                 })

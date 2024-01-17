@@ -34,7 +34,8 @@ class _LiveChatPageState extends ConsumerState<LiveChatPage> {
             appBar:
                 ArrowAppBar(leading: Icons.keyboard_backspace, title: '실시간 문의',
                     moveRoute: (){
-                      Navigator.pushNamed(context, Move.CustomerPage);
+                      Navigator.pop(context);
+                      // Navigator.pushNamed(context, Move.CustomerPage);
                     }),
             body: Stack(
               children: [
