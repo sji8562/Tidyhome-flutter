@@ -15,7 +15,8 @@ class TermsOfService extends StatelessWidget {
     return Scaffold(
       appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '서비스 약관',
           moveRoute: (){
-            Navigator.pushNamed(context, Move.CustomerPage);
+            Navigator.pop(context);
+            // Navigator.pushNamed(context, Move.CustomerPage);
           }
       ),
       body: Column(

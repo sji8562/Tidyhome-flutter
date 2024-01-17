@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toyproject/_core/constants/Define.dart';
 import 'package:toyproject/_core/utils/validator_util.dart';
+import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page_view_model.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 import 'package:toyproject/ui/widget/button/color_button_full_width.dart';
 import 'package:toyproject/ui/widget/button/soft_color_red_button.dart';
@@ -44,7 +45,9 @@ class EnterAccessMethodsPage extends ConsumerWidget {
                     Image.asset('${Define.images}safety_info_image.png', width: double.infinity,),
         
                     // TODO 삭제하기 클릭 시 내용 clear
-                    SoftColorRedButton(text: '삭제하기', funPageRoute: () {}),
+                    SoftColorRedButton(text: '삭제하기', funPageRoute: () {
+                      // ref.read(enterAccessMethodsProvider.notifier).deleteEnterAccessMethods();
+                    }),
                   ],
                 ),
               ),

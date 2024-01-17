@@ -57,7 +57,8 @@ class _FaqPageState extends ConsumerState<FaqPage> {
             appBar:
                 ArrowAppBar(leading: Icons.keyboard_backspace, title: '자주 묻는 질문',
                     moveRoute: (){
-                      Navigator.pushNamed(context, Move.CustomerPage);
+                      Navigator.pop(context);
+                      // Navigator.pushNamed(context, Move.CustomerPage);
                     }),
             body: Stack(
               children: [
@@ -82,8 +83,8 @@ class _FaqPageState extends ConsumerState<FaqPage> {
                           Row(
                             children: [
                               SizedBox(width: 5.0,),
-                              Expanded(flex: 1, child: buildServiceButton(ServiceType.Applience, '가전/침대청소', 6),),
-                              SizedBox(width: 5.0,),
+                              // Expanded(flex: 1, child: buildServiceButton(ServiceType.Applience, '가전/침대청소', 6),),
+                              // SizedBox(width: 5.0,),
                               Expanded(flex:1, child: buildServiceButton(ServiceType.Pay, '결제/예약', 1)),
                               SizedBox(width: 5.0,),
                             ],
@@ -130,53 +131,49 @@ class _FaqPageState extends ConsumerState<FaqPage> {
                             },
                           ),
                           SizedBox(height: 60.0,),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              child: Text('서비스 요금', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),), alignment: Alignment.centerLeft,
+                          if (faqListCode2.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                child: Text('서비스 요금', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                                alignment: Alignment.centerLeft,
+                              ),
                             ),
-                          ),
-                          ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: faqListCode2.length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  ExpansionTile(
-                                    title: Text(
-                                      faqListCode2[index].title,
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(20.0),
-                                            child: Text(faqListCode2[index].content),
+                            ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: faqListCode2.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    ExpansionTile(
+                                      title: Text(
+                                        faqListCode2[index].title,
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                                          child: Container(
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(20.0),
+                                              child: Text(faqListCode2[index].content),
+                                            ),
+                                            color: bgAndLineColor,
                                           ),
-                                          color: bgAndLineColor,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                          SizedBox(height: 60.0,)
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                            SizedBox(height: 60.0,)
                         ],
                       ),
                     )
                   ],
                 ),
-                // Positioned(
-                //   bottom: 10,
-                //   child: SoftColorButton(text: '실시간 문의', funPageRoute: () {
-                //     Navigator.pushNamed(context, Move.LiveChatPage);
-                //   }),
-                // )
               ],
             ),
     );
