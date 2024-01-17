@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashPage(),
+      // home: const SplashPage(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       // initialRoute: Move.ReservationListPage,
-      // initialRoute: Move.ReservationPage,
+      initialRoute: Move.ReservationListPage,
       routes: getRouters(),
       theme: theme(),
     );

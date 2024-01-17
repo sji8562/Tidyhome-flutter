@@ -44,8 +44,8 @@ class ResultPageViewModel extends StateNotifier<ResultPageModel?> {
     state = state?.copyWith(carefulETC: value1, requestETC: value2);
   }
 
-  void setCleaningDate(String value1, String value2, String value3, bool value4, int value5) {
-    state = state?.copyWith(cleaningDate: CleaningDate(value1, value2, value3, value4, value5));
+  void setCleaningDate(String value1, String value2, String value3, bool value4, int value5, int value6) {
+    state = state?.copyWith(cleaningDate: CleaningDate(value1, value2, value3, value4, value5, value6));
   }
 
 }

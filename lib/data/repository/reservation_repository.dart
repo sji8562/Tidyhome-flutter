@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:toyproject/_core/constants/http.dart';
+import 'package:toyproject/data/dto/request_dto/reservation/reservation_request.dart';
 import 'package:toyproject/data/dto/response_dto/response_dto.dart';
 import 'package:toyproject/data/model/reservation.dart';
 import 'package:toyproject/data/model/reservationDetail.dart';
@@ -71,6 +72,22 @@ class ReservationRepository {
       Logger().d("fetchReservationSave진입 222222222222");
       Logger().d(responseDTO.response.toString());
       responseDTO.response = ReservationDetail.fromJson(responseDTO.response);
+      Logger().d("fetchReservationSave진입 333333333333");
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(success: false, response: null, error: "예약 내역 상세 조회 에러");
+    }
+
+  }
+
+  Future<ResponseDTO> fetchReservationUpdate(ReservationUpdateDTO request) async {
+    try {
+      Response<dynamic> response = await dio.post("/reservation/list/${request.id}/update", data: request.toJson());
+      Logger().d("fetchReservationUpdate진입 111111111111");
+      Logger().d(request.toJson());
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("fetchReservationUpdate진입 222222222222");
+      Logger().d(responseDTO.response.toString());
       Logger().d("fetchReservationSave진입 333333333333");
       return responseDTO;
     } catch (e) {

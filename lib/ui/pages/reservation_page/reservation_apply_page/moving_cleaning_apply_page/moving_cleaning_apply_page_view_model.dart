@@ -1,20 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
+import 'package:toyproject/_core/utils/extract_time_util.dart';
+import 'package:toyproject/data/dto/response_dto/response_dto.dart';
+import 'package:toyproject/data/model/option_price.dart';
+import 'package:toyproject/data/repository/option_repository.dart';
 
 import '../../../../../data/model/home_work_apply_field.dart';
 
 // 1. 창고 데이터
 class MovingCleaningApplyPageModel  {
   List<HomeWorkApplyField>? homeWorkFields;
-
-  MovingCleaningApplyPageModel(this.homeWorkFields);
+  List<OptionPrice>? options;
+  MovingCleaningApplyPageModel(this.homeWorkFields, this.options);
 
   MovingCleaningApplyPageModel copyWith({
     List<HomeWorkApplyField>? homeWorkFields,
+    List<OptionPrice>? options
   }) {
     return MovingCleaningApplyPageModel(
       homeWorkFields ?? this.homeWorkFields,
+      options ?? this.options
     );
   }
 
@@ -25,9 +29,16 @@ class MovingCleaningApplyPageModel  {
 class MovingCleaningApplyPageViewModel extends StateNotifier<MovingCleaningApplyPageModel?> {
   MovingCleaningApplyPageViewModel(super.state);
 
-  void addServiceTime() {
-    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList:["2시간/38,900원", "4시간/51,900원", "6시간/64,900원", "8시간/112,900원"]);
+  Future<void> roadOptions() async {
+    ResponseDTO responseDTO = await OptionRepository().fetchOptionList(2);
+    state = state!.copyWith(options: responseDTO.response);
+
+    List<String> selectList = state!.options!.map((option) {
+      return '${option.name} / ${formatNumberWithComma(option.price)}원';
+    }).toList();
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: selectList);
     state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+
   }
 
   void addAreaSize(){
@@ -110,5 +121,5 @@ class MovingCleaningApplyPageViewModel extends StateNotifier<MovingCleaningApply
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final movingCleaningApplyProvider =
 StateNotifierProvider<MovingCleaningApplyPageViewModel, MovingCleaningApplyPageModel?>((ref) {
-  return MovingCleaningApplyPageViewModel(MovingCleaningApplyPageModel([]))..addServiceTime();
+  return MovingCleaningApplyPageViewModel(MovingCleaningApplyPageModel([], []))..roadOptions();
 });

@@ -7,6 +7,7 @@ import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
 import 'package:toyproject/data/model/reservationDetail.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/icon_text.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button.dart';
@@ -99,8 +100,8 @@ class ReservationDetailPage extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('서비스 일정'),
-                        textBody6(reservationDetail.getFormattedDateWithYear()),
-                        textBody6(reservationDetail.option + '(${reservationDetail.getFormattedTime()} 부터)'),
+                        textBody6(reservationDetail.reservationDate),
+                        textBody6(reservationDetail.option + "(" + reservationDetail.reservationTime + ")"),
 
                         SizedBox(height: 15.0,),
 
@@ -120,9 +121,20 @@ class ReservationDetailPage extends ConsumerWidget {
                 // TODO 완료 또는 취소된 내역이면 아래 (일정 변경하기 ~ 결제수단) 없애기
 
                 CustomDividerThin(),
-                ImageAndTextAndButton(title: '일정 변경하기', icon_name: 'cross_arrow.PNG'),
+                ImageAndTextAndButton(title: '일정 변경하기', icon_name: 'cross_arrow.PNG', acting: (){
+                  ref.read(reservationChangeProvider.notifier).setReservationId(reservationDetailPageModel!.reservationDetail!.reservationId);
+                  ref.read(reservationChangeProvider.notifier).setCleaningDate(
+                    reservationDetail.reservationDate,
+                    reservationDetail.option,
+                    reservationDetail.reservationTime,
+                    reservationDetail.pet,
+                    1, 1);
+                  Navigator.pushNamed(context, Move.ReservationChangePage);
+                },),
                 CustomDividerThin(),
-                ImageAndTextAndButton(title: '일정 취소하기', icon_name: 'clear_icon.PNG'),
+                ImageAndTextAndButton(title: '일정 취소하기', icon_name: 'clear_icon.PNG', acting: (){
+                  Navigator.pushNamed(context, Move.ReservationCancelPage);
+                },),
 
                 CustomDivider(),
 
@@ -134,7 +146,8 @@ class ReservationDetailPage extends ConsumerWidget {
                   ),
                 ),
                 ImageAndTextAndButtonWithLabel(title: '출입방법', icon_name: 'home_icon.PNG', button_text: '등록됨', is_active: true,
-                  acting: () { Navigator.pushNamed(context, Move.EnterAccessMethodsPage); }
+                  acting: () {
+                    Navigator.pushNamed(context, Move.EnterAccessMethodsPage); }
                 ),
 
                 CustomDividerThin(),

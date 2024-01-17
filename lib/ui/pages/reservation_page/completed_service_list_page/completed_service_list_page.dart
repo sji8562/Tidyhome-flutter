@@ -48,7 +48,7 @@ class CompletedServiceListPage extends ConsumerWidget {
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationDetailPage(id: reservations[index].reservationId)));
                         },
-                        child: ReservationListTab(service_type: reservations[index].firstCategory, service_date: reservations[index].getFormattedDate() + ' ' + reservations[index].getFormattedTime(), is_done: true,)
+                        child: ReservationListTab(service_type: reservations[index].firstCategory, service_date: reservations[index].reservationDate + ' ' + reservations[index].reservationTime, is_done: true,)
                     ),
                   ],
                 );

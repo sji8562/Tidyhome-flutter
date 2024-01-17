@@ -43,3 +43,20 @@ String formatNumberWithComma(int number) {
       RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
           (Match match) => '${match[1]},');
 }
+
+int extractNumberFromTimeString(String input) {
+  // 정규 표현식을 사용하여 문자열에서 숫자 부분 추출
+  RegExp regex = RegExp(r'\d+');
+  Match? match = regex.firstMatch(input); // Nullable로 선언
+
+  // 추출된 숫자를 int로 변환하여 반환
+  if (match != null) {
+    String numberString = match.group(0)!; // Non-nullable로 캐스팅
+    return int.parse(numberString);
+  } else {
+    // 일치하는 숫자가 없을 경우 예외 처리 또는 기본값 설정 가능
+    throw FormatException('No numeric value found in the input string');
+    // 또는 기본값 설정
+    // return 0;
+  }
+}

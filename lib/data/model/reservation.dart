@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 class Reservation {
   int reservationId;
-  DateTime reservationDate;
+  String reservationDate;
   String reservationTime;
   String firstCategory;
 
@@ -11,7 +11,7 @@ class Reservation {
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   Reservation.fromJson(Map<String, dynamic> json)
       : reservationId = json["reservationId"],
-        reservationDate = DateTime.parse(json["reservationDate"]),
+        reservationDate = json["reservationDate"],
         reservationTime = json["reservationTime"],
         firstCategory = json["firstCategory"];
 
@@ -21,9 +21,9 @@ class Reservation {
   }
 
 // Formatted date for data binding
-  String getFormattedDate() {
-    return DateFormat("M월 d일").format(reservationDate);
-  }
+//   String getFormattedDate() {
+//     return DateFormat("M월 d일").format(reservationDate);
+//   }
 
   // Convert reservationTime to AM/PM format
   String getFormattedTime() {

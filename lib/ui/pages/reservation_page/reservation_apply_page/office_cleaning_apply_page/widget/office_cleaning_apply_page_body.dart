@@ -27,7 +27,7 @@ class _OfficeCleaningApplyPageBodyState extends ConsumerState<OfficeCleaningAppl
   bool isButtonEnabled2 = true;
   bool isButtonEnabled3 = true;
   bool isButtonEnabled4 = true;
-
+  int optionIndex = 0;
 
   final List<TextEditingController> _homeWorkControllers = [];
 
@@ -107,6 +107,7 @@ class _OfficeCleaningApplyPageBodyState extends ConsumerState<OfficeCleaningAppl
                                     child:
                                     InkWell(onTap: () {
                                       if(index == 0 && isButtonEnabled1){
+                                        optionIndex = index2;
                                         ref.read(officeCleaningApplyProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                         Future.delayed(Duration(seconds: 2), () {
                                           ref.read(officeCleaningApplyProvider.notifier).addServiceDate();
@@ -169,7 +170,7 @@ class _OfficeCleaningApplyPageBodyState extends ConsumerState<OfficeCleaningAppl
               child: ColorButton(text: "예약 신청", funPageRoute: (){
                 ref.read(resultPageProvider.notifier).
                 setCleaningDate(homeWorkFields[1]!.inputAnswer!, homeWorkFields[0]!.inputAnswer!,
-                    homeWorkFields[2]!.inputAnswer!, homeWorkFields[3]!.inputAnswer! == "예" ? true : false, 0);
+                    homeWorkFields[2]!.inputAnswer!, homeWorkFields[3]!.inputAnswer! == "예" ? true : false, 0, optionIndex+1);
                 Navigator.pushNamed(context, Move.ReservationResultPage);
               }),
             )
