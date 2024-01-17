@@ -139,7 +139,7 @@ class ReservationDetailPage extends ConsumerWidget {
                     // button_text: '등록됨', is_active: true,
                   acting: () { 
                     // Navigator.pushNamed(context, Move.EnterAccessMethodsPage); 
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => EnterAccessMethodsPage(id)));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => EnterAccessMethodsPage(id)));
                   }
                 ),
 
@@ -148,7 +148,7 @@ class ReservationDetailPage extends ConsumerWidget {
                 ImageAndTextAndButtonWithLabel(title: '기타 요청사항', icon_name: 'message_icon.png',
                     acting: () {
                       // Navigator.pushNamed(context, Move.EnterOtherRequestsPage);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => EnterOtherRequestsPage(id)));
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => EnterOtherRequestsPage(id)));
                     }
                 ),
 
