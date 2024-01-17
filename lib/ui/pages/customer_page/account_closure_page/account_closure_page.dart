@@ -43,23 +43,6 @@ class AccountClosurePage extends ConsumerWidget {
                           '- 적립금, 예치금, 쿠폰 등 모든 혜택이 사라집니다.\n'
                       ),
                     ),
-                    // Divider(
-                    //   color: disableColor,
-                    //   height: 20
-                    // ),
-                    // TextField(
-                    //   maxLines: null, // 다중 행으로 설정하려면 null 또는 원하는 줄 수를 지정
-                    //   maxLength: 300,
-                    //   decoration: InputDecoration(
-                    //     hintText: '내용을 입력해주세요',
-                    //     hintStyle: TextStyle(color: disableColor),
-                    //     border: InputBorder.none, // 밑줄 없애기
-                    //   ),
-                    //   onChanged: (text) {
-                    //     // 텍스트가 변경될 때 실행되는 콜백 함수
-                    //     print('Typed text: $text');
-                    //   },
-                    // ),
                     const SizedBox(height: 30,),
                     SoftColorRedButton(text: '탈퇴 요청하기', funPageRoute: () {
                       ref.read(accountClosureProvider).accountClose();

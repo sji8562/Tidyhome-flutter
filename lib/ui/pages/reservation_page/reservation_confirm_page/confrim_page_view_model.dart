@@ -51,5 +51,5 @@ class ConfirmPageViewModel extends StateNotifier<ConfirmPageModel?> {
 }
 
 final confirmPageProvider = StateNotifierProvider<ConfirmPageViewModel, ConfirmPageModel?>((ref) {
-  return ConfirmPageViewModel(ConfirmPageModel(howToOpen: "없음", doorPassword: "없음", carefulETC: "없음", requestETC: "없음"));
+  return ConfirmPageViewModel(ConfirmPageModel(howToOpen: "", doorPassword: "", carefulETC: "", requestETC: ""));
 });

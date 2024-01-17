@@ -18,13 +18,15 @@ class ReservationRepository {
       Logger().d("예약내역 리스트 요청 통신 진입1111111111111111");
       List<dynamic> mapList = responseDTO.response;
       Logger().d("예약내역 리스트 요청 통신 진입 2222222222222222");
-      List<Reservation> reservations = mapList.map((e) => Reservation.fromJson(e)).toList();
+      List<Reservation> reservations = mapList.map((e) =>
+          Reservation.fromJson(e)).toList();
       responseDTO.response = reservations;
       Logger().d("통신 =========", responseDTO.response.toString());
       return responseDTO;
     } catch (e) {
       // 200이 아니면 catch로 감
-      return ResponseDTO(success: false, response: null, error: "예약내역 목록 조회 에러");
+      return ResponseDTO(
+          success: false, response: null, error: "예약내역 목록 조회 에러");
     }
   }
 
@@ -37,30 +39,33 @@ class ReservationRepository {
       Logger().d("완료된 서비스 리스트 요청 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapList = responseDTO.response;
-      List<Reservation> reservations = mapList.map((e) => Reservation.fromJson(e)).toList();
+      List<Reservation> reservations = mapList.map((e) =>
+          Reservation.fromJson(e)).toList();
       responseDTO.response = reservations;
       Logger().d("통신 =========", responseDTO.response.toString());
       return responseDTO;
     } catch (e) {
       // 200이 아니면 catch로 감
-      return ResponseDTO(success: false, response: null, error: "완료된 서비스 목록 조회 에러");
+      return ResponseDTO(
+          success: false, response: null, error: "완료된 서비스 목록 조회 에러");
     }
   }
 
   // 예약 내역 상세
   Future<ResponseDTO> fetchReservationDetail(id) async {
     Logger().d("fetchReservationDetail 진입");
-      try {
-        Response<dynamic> response = await dio.get("/reservation/list/$id");
-        Logger().d("fetchReservationDetail 진입 111111111111");
-        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-        Logger().d("fetchReservationDetail 진입 222222222222");
-        Logger().d(responseDTO.response.toString());
-        responseDTO.response = ReservationDetail.fromJson(responseDTO.response);
-        Logger().d("fetchReservationDetail 진입 333333333333");
-        return responseDTO;
-      } catch (e) {
-        return ResponseDTO(success: false, response: null, error: "예약 내역 상세 조회 에러");
+    try {
+      Response<dynamic> response = await dio.get("/reservation/list/$id");
+      Logger().d("fetchReservationDetail 진입 111111111111");
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("fetchReservationDetail 진입 222222222222");
+      Logger().d(responseDTO.response.toString());
+      responseDTO.response = ReservationDetail.fromJson(responseDTO.response);
+      Logger().d("fetchReservationDetail 진입 333333333333");
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(
+          success: false, response: null, error: "예약 내역 상세 조회 에러");
     }
   }
 
@@ -75,14 +80,16 @@ class ReservationRepository {
       Logger().d("fetchReservationSave진입 333333333333");
       return responseDTO;
     } catch (e) {
-      return ResponseDTO(success: false, response: null, error: "예약 내역 상세 조회 에러");
+      return ResponseDTO(
+          success: false, response: null, error: "예약 내역 상세 조회 에러");
     }
-
   }
 
-  Future<ResponseDTO> fetchReservationUpdate(ReservationUpdateDTO request) async {
+  Future<ResponseDTO> fetchReservationUpdate(
+      ReservationUpdateDTO request) async {
     try {
-      Response<dynamic> response = await dio.post("/reservation/list/${request.id}/update", data: request.toJson());
+      Response<dynamic> response = await dio.post(
+          "/reservation/list/${request.id}/update", data: request.toJson());
       Logger().d("fetchReservationUpdate진입 111111111111");
       Logger().d(request.toJson());
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
@@ -91,8 +98,24 @@ class ReservationRepository {
       Logger().d("fetchReservationSave진입 333333333333");
       return responseDTO;
     } catch (e) {
-      return ResponseDTO(success: false, response: null, error: "예약 내역 상세 조회 에러");
+      return ResponseDTO(
+          success: false, response: null, error: "예약 내역 상세 조회 에러");
     }
-
   }
-}
+
+    Future<ResponseDTO> deleteEnterAccessMethods(reservationId) async {
+      try {
+        Logger().d("출입 방법 삭제 호출");
+        Response<dynamic> response = await dio.post(
+            "/reservation/list/$reservationId/enter/delete");
+        Logger().d("결과 ================ 1111111");
+        Logger().d(response);
+        ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+        Logger().d("결과 ================ 22222222222");
+        return responseDTO;
+      } catch (e) {
+        return ResponseDTO(
+            success: false, response: null, error: "출입 방법 삭제 에러");
+      }
+    }
+  }

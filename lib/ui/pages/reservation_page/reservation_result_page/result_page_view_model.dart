@@ -51,5 +51,5 @@ class ResultPageViewModel extends StateNotifier<ResultPageModel?> {
 }
 
 final resultPageProvider = StateNotifierProvider<ResultPageViewModel, ResultPageModel?>((ref) {
-  return ResultPageViewModel(ResultPageModel(howToOpen: "없음", doorPassword: "없음", carefulETC: "없음", requestETC: "없음"));
+  return ResultPageViewModel(ResultPageModel(howToOpen: "", doorPassword: "", carefulETC: "", requestETC: ""));
 });
