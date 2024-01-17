@@ -31,6 +31,7 @@ class _MovingCleaningApplyPageBodyState extends ConsumerState<MovingCleaningAppl
   bool isButtonEnabled4 = true;
   bool isButtonEnabled5 = true;
   bool isValidated = false;
+  int optionIndex = 0;
   final areaController = TextEditingController();
 
 
@@ -112,6 +113,7 @@ class _MovingCleaningApplyPageBodyState extends ConsumerState<MovingCleaningAppl
                                       child:
                                       InkWell(onTap: () {
                                         if(index == 0 && isButtonEnabled1){
+                                          optionIndex = index2;
                                           ref.read(movingCleaningApplyProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                           Future.delayed(Duration(seconds: 2), () {
                                             ref.read(movingCleaningApplyProvider.notifier).addAreaSize();
@@ -203,7 +205,7 @@ class _MovingCleaningApplyPageBodyState extends ConsumerState<MovingCleaningAppl
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ColorButton(text: "예약 신청", funPageRoute: (){
               ref.read(resultPageProvider.notifier).setCleaningDate(homeWorkFields[2]!.inputAnswer!,
-                  homeWorkFields[0]!.inputAnswer!, homeWorkFields[3]!.inputAnswer!, homeWorkFields[4]!.inputAnswer! == "예" ? true : false, parseInt(homeWorkFields[1]!.inputAnswer!));
+                  homeWorkFields[0]!.inputAnswer!, homeWorkFields[3]!.inputAnswer!, homeWorkFields[4]!.inputAnswer! == "예" ? true : false, parseInt(homeWorkFields[1]!.inputAnswer!), optionIndex+1);
               Navigator.pushNamed(context, Move.ReservationResultPage);
             }),
           )

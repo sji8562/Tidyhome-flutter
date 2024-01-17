@@ -80,7 +80,8 @@ class ReservationListPage extends ConsumerWidget {
                           ReservationTab(
                             icon: _setServiceIconName(reservations[index].firstCategory),
                             upText: reservations[index].firstCategory,
-                            downText: '${reservations[index].getFormattedDate()} ${reservations[index].getFormattedTime()}',
+                            downText: '${reservations[index].reservationDate} ${reservations[index].reservationTime}',
+                            // TODO 값 안넘어감
                             moveRoute: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationDetailPage(id: reservations[index].reservationId)));
                             },

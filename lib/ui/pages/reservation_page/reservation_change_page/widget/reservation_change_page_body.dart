@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/utils/extract_time_util.dart';
 import 'package:toyproject/_core/utils/validator_util.dart';
+import 'package:toyproject/data/dto/request_dto/reservation/reservation_request.dart';
 import 'package:toyproject/data/model/home_work_apply_field.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/moving_cleaning_apply_page/widget/j_soft_color_button.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page_view_model.dart';
 import 'package:toyproject/ui/widget/button/color_button.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
 import 'package:toyproject/ui/widget/loading.dart';
@@ -152,7 +155,8 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ColorButton(text: "예약 변경", funPageRoute: (){
-
+              ReservationUpdateDTO request = ReservationUpdateDTO(reservationChangePageModel.reservationId!, homeWorkFields[1]!.inputAnswer!, homeWorkFields[2]!.inputAnswer!);
+                ref.read(reservationChangeProvider.notifier).reservationChange(request);
             }),
           )
       ],
@@ -194,7 +198,8 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
           ref.read(reservationChangeProvider.notifier).updateAnswer(index, formattedDate);
           Navigator.pop(context);
           await Future.delayed(Duration(seconds: 1), () {
-            ref.read(reservationChangeProvider.notifier).addServiceChangeTime();
+            Logger().d(ref.read(reservationChangeProvider)!.cleaningDate!.soYoTime);
+            ref.read(reservationChangeProvider.notifier).addServiceStartTime(extractNumberFromTimeString(ref.read(reservationChangeProvider)!.cleaningDate!.soYoTime));
           });
         }
       },

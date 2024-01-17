@@ -6,11 +6,11 @@ import 'package:toyproject/data/model/option_price.dart';
 
 class OptionRepository{
   // 공지사항 조회
-  Future<ResponseDTO> fetchOptionList() async {
+  Future<ResponseDTO> fetchOptionList(int id) async {
     Logger().d("fetchNotice 진입");
     try {
       Response<dynamic> response =
-      await dio.get("/api/option");
+      await dio.get("/api/option?secondCategoryId=$id");
       Logger().d("옵션 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapList = responseDTO.response["optionPrices"];

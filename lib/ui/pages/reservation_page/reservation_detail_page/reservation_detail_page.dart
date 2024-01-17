@@ -7,22 +7,17 @@ import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
 import 'package:toyproject/data/model/reservationDetail.dart';
-import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page.dart';
-import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page/enter_other_requests_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/icon_text.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button_with_label.dart';
-import 'package:toyproject/ui/pages/reservation_page/widget/reservation_success.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/text_label.dart';
-import 'package:toyproject/ui/widget/blue_small_text_button.dart';
-import 'package:toyproject/ui/widget/button/color_button.dart';
 import 'package:toyproject/ui/widget/button/color_button_full_width.dart';
 import 'package:toyproject/ui/widget/custom_modal/information_modal.dart';
 import 'package:toyproject/ui/widget/divider/custom_divider.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 import 'package:toyproject/ui/widget/divider/custom_divider_thin.dart';
-import 'package:toyproject/ui/widget/exclamationmark_title.dart';
 import 'package:toyproject/ui/widget/loading.dart';
 
 class ReservationDetailPage extends ConsumerWidget {
@@ -101,8 +96,8 @@ class ReservationDetailPage extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('서비스 일정'),
-                        textBody6(reservationDetail.getFormattedDateWithYear()),
-                        textBody6(reservationDetail.option + '(${reservationDetail.getFormattedTime()} 부터)'),
+                        textBody6(reservationDetail.reservationDate),
+                        textBody6(reservationDetail.option + "(" + reservationDetail.reservationTime + ")"),
 
                         SizedBox(height: 15.0,),
 
@@ -122,9 +117,20 @@ class ReservationDetailPage extends ConsumerWidget {
                 // TODO 완료 또는 취소된 내역이면 아래 (일정 변경하기 ~ 결제수단) 없애기
 
                 CustomDividerThin(),
-                ImageAndTextAndButton(title: '일정 변경하기', icon_name: 'cross_arrow.PNG'),
+                ImageAndTextAndButton(title: '일정 변경하기', icon_name: 'cross_arrow.PNG', acting: (){
+                  ref.read(reservationChangeProvider.notifier).setReservationId(reservationDetailPageModel!.reservationDetail!.reservationId);
+                  ref.read(reservationChangeProvider.notifier).setCleaningDate(
+                    reservationDetail.reservationDate,
+                    reservationDetail.option,
+                    reservationDetail.reservationTime,
+                    reservationDetail.pet,
+                    1, 1);
+                  Navigator.pushNamed(context, Move.ReservationChangePage);
+                },),
                 CustomDividerThin(),
-                ImageAndTextAndButton(title: '일정 취소하기', icon_name: 'clear_icon.PNG'),
+                ImageAndTextAndButton(title: '일정 취소하기', icon_name: 'clear_icon.PNG', acting: (){
+                  Navigator.pushNamed(context, Move.ReservationCancelPage);
+                },),
 
                 CustomDivider(),
 
@@ -135,11 +141,12 @@ class ReservationDetailPage extends ConsumerWidget {
                       child: Text('부가정보 입력')
                   ),
                 ),
+
                 ImageAndTextAndButtonWithLabel(title: '출입방법', icon_name: 'home_icon.PNG',
                     // button_text: '등록됨', is_active: true,
                   acting: () { 
                     // Navigator.pushNamed(context, Move.EnterAccessMethodsPage); 
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => EnterAccessMethodsPage(id)));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => EnterAccessMethodsPage(id)));
                   }
                 ),
 
@@ -148,7 +155,7 @@ class ReservationDetailPage extends ConsumerWidget {
                 ImageAndTextAndButtonWithLabel(title: '기타 요청사항', icon_name: 'message_icon.png',
                     acting: () {
                       // Navigator.pushNamed(context, Move.EnterOtherRequestsPage);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => EnterOtherRequestsPage(id)));
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => EnterOtherRequestsPage(id)));
                     }
                 ),
 

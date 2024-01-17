@@ -24,6 +24,6 @@ class ReservationDetailPageViewModel extends StateNotifier<ReservationDetailPage
 }
 //창고관리자
 final reservationDetailProvider =
-StateNotifierProvider.family.autoDispose<ReservationDetailPageViewModel, ReservationDetailPageModel?, int>((ref, id) {
+StateNotifierProvider.family<ReservationDetailPageViewModel, ReservationDetailPageModel?, int>((ref, id) {
   return ReservationDetailPageViewModel(ReservationDetailPageModel(null))..fetchReservationDetail(id);
 });

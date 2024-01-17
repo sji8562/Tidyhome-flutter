@@ -1,9 +1,10 @@
 import 'package:intl/intl.dart';
 
 class ReservationDetail {
+  int reservationId;
   String address;
   String addressDetail;
-  DateTime reservationDate;
+  String reservationDate;
   String reservationTime;
   bool pet;
   int price;
@@ -11,14 +12,16 @@ class ReservationDetail {
   String secondCategory;
   String option;
 
-  ReservationDetail(this.address, this.addressDetail, this.reservationDate, this.reservationTime,
+  ReservationDetail(this.reservationId, this.address, this.addressDetail, this.reservationDate, this.reservationTime,
       this.pet, this.price, this.secondCategory, this.firstCategory, this.option);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   ReservationDetail.fromJson(Map<String, dynamic> json)
-      : address = json["address"],
+      : reservationId = json["reservationId"],
+        address = json["address"],
         addressDetail = json["addressDetail"],
-        reservationDate = DateTime.parse(json["reservationDate"]),
+        // reservationDate = DateTime.parse(json["reservationDate"]),
+        reservationDate = json["reservationDate"],
         reservationTime = json["reservationTime"],
         pet = json["pet"],
         price = json["price"],
@@ -31,13 +34,13 @@ class ReservationDetail {
     return 'ReservationDetail{address: $address, addressDetail: $addressDetail, reservationDate: $reservationDate, reservationTime: $reservationTime, pet: $pet, price: $price, firstCategory: $firstCategory, secondCategory: $secondCategory, option: $option}';
   }
 
-  String getFormattedDateWithYear() {
-    return DateFormat("yyyy년 M월 d일").format(reservationDate);
-  }
-
-  String getFormattedDate() {
-    return DateFormat("M월 d일").format(reservationDate);
-  }
+  // String getFormattedDateWithYear() {
+  //   return DateFormat("yyyy년 M월 d일").format(reservationDate);
+  // }
+  //
+  // String getFormattedDate() {
+  //   return DateFormat("M월 d일").format(reservationDate);
+  // }
 
   String getFormattedTime() {
     final timeFormat = DateFormat('HH:mm:ss');

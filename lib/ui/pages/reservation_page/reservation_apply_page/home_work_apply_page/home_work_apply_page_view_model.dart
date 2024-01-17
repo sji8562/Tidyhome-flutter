@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:toyproject/_core/utils/extract_time_util.dart';
 import 'package:toyproject/data/dto/response_dto/response_dto.dart';
 import 'package:toyproject/data/model/option_price.dart';
+import 'package:toyproject/data/repository/option_repository.dart';
+import 'package:toyproject/data/repository/payment_repository.dart';
 import 'package:toyproject/data/repository/reservation_repository.dart';
 
 import '../../../../../data/model/home_work_apply_field.dart';
@@ -30,10 +33,22 @@ class HomeWorkApplyPageModel  {
 class HomeWorkApplyPageViewModel extends StateNotifier<HomeWorkApplyPageModel?> {
   HomeWorkApplyPageViewModel(super.state);
 
-    void addServiceTime() {
-    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: ["2시간/38,900원", "4시간/51,900원", "6시간/64,900원", "8시간/112,900원"]);
-    state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
-  }
+    Future<void> roadOptions() async {
+      ResponseDTO responseDTO = await OptionRepository().fetchOptionList(1);
+      state = state!.copyWith(options: responseDTO.response);
+
+      List<String> selectList = state!.options!.map((option) {
+        return '${option.name} / ${formatNumberWithComma(option.price)}원';
+      }).toList();
+      HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: selectList);
+      state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+
+    }
+
+  //   void addServiceTime() {
+  //   HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: ["2시간/38,900원", "4시간/51,900원", "6시간/64,900원", "8시간/112,900원"]);
+  //   state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+  // }
 
   void addServiceDate() {
     HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "청소는 언제로 도와드릴까요? (클릭)");
@@ -111,5 +126,5 @@ class HomeWorkApplyPageViewModel extends StateNotifier<HomeWorkApplyPageModel?> 
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final homeWorkApplyProvider =
 StateNotifierProvider<HomeWorkApplyPageViewModel, HomeWorkApplyPageModel?>((ref) {
-  return HomeWorkApplyPageViewModel(HomeWorkApplyPageModel([], []))..addServiceTime();
+  return HomeWorkApplyPageViewModel(HomeWorkApplyPageModel([], []))..roadOptions();
 });

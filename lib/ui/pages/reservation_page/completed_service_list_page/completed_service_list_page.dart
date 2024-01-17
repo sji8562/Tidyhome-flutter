@@ -49,7 +49,7 @@ class CompletedServiceListPage extends ConsumerWidget {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationDetailPage(id: reservations[index].reservationId)));
                         },
                         child: ReservationListTab(service_type: reservations[index].firstCategory,
-                          service_date: reservations[index].getFormattedDate() + ' ' + reservations[index].getFormattedTime(),
+                          service_date: reservations[index].reservationDate + ' ' + reservations[index].reservationTime,
                           is_done: reservations[index].status == 3,) // 1 예약 완료, 2 예약 취소, 3 서비스 완료, 4 환불 완료
                     ),
                   ],

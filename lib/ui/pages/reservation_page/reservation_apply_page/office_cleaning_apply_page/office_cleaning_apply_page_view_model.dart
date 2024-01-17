@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:toyproject/_core/utils/extract_time_util.dart';
+import 'package:toyproject/data/dto/response_dto/response_dto.dart';
+import 'package:toyproject/data/model/option_price.dart';
+import 'package:toyproject/data/repository/option_repository.dart';
 
 import '../../../../../data/model/home_work_apply_field.dart';
 
 // 1. 창고 데이터
 class OfficeCleaningApplyPageModel  {
   List<HomeWorkApplyField>? homeWorkFields;
+  List<OptionPrice>? options;
 
-  OfficeCleaningApplyPageModel(this.homeWorkFields);
+  OfficeCleaningApplyPageModel(this.homeWorkFields, this.options);
 
   OfficeCleaningApplyPageModel copyWith({
     List<HomeWorkApplyField>? homeWorkFields,
+    List<OptionPrice>? options
   }) {
     return OfficeCleaningApplyPageModel(
       homeWorkFields ?? this.homeWorkFields,
+      options ?? this.options
     );
   }
 
@@ -25,9 +32,16 @@ class OfficeCleaningApplyPageModel  {
 class OfficeCleaningApplyPageViewModel extends StateNotifier<OfficeCleaningApplyPageModel?> {
   OfficeCleaningApplyPageViewModel(super.state);
 
-  void addServiceTime() {
-    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: ["2시간/38,900원", "4시간/51,900원", "6시간/64,900원", "8시간/112,900원"]);
+  Future<void> roadOptions() async {
+    ResponseDTO responseDTO = await OptionRepository().fetchOptionList(3);
+    state = state!.copyWith(options: responseDTO.response);
+
+    List<String> selectList = state!.options!.map((option) {
+      return '${option.name} / ${formatNumberWithComma(option.price)}원';
+    }).toList();
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: selectList);
     state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+
   }
 
   void addServiceDate() {
@@ -105,5 +119,5 @@ class OfficeCleaningApplyPageViewModel extends StateNotifier<OfficeCleaningApply
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final officeCleaningApplyProvider =
 StateNotifierProvider< OfficeCleaningApplyPageViewModel,  OfficeCleaningApplyPageModel?>((ref) {
-  return  OfficeCleaningApplyPageViewModel( OfficeCleaningApplyPageModel([]))..addServiceTime();
+  return  OfficeCleaningApplyPageViewModel( OfficeCleaningApplyPageModel([], []))..roadOptions();
 });

@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: Move.MainHomePage,
       // initialRoute: Move.ReservationListPage,
-      // initialRoute: Move.ReservationPage,
       routes: getRouters(),
       theme: theme(),
     );
