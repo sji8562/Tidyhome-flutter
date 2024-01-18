@@ -7,6 +7,9 @@ import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
 import 'package:toyproject/data/model/reservationDetail.dart';
+import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_after_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page/enter_other_requests_after_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_cancle_page/reservation_cancel_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/icon_text.dart';
@@ -34,6 +37,32 @@ class ReservationDetailPage extends ConsumerWidget {
       },
     );
   }
+  
+  String setStatusName(int id){
+    if(id == 1){
+      return "예약 대기";
+    } else if (id == 2){
+      return "예약 완료";
+    } else if (id == 3){
+      return "서비스 완료";
+    } else if (id == 4){
+      return "예약 취소";
+    }
+    return "";
+  }
+  
+  bool setIsActive(int id){
+    if(id == 1){
+      return false;
+    } else if (id == 2){
+      return true;
+    } else if (id == 3){
+      return true;
+    } else if (id == 4){
+      return false;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -59,9 +88,13 @@ class ReservationDetailPage extends ConsumerWidget {
       }
       return 'air_conditioner_cleaning_icon.png';
     };
+    
+    
 
     return Scaffold(
-      appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '',),
+      appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: '', moveRoute: (){
+        Navigator.pushNamedAndRemoveUntil(context, Move.ReservationListPage, (route) => false);
+      },),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -80,7 +113,7 @@ class ReservationDetailPage extends ConsumerWidget {
                             children: [
                               Text(reservationDetail.firstCategory, style: TextStyle(fontWeight: FontWeight.bold),),
                               SizedBox(height: 8,),
-                              TextLabel(text: '예약 완료', is_active: true,),
+                              TextLabel(text: setStatusName(reservationDetailPageModel!.reservationDetail!.status), is_active: setIsActive(reservationDetailPageModel!.reservationDetail!.status)),
                             ],
                           ),
                         )
@@ -129,6 +162,13 @@ class ReservationDetailPage extends ConsumerWidget {
                 },),
                 CustomDividerThin(),
                 ImageAndTextAndButton(title: '일정 취소하기', icon_name: 'clear_icon.PNG', acting: (){
+                  ref.read(reservationCancelProvider.notifier).setReservationId(reservationDetailPageModel!.reservationDetail!.reservationId);
+                  ref.read(reservationCancelProvider.notifier).setCleaningDate(
+                      reservationDetail.reservationDate,
+                      reservationDetail.option,
+                      reservationDetail.reservationTime,
+                      reservationDetail.pet,
+                      1, 1);
                   Navigator.pushNamed(context, Move.ReservationCancelPage);
                 },),
 
@@ -143,19 +183,20 @@ class ReservationDetailPage extends ConsumerWidget {
                 ),
 
                 ImageAndTextAndButtonWithLabel(title: '출입방법', icon_name: 'home_icon.PNG',
-                    // button_text: '등록됨', is_active: true,
-                  acting: () { 
-                    // Navigator.pushNamed(context, Move.EnterAccessMethodsPage); 
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => EnterAccessMethodsPage(id)));
+                    button_text: reservationDetail.enter == "" || reservationDetail.enter == null ? "없음" : reservationDetail.enter,
+                  acting: () {
+                    // Navigator.pushNamed(context, Move.EnterAccessMethodsAfterPage);a
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => EnterAccessMethodsAfterPage(id)));
                   }
                 ),
 
                 CustomDividerThin(),
 
                 ImageAndTextAndButtonWithLabel(title: '기타 요청사항', icon_name: 'message_icon.png',
+                    button_text: reservationDetail.otherRequest == "" || reservationDetail.otherRequest == null ? "없음" : reservationDetail.otherRequest,
                     acting: () {
-                      // Navigator.pushNamed(context, Move.EnterOtherRequestsPage);
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => EnterOtherRequestsPage(id)));
+                      // Navigator.pushNamed(context, Move.EnterOtherRequestsAfterPage);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => EnterOtherRequestsAfterPage(id)));
                     }
                 ),
 
@@ -174,7 +215,7 @@ class ReservationDetailPage extends ConsumerWidget {
                           child: Row(
                             children: [
                               // TODO 완료 여부에 따라 텍스트 변경 필요
-                              textBody6('결제 예정 금액'),
+                              textBody6('결제 금액'),
                               textBody6(reservationDetail.getFormattedPrice()),
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

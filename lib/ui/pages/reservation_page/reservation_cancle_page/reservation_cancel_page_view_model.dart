@@ -1,17 +1,31 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+import 'package:toyproject/_core/constants/move.dart';
+import 'package:toyproject/data/dto/response_dto/response_dto.dart';
+import 'package:toyproject/data/model/cleaning_date.dart';
+import 'package:toyproject/data/repository/reservation_repository.dart';
+import 'package:toyproject/main.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_list_page/reservation_list_page_view_model.dart';
 import '../../../../../data/model/home_work_apply_field.dart';
 
 // 1. 창고 데이터
-class ReservationCanclePageModel  {
+class ReservationCancelPageModel  {
   List<HomeWorkApplyField>? homeWorkFields;
+  CleaningDate? cleaningDate;
+  int? reservationId;
 
-  ReservationCanclePageModel(this.homeWorkFields);
+  ReservationCancelPageModel(this.homeWorkFields, this.cleaningDate, this.reservationId);
 
-  ReservationCanclePageModel copyWith({
+  ReservationCancelPageModel copyWith({
     List<HomeWorkApplyField>? homeWorkFields,
+    CleaningDate? cleaningDate,
+    int? reservationId
   }) {
-    return ReservationCanclePageModel(
+    return ReservationCancelPageModel(
       homeWorkFields ?? this.homeWorkFields,
+      cleaningDate ?? this.cleaningDate,
+      reservationId ?? this.reservationId
     );
   }
 
@@ -19,9 +33,18 @@ class ReservationCanclePageModel  {
 }
 
 // 2. 창고
-class ReservationCanclePageViewModel extends StateNotifier<ReservationCanclePageModel?> {
-  ReservationCanclePageViewModel(super.state);
+class ReservationCancelPageViewModel extends StateNotifier<ReservationCancelPageModel?> {
+  final mContext = navigatorKey.currentContext;
+  Ref ref;
+  ReservationCancelPageViewModel(super.state, this.ref);
 
+  void setReservationId(int id){
+    state = state!.copyWith(reservationId: id);
+  }
+
+  void setCleaningDate(String value1, String value2, String value3, bool value4, int value5, int value6) {
+    state = state?.copyWith(cleaningDate: CleaningDate(value1, value2, value3, value4, value5, value6));
+  }
 
   void addWhyChange(){
     HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "어떤 이유 때문에 취소 하시나요?", selectList: ["일정이 생겨서", "날짜, 시간 입력 실수", "기타"]);
@@ -110,6 +133,28 @@ class ReservationCanclePageViewModel extends StateNotifier<ReservationCanclePage
     );
   }
 
+  Future<void> reservationCancel(int id) async {
+    Logger().d("캔슬 통신 진입");
+    ResponseDTO responseDTO = await ReservationRepository().fetchReservationCancel(id);
+
+    if(responseDTO.success == true){
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(
+          content: Text("취소 완료!"),
+        ),
+      );
+      ref.read(reservationProvider.notifier).fetchReservation();
+      Navigator.pushNamedAndRemoveUntil(mContext!, Move.ReservationListPage, (route) => false);
+
+    } else {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(
+          content: Text("취소 실패!"),
+        ),
+      );
+    }
+  }
+
 
 }
 
@@ -117,6 +162,6 @@ class ReservationCanclePageViewModel extends StateNotifier<ReservationCanclePage
 
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final reservationCancelProvider =
-StateNotifierProvider<ReservationCanclePageViewModel, ReservationCanclePageModel?>((ref) {
-  return ReservationCanclePageViewModel(ReservationCanclePageModel([]))..addWhyChange();
+StateNotifierProvider<ReservationCancelPageViewModel, ReservationCancelPageModel?>((ref) {
+  return ReservationCancelPageViewModel(ReservationCancelPageModel([], CleaningDate("", "", "", false, 0, 1), 1), ref) ..addWhyChange();
 });

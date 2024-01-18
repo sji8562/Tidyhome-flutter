@@ -7,6 +7,7 @@ import 'package:toyproject/data/model/cleaning_date.dart';
 import 'package:toyproject/data/repository/reservation_repository.dart';
 import 'package:toyproject/main.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_list_page/reservation_list_page_view_model.dart';
 import '../../../../../data/model/home_work_apply_field.dart';
 
 // 1. 창고 데이터
@@ -139,6 +140,7 @@ class ReservationChangePageViewModel extends StateNotifier<ReservationChangePage
         ),
       );
       addWhyChange();
+      ref.read(reservationProvider.notifier).fetchReservation();
       Navigator.pushNamedAndRemoveUntil(mContext!, Move.ReservationListPage, (Route<dynamic> route) => false);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(

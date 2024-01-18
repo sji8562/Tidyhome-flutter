@@ -23,10 +23,12 @@ class ReservationPageViewModel extends StateNotifier<ReservationPageModel?> {
     ResponseDTO responseDTO = await ReservationRepository().fetchReservation();
     state = ReservationPageModel(responseDTO.response);
   }
+
+
 }
 
 // 창고관리자
 final reservationProvider =
-    StateNotifierProvider<ReservationPageViewModel, ReservationPageModel?>((ref) {
+    StateNotifierProvider.autoDispose<ReservationPageViewModel, ReservationPageModel?>((ref) {
       return ReservationPageViewModel(ReservationPageModel([]))..fetchReservation();
     });
