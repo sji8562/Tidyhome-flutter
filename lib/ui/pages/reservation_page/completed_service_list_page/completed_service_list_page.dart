@@ -7,6 +7,7 @@ import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
 import 'package:toyproject/data/model/reservation.dart';
 import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page/completed_service_list_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/icon_text.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button_with_label.dart';
@@ -46,6 +47,8 @@ class CompletedServiceListPage extends ConsumerWidget {
                   children: [
                     InkWell(
                         onTap: () {
+                          int id = reservations[index].reservationId;
+                          ref.read(reservationDetailProvider(id).notifier).fetchReservationDetail(id);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationDetailPage(id: reservations[index].reservationId)));
                         },
                         child: ReservationListTab(service_type: reservations[index].firstCategory,

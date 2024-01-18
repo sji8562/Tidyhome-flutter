@@ -12,6 +12,8 @@ import 'package:toyproject/ui/pages/customer_page/term_of_service_page/terms_of_
 import 'package:toyproject/ui/pages/pay_ment_page/pay_ment_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/caution_page/caution_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/completed_service_list_page/completed_service_list_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_after_page.dart';
+import 'package:toyproject/ui/pages/reservation_page/enter_other_requests_page/enter_other_requests_after_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/office_cleaning_apply_page/office_cleaning_apply_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_cancle_page/reservation_cancel_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page.dart';
@@ -94,6 +96,8 @@ class Move {
   static String ReservationResultPage = '/reservation/result';
   static String ReservationListPage = '/reservation/list';
   static String EnterAccessMethodsPage = '/reservation/access-methods';
+  static String EnterAccessMethodsAfterPage = '/reservation/access-methods/after';
+  static String EnterOtherRequestsAfterPage = '/reservation/other-requests/after';
   static String EnterOtherRequestsPage = '/reservation/other-requests';
   static String ReservationDetailPage = '/reservation/detail';
   static String CautionPage = '/reservation/caution';
@@ -124,6 +128,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.OfficeCleaningApplyPage : (context) => OfficeCleaningApplyPage(),
     Move.ReservationChangePage : (context) => ReservationChangePage(),
     Move.ReservationConfirmPage : (context) => ReservationConfirmPage(),
+    Move.ReservationCancelPage : (context) => ReservationCancelPage(),
     // KWON
     Move.ChoiceAddressPage: (context) => ChoiceAddressPage(),
     Move.ReservationPage: (context) => ReservationPage(),
@@ -146,7 +151,9 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.ReservationResultPage: (context) => ReservationResultPage(),
     Move.ReservationListPage: (context) => ReservationListPage(),
     Move.EnterAccessMethodsPage: (context) => EnterAccessMethodsPage(),
+    // Move.EnterAccessMethodsAfterPage: (context) => EnterAccessMethodsAfterPage(),
     Move.EnterOtherRequestsPage: (context) => EnterOtherRequestsPage(),
+    // Move.EnterOtherRequestsAfterPage: (context) => EnterOtherRequestsAfterPage(),
     // Move.ReservationDetailPage: (context) => ReservationDetailPage(),
     Move.CautionPage: (context) => CautionPage(),
     Move.CompletedServiceListPage: (context) => CompletedServiceListPage(),
