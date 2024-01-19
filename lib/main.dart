@@ -8,6 +8,7 @@ import 'firebase_options.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -25,8 +26,7 @@ class MyApp extends StatelessWidget {
       home: const SplashPage(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      // initialRoute: Move.ReservationPage,
-      // initialRoute: Move.CompanyUpdateInfoPage,
+      initialRoute: Move.StartPage,
       routes: getRouters(),
       theme: theme(),
     );
