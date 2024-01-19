@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
@@ -25,11 +28,14 @@ class _UserPicState extends State<UserPic> {
     final XFile? pickedFile = await picker.pickImage(source: imageSource);
 
     if (pickedFile != null) {
-      setState(() {
-        _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
-        widget.onImageSelected(pickedFile.path);
+      Uint8List temp = await pickedFile.readAsBytes();
+      String completeEncoded = base64Encode(temp);
 
+      setState(() {
+        _image = XFile(pickedFile.path);
+        widget.onImageSelected(completeEncoded);
       });
+      Logger().d(completeEncoded);
     }
   }
 
@@ -38,11 +44,15 @@ class _UserPicState extends State<UserPic> {
     final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
-      setState(() {
-        _image = XFile(pickedFile.path); //가져온 이미지를 _image에 저장
-        widget.onImageSelected(pickedFile.path);
+      Uint8List temp = await pickedFile.readAsBytes();
+      String completeEncoded = base64Encode(temp);
 
+      setState(() {
+        _image = XFile(pickedFile.path);
+        widget.onImageSelected(completeEncoded);
       });
+      Logger().d(completeEncoded);
+
     }
   }
 

@@ -17,7 +17,6 @@ class ReservationPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(sessionProvider).setUser();
     ChoiceAddressPageModel? choiceAddressPageModel = ref.watch(choiceAddressProvider);
     if (choiceAddressPageModel?.addressList == null) {
       return const Loading();

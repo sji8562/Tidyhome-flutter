@@ -134,4 +134,22 @@ class UserRepository {
       return ResponseDTO(success: false, response: null, error: "회원 탈퇴 실패");
     }
   }
+
+  // 파트너 업데이트
+  Future<ResponseDTO> fetchPartnerUpdate(PartnerUpdateDTO request) async {
+    try {
+      Logger().d("fetchPartnerUpdate 요청됨");
+      Response<dynamic> response = await dio.post<dynamic>("/api/partner/update",
+          data: request.toJson());
+
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("파싱완료1");
+
+      return responseDTO;
+    } catch (e) {
+      // 200이 아니면 catch로 감
+      return ResponseDTO(success: false, response: null, error: "파트너 업데이트 실패");
+    }
+  }
+
 }
