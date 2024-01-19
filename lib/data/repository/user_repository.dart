@@ -88,6 +88,36 @@ class UserRepository {
     }
   }
 
+  // 파트너 로그인
+  Future<ResponseDTO> fetchPartnerLogin(JoinReqDTO requestDTO) async {
+    try {
+      Logger().d("fetchLogin요청됨");
+      Response<dynamic> response = await dio.post<dynamic>("/api/partner/login",
+          data: requestDTO.toJson());
+
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("파싱완료1");
+      responseDTO.response = User.fromJson(responseDTO.response);
+
+      final jwt = response.headers["Authorization"];
+      if (jwt != null) {
+        responseDTO.token = jwt.first;
+      }
+      Logger().d("jwt토큰 넣기");
+
+      // responseDTO.response = User.fromJson(responseDTO.response); //user객체가 들어가지만 null값이나옴
+      Logger().d("파싱완료2");
+      Logger().d(responseDTO.response);
+      Logger().d("파싱완료3");
+
+
+      return responseDTO;
+    } catch (e) {
+      // 200이 아니면 catch로 감
+      return ResponseDTO(success: false, response: null, error: "로그인실패.");
+    }
+  }
+
   // 회원 탈퇴
   Future<ResponseDTO> fetchCloseAccount() async {
     try {

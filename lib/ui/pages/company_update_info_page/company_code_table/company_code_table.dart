@@ -47,6 +47,13 @@ class SubCity {
       SubCity toggleChecked() {
             return SubCity(subCity, !isChecked);
       }
+
+      SubCity copyWith({String? subCity, bool? isChecked}) {
+            return SubCity(
+                  subCity ?? this.subCity,
+                  isChecked ?? this.isChecked,
+            );
+      }
 }
 
 

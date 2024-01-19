@@ -7,11 +7,16 @@ import '../../../../_core/utils/validator_util.dart';
 import '../../../widget/text_form_field/common_text_form_field.dart';
 import '../company_update_info_pages_view_model.dart';
 
-class CompanyUpdateInfoPicPageBody extends ConsumerWidget {
+class CompanyUpdateInfoPicPageBody extends ConsumerStatefulWidget {
   const CompanyUpdateInfoPicPageBody({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CompanyUpdateInfoPicPageBody> createState() => _CompanyUpdateInfoPicPageBodyState();
+}
+
+class _CompanyUpdateInfoPicPageBodyState extends ConsumerState<CompanyUpdateInfoPicPageBody> {
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       // resizeToAvoidBottomInset을 true로 설정하여 키보드가 나타날 때 화면을 자동으로 조절
       // (디폴트는 true이므로 생략 가능)
