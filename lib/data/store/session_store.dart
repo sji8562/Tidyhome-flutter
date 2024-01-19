@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:toyproject/ui/pages/join_page/join_page_view_model.dart';
+import 'package:toyproject/ui/widget/button/color_button.dart';
 
 import '../../_core/constants/http.dart';
 import '../../_core/constants/move.dart';
@@ -180,6 +181,48 @@ class SessionStore extends SessionUser {
           content: Text("인증 실패!"),
         ),
       );
+    }
+  }
+
+  Future<void> partnerUpdate(PartnerUpdateDTO request) async {
+    // 1. 통신 코드
+    ResponseDTO responseDTO = await UserRepository().fetchPartnerUpdate(request);
+
+    // 2. 비지니스 로직
+    if (responseDTO.success == true) {
+      showModalBottomSheet<void>(
+        isScrollControlled: true,
+        context: mContext!,
+        shape: LinearBorder(),
+        builder: (BuildContext context) {
+          return Container(
+            width: double.infinity,
+            height: 310,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 70, left: 20, bottom: 15),
+                      child: Text("파트너 회원가입을 환영합니다.", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    ),
+                  ],
+                ),
+                Align(
+                    alignment:Alignment(-0.7,0), child: Text("미소와 함께 즐거운 하루 보내세요")),
+                SizedBox(height: 20,),
+                ColorButton(text: "시작하기", funPageRoute: (){
+                  Navigator.pushNamed(context, Move.MainPage);
+                })
+              ],
+            ),
+          );
+        },
+      );
+      // 3. 페이지 이동
+    } else {
+      ScaffoldMessenger.of(mContext!)
+          .showSnackBar(SnackBar(content: Text("업데이트 실패")));
     }
   }
 }

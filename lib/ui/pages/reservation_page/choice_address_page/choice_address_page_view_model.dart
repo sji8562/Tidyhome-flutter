@@ -127,7 +127,7 @@ class ChoiceAddressPageViewModel extends StateNotifier<ChoiceAddressPageModel?> 
 }
 
 final choiceAddressProvider = StateNotifierProvider.autoDispose<ChoiceAddressPageViewModel, ChoiceAddressPageModel?>((ref) {
-return ChoiceAddressPageViewModel(ChoiceAddressPageModel(null), ref)..notifyInit();
+return ChoiceAddressPageViewModel(ChoiceAddressPageModel([]), ref)..notifyInit();
 });
 
 

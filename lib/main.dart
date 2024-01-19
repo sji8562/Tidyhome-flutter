@@ -1,6 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toyproject/ui/pages/splash_page/splash_page.dart';
 import '_core/constants/move.dart';
@@ -28,10 +26,7 @@ class MyApp extends StatelessWidget {
       home: const SplashPage(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-
-      // initialRoute: Move.MainHomePage,
-      initialRoute: Move.CompanyUpdateInfoPage,
-
+      initialRoute: Move.StartPage,
       routes: getRouters(),
       theme: theme(),
     );

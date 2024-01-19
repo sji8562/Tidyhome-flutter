@@ -19,7 +19,6 @@ class MainHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    ref.read(sessionProvider).setUser();
     SessionStore sessionStore = ref.watch(sessionProvider);
 
     //null 처리 : 상태값이 null일 경우, gif가 출력됨
@@ -80,7 +79,7 @@ class MainHomePage extends ConsumerWidget {
                       children: [
                         Text('나의 정보', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                         SizedBox(height: 10,),
-                        // Text(sessionStore.user!.tel!),
+                        Text(sessionStore.user!.tel!),
                       ],
                     ),
                   ),
