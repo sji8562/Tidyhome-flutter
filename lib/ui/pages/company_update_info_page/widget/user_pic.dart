@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 import 'dart:io';
 
 import 'package:toyproject/_core/constants/color.dart';
@@ -61,95 +62,85 @@ class _UserPicState extends State<UserPic> {
   }
 
   Widget _buildPhotoArea() {
-    return _image != null
-        ? Container(
-      width: 220,
-      height: 270,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: InkWell(
-          onTap: (){
-            showDialog(
-              context: context,
-              barrierDismissible: true, //바깥 영역 터치시 닫을지 여부 결정
-              builder: ((context) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 320),
-                  child: AlertDialog(
-                    title: Center(child: Text("이미지 등록 및 촬영")),
-                    content: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                            margin: EdgeInsets.all(10),
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(5),
-                              boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 0.5, blurRadius: 5)],
-                            ),
-                            child: IconButton(
-                                onPressed: (){
-                                  getImage(ImageSource.gallery);
-                                },
-                                icon: Icon(
-                                  Icons.add_photo_alternate_outlined,
-                                  size: 30,
-                                  color: Colors.white,
-                                )
-                            )
-                        ),
-                        //카메라로 촬영하기
-                        Container(
-                            margin: EdgeInsets.all(10),
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(5),
-                              boxShadow: [
-                                BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 0.5, blurRadius: 5)
-                              ],
-                            ),
-                            child: IconButton(
-                                onPressed: () {
-                                  getCameraImage(ImageSource.camera);
-                                },
-                                icon: Icon(Icons.add_a_photo, size: 30, color: Colors.white,)
-                            )
-                        ),
-                      ],
-                    ),
-                    actions: <Widget>[
-                      Container(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); //창 닫기
-                          },
-                          child: Text("닫기"),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-            );
-          },
-          child: Image.file(
-            File(_image!.path),
-            width: double.infinity, // 부모의 가로 크기에 맞추기
-            height: double.infinity, // 부모의 세로 크기에 맞추기
-            fit: BoxFit.cover, // 이미지를 가득 채우도록 설정
-          ),
-        ),
-      ),
-    )
-        : Container(
+    return Container(
         width: 220,
         height: 270,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(10), // 테두리 둥근 정도 결정
             // TODO 언약: 이미지 매겨변수 받기
             child: InkWell(
-                onTap: () {
-                  getImage(ImageSource.gallery);
-                },
-                child: Image.asset("assets/images/basicpic.jpg",fit: BoxFit.cover,)))
+              onTap: (){
+                showDialog(
+                  context: context,
+                  barrierDismissible: true, //바깥 영역 터치시 닫을지 여부 결정
+                  builder: ((context) {
+                    Logger().d("여기 뜹니까");
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 300),
+                      child: AlertDialog(
+                        title: Center(child: Text("이미지 등록 및 촬영")),
+                        content: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(5),
+                                  boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 0.5, blurRadius: 5)],
+                                ),
+                                child: IconButton(
+                                    onPressed: (){
+                                      getImage(ImageSource.gallery);
+                                    },
+                                    icon: Icon(
+                                      Icons.add_photo_alternate_outlined,
+                                      size: 30,
+                                      color: Colors.white,
+                                    )
+                                )
+                            ),
+                            //카메라로 촬영하기
+                            Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.circular(5),
+                                  boxShadow: [
+                                    BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 0.5, blurRadius: 5)
+                                  ],
+                                ),
+                                child: IconButton(
+                                    onPressed: () {
+                                      getCameraImage(ImageSource.camera);
+                                    },
+                                    icon: Icon(Icons.add_a_photo, size: 30, color: Colors.white,)
+                                )
+                            ),
+                          ],
+                        ),
+                        actions: <Widget>[
+                          Container(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(); //창 닫기
+                              },
+                              child: Text("닫기"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                );
+              },
+              child: _image == null ? Image.asset("assets/images/basicpic.jpg",fit: BoxFit.cover)
+                      : Image.file(
+                File(_image!.path),
+                width: double.infinity, // 부모의 가로 크기에 맞추기
+                height: double.infinity, // 부모의 세로 크기에 맞추기
+                fit: BoxFit.cover, // 이미지를 가득 채우도록 설정
+              ),
+            )
+        )
       // Image.asset(imageUrl)))
 
     );

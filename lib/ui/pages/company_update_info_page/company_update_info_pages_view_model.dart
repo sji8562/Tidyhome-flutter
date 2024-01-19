@@ -85,13 +85,19 @@ class CompanyUpdateInfoPagesViewModel
   void toggleServiceLocation(String service) {
     state = state?.copyWith(
       serviceLocation: state?.serviceLocation
-          ?.map((location) =>
-      location.city == service
-          ? location.copyWith(isChecked: !location.isChecked)
-          : location.copyWith(isChecked: false))
+          ?.map((location) {
+        if (location.city == service) {
+          // 선택된 service의 경우
+          return location.copyWith(isChecked: !location.isChecked);
+        } else {
+          // 선택되지 않은 다른 service의 경우
+          return location.copyWith(isChecked: false, subCity: location.subCity.map((subCity) => subCity.copyWith(isChecked: false)).toList());
+        }
+      })
           ?.toList(),
     );
   }
+
 
   List<SubCity> extractSelectedElement(int selectedIndex) {
     int indexOfSelected = state!.serviceLocation.indexWhere(

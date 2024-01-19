@@ -11,8 +11,8 @@ class CompanyUpdateInfoFourthPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     CompanyUpdateInfoPagesModel? companyUpdateInfoPagesModel =
-    ref.read(companyUpdateInfoProvider);
-    List<ServiceType> serviceTypes = companyUpdateInfoPagesModel!.serviceType;
+    ref.watch(companyUpdateInfoProvider);
+    List<ServiceType> serviceTypes = ref.read(companyUpdateInfoProvider.notifier).selectedServiceTypes();
     List<String> serviceLocations = ref.read(companyUpdateInfoProvider.notifier).extractCheckedSubCities();
     return Column(
       children: [
@@ -75,7 +75,7 @@ class CompanyUpdateInfoFourthPageBody extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("상호명"),
-              Text(companyUpdateInfoPagesModel.companyName,style: descriptionDisableStyle(),
+              Text(companyUpdateInfoPagesModel!.companyName,style: descriptionDisableStyle(),
               ),
             ],
           ),
@@ -87,7 +87,7 @@ class CompanyUpdateInfoFourthPageBody extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("사업자번호"),
-              Text(companyUpdateInfoPagesModel.companyBusinessNumber,style: descriptionDisableStyle(),
+              Text(companyUpdateInfoPagesModel!.companyBusinessNumber,style: descriptionDisableStyle(),
               ),
             ],
           ),

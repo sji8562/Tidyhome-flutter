@@ -12,14 +12,13 @@ import 'package:toyproject/ui/widget/button/soft_color_red_button.dart';
 import 'package:toyproject/ui/widget/text_form_field/common_text_form_field.dart';
 
 class EnterAccessMethodsPage extends ConsumerWidget {
-  int? id;
 
   final howToOpen = TextEditingController();
   final doorPassword = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
-  EnterAccessMethodsPage({super.key, this.id});
+  EnterAccessMethodsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

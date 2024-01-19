@@ -27,6 +27,6 @@ class CompletedReservationPageViewModel extends StateNotifier<CompletedReservati
 
 // 창고관리자
 final completedReservationProvider =
-StateNotifierProvider<CompletedReservationPageViewModel, CompletedReservationPageModel?>((ref) {
+StateNotifierProvider.autoDispose<CompletedReservationPageViewModel, CompletedReservationPageModel?>((ref) {
   return CompletedReservationPageViewModel(CompletedReservationPageModel([]))..fetchCompletedReservation();
 });

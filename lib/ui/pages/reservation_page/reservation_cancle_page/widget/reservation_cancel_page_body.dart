@@ -3,11 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:toyproject/_core/constants/color.dart';
+import 'package:toyproject/_core/utils/extract_time_util.dart';
 import 'package:toyproject/_core/utils/validator_util.dart';
+import 'package:toyproject/data/dto/request_dto/reservation/reservation_request.dart';
 import 'package:toyproject/data/model/home_work_apply_field.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_apply_page/moving_cleaning_apply_page/widget/j_soft_color_button.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_cancle_page/reservation_cancel_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_change_page/reservation_change_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_list_page/reservation_list_page_view_model.dart';
 import 'package:toyproject/ui/widget/button/color_button.dart';
 import 'package:toyproject/ui/widget/loading.dart';
 
@@ -51,7 +54,7 @@ class _ReservationCancelPageBodyState extends ConsumerState<ReservationCancelPag
 
   @override
   Widget build(BuildContext context) {
-    ReservationCanclePageModel? reservationCancelPageModel = ref.watch(reservationCancelProvider);
+    ReservationCancelPageModel? reservationCancelPageModel = ref.watch(reservationCancelProvider);
     if (reservationCancelPageModel?.homeWorkFields == null) {
       return Loading();
     }
@@ -170,8 +173,16 @@ class _ReservationCancelPageBodyState extends ConsumerState<ReservationCancelPag
         if(!isButtonEnabled4)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: ColorButton(text: "예약 취소", funPageRoute: (){
-
+            child: ColorButton(text: homeWorkFields.length == 5 ? "예약 변경" : "예약 취소", funPageRoute: (){
+              if(homeWorkFields.length == 5){
+                int id = ref.read(reservationCancelProvider)!.reservationId!;
+                ReservationUpdateDTO request = ReservationUpdateDTO(id, homeWorkFields[2]!.inputAnswer!, homeWorkFields[3]!.inputAnswer!);
+                ref.read(reservationChangeProvider.notifier).reservationChange(request);
+              } else if(homeWorkFields.length == 3) {
+                int id = ref.read(reservationCancelProvider)!.reservationId!;
+                ref.read(reservationCancelProvider.notifier).reservationCancel(
+                    id);
+              }
             }),
           )
       ],
@@ -213,7 +224,8 @@ class _ReservationCancelPageBodyState extends ConsumerState<ReservationCancelPag
           ref.read(reservationCancelProvider.notifier).updateAnswer(index, formattedDate);
           Navigator.pop(context);
           await Future.delayed(Duration(seconds: 1), () {
-            ref.read(reservationCancelProvider.notifier).addServiceChangeTime();
+            ref.read(reservationCancelProvider.notifier).addServiceStartTime(extractNumberFromTimeString(ref.read(reservationCancelProvider)!.cleaningDate!.soYoTime!)
+            );
           });
         }
       },

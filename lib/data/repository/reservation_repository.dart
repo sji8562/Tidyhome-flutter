@@ -69,21 +69,21 @@ class ReservationRepository {
     }
   }
 
-  Future<ResponseDTO> fetchReservationSave() async {
-    try {
-      Response<dynamic> response = await dio.get("/reservation");
-      Logger().d("fetchReservationSave진입 111111111111");
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      Logger().d("fetchReservationSave진입 222222222222");
-      Logger().d(responseDTO.response.toString());
-      responseDTO.response = ReservationDetail.fromJson(responseDTO.response);
-      Logger().d("fetchReservationSave진입 333333333333");
-      return responseDTO;
-    } catch (e) {
-      return ResponseDTO(
-          success: false, response: null, error: "예약 내역 상세 조회 에러");
-    }
-  }
+  // Future<ResponseDTO> fetchReservationSave() async {
+  //   try {
+  //     Response<dynamic> response = await dio.get("/reservation");
+  //     Logger().d("fetchReservationSave진입 111111111111");
+  //     ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+  //     Logger().d("fetchReservationSave진입 222222222222");
+  //     Logger().d(responseDTO.response.toString());
+  //     responseDTO.response = ReservationDetail.fromJson(responseDTO.response);
+  //     Logger().d("fetchReservationSave진입 333333333333");
+  //     return responseDTO;
+  //   } catch (e) {
+  //     return ResponseDTO(
+  //         success: false, response: null, error: "예약 내역 상세 조회 에러");
+  //   }
+  // }
 
   Future<ResponseDTO> fetchReservationUpdate(
       ReservationUpdateDTO request) async {
@@ -96,6 +96,22 @@ class ReservationRepository {
       Logger().d("fetchReservationUpdate진입 222222222222");
       Logger().d(responseDTO.response.toString());
       Logger().d("fetchReservationSave진입 333333333333");
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(
+          success: false, response: null, error: "예약 내역 상세 조회 에러");
+    }
+  }
+
+  Future<ResponseDTO> fetchReservationCancel(int id) async {
+    try {
+      final response = await dio.post(
+          "/reservation/cancel/$id");
+      Logger().d("fetchReservationCancel진입 111111111111");
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("fetchReservationCancel진입 222222222222");
+      Logger().d(responseDTO.response.toString());
+      Logger().d("fetchReservationCancel진입 333333333333");
       return responseDTO;
     } catch (e) {
       return ResponseDTO(
@@ -118,4 +134,53 @@ class ReservationRepository {
             success: false, response: null, error: "출입 방법 삭제 에러");
       }
     }
+
+  Future<ResponseDTO> fetchEnterAccessMethodsSave(EnterAccessUpdateDTO request) async {
+    try {
+      Logger().d("출입 방법 업데이트 호출");
+      Response<dynamic> response = await dio.post(
+          "/reservation/list/${request.reservationId}/enter", data: request.toJson());
+      Logger().d("출입 방법 업데이트 1111111");
+      Logger().d(response);
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("출입 방법 업데이트 22222222222");
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(
+          success: false, response: null, error: "출입 방법 업데이트 에러");
+    }
+  }
+
+  Future<ResponseDTO> deleteOtherRequestMethods(reservationId) async {
+    try {
+      Logger().d("기타 요청사항 삭제 호출");
+      Response<dynamic> response = await dio.post(
+          "/reservation/list/$reservationId/request/delete");
+      Logger().d("결과 ================ 1111111");
+      Logger().d(response);
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("결과 ================ 22222222222");
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(
+          success: false, response: null, error: "기타 요청사항 삭제 에러");
+    }
+  }
+
+  Future<ResponseDTO> fetchUpdateOtherRequestMethods(OtherRequestUpdateDTO request) async {
+    try {
+      Logger().d("기타 요청사항 업데이트 호출");
+      Response<dynamic> response = await dio.post(
+          "/reservation/list/${request.reservationId}/request", data: request.toJson());
+      Logger().d("기타 요청사항 업데이트 호출 1111111");
+      Logger().d(response);
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d("기타 요청사항 업데이트 호출 22222222222");
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(
+          success: false, response: null, error: "기타 요청사항 업데이트 에러");
+    }
+  }
+
   }

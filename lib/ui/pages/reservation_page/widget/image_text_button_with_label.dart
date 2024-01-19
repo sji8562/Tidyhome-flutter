@@ -32,7 +32,7 @@ class ImageAndTextAndButtonWithLabel extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
-                  button_text ?? '없음', style: TextStyle(color: jColor),
+                  button_text ?? '없음', style: TextStyle(color: button_text == null || button_text == '없음' ? basicColorB9 : primaryColor),
                 ),
               ),
               color: bgAndLineColor,

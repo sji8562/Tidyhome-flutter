@@ -2,28 +2,53 @@ import 'package:intl/intl.dart';
 
 class ReservationDetail {
   int reservationId;
+  int status;
   String address;
   String addressDetail;
   String reservationDate;
   String reservationTime;
   bool pet;
+  String enter;
+  String enterPassword;
+  String special;
+  String otherRequest;
   int price;
   String firstCategory;
   String secondCategory;
   String option;
 
-  ReservationDetail(this.reservationId, this.address, this.addressDetail, this.reservationDate, this.reservationTime,
-      this.pet, this.price, this.secondCategory, this.firstCategory, this.option);
+
+  ReservationDetail(
+      this.reservationId,
+      this.status,
+      this.address,
+      this.addressDetail,
+      this.reservationDate,
+      this.reservationTime,
+      this.pet,
+      this.enter,
+      this.enterPassword,
+      this.special,
+      this.otherRequest,
+      this.price,
+      this.firstCategory,
+      this.secondCategory,
+      this.option);
 
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   ReservationDetail.fromJson(Map<String, dynamic> json)
       : reservationId = json["reservationId"],
+        status = json["status"],
         address = json["address"],
         addressDetail = json["addressDetail"],
         // reservationDate = DateTime.parse(json["reservationDate"]),
         reservationDate = json["reservationDate"],
         reservationTime = json["reservationTime"],
         pet = json["pet"],
+        enter = json["enter"],
+        enterPassword = json["enterPassword"],
+        special = json["special"],
+        otherRequest = json["otherRequest"],
         price = json["price"],
         firstCategory = json["firstCategory"],
         secondCategory = json["secondCategory"],
