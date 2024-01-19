@@ -45,7 +45,9 @@ class ReservationListPage extends ConsumerWidget {
     return Scaffold(
       appBar: ArrowAppBar(
         leading: Icons.keyboard_backspace,
-        title: "",
+        title: "", moveRoute: (){
+          Navigator.pushNamed(context, Move.ReservationPage);
+      },
       ),
       body: Column(
         children: [
