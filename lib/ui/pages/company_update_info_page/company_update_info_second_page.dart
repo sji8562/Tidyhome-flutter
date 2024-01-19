@@ -21,6 +21,7 @@ class CompanyUpdateInfoSecondPage extends ConsumerStatefulWidget {
 class _CompanyUpdateInfoSecondPageState extends ConsumerState<CompanyUpdateInfoSecondPage> {
   @override
   Widget build(BuildContext context) {
+    CompanyUpdateInfoPagesModel? companyUpdateInfoModel = ref.watch(companyUpdateInfoProvider);
     return Stack(
       children: [
         Scaffold(

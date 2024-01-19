@@ -147,7 +147,10 @@ class JoinPageBody extends ConsumerWidget {
                                       // };
 
                                       SmsCheckDTO smsCheckDTO = SmsCheckDTO(tel: joinFields[1].inputTel!, code: _gubunControllers[index].text);
-                                      sessionStore.smsCheck(smsCheckDTO);
+                                      if(joinFields[0].inputGubun == "이용자"){
+                                        sessionStore.smsCheck(smsCheckDTO, 1);
+                                      } else if(joinFields[0].inputGubun == "청소업체"){
+                                      sessionStore.smsCheck(smsCheckDTO, 2);}
                                     });
                                   }
                                 },

@@ -10,7 +10,7 @@ class OptionRepository{
     Logger().d("fetchNotice 진입");
     try {
       Response<dynamic> response =
-      await dio.get("/api/option?secondCategoryId=$id");
+      await dio.get("/api/option/detail?secondCategoryId=$id");
       Logger().d("옵션 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapList = responseDTO.response["optionPrices"];
