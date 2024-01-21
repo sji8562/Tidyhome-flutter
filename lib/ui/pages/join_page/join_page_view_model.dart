@@ -39,7 +39,7 @@ class JoinChatViewModel extends StateNotifier<JoinChatModel?> {
         arrowTitle: "",
         placeholder: "청소업체 or 이용자");
     state = state?.copyWith(
-      joinFields: [...state!.joinFields, joinField],
+      joinFields: [joinField],
     );
   }
 

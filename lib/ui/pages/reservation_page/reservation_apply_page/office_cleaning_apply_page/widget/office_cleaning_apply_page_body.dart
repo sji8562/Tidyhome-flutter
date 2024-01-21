@@ -110,6 +110,7 @@ class _OfficeCleaningApplyPageBodyState extends ConsumerState<OfficeCleaningAppl
                                         optionIndex = index2;
                                         ref.read(officeCleaningApplyProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                         Future.delayed(Duration(seconds: 2), () {
+                                          ref.read(officeCleaningApplyProvider.notifier).delServiceTime();
                                           ref.read(officeCleaningApplyProvider.notifier).addServiceDate();
                                         });
                                         isButtonEnabled1 = false;
@@ -118,6 +119,7 @@ class _OfficeCleaningApplyPageBodyState extends ConsumerState<OfficeCleaningAppl
                                         ref.read(officeCleaningApplyProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                         isButtonEnabled2 = false;
                                         Future.delayed(Duration(seconds: 2), () {
+                                          ref.read(officeCleaningApplyProvider.notifier).delServiceStartTime();
                                           ref.read(officeCleaningApplyProvider.notifier).addHasPet();
                                         });
                                       }
@@ -169,7 +171,7 @@ class _OfficeCleaningApplyPageBodyState extends ConsumerState<OfficeCleaningAppl
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: ColorButton(text: "예약 신청", funPageRoute: (){
                 ref.read(resultPageProvider.notifier).
-                setCleaningDate(homeWorkFields[1]!.inputAnswer!, homeWorkFields[0]!.inputAnswer!,
+                setCleaningDate("사무실청소", homeWorkFields[1]!.inputAnswer!, homeWorkFields[0]!.inputAnswer!,
                     homeWorkFields[2]!.inputAnswer!, homeWorkFields[3]!.inputAnswer! == "예" ? true : false, 0, optionIndex+1);
                 Navigator.pushNamed(context, Move.ReservationResultPage);
               }),

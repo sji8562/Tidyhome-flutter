@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:toyproject/ui/pages/customer_page/account_closure_page/widget/closure_modal.dart';
 
 import '../../../../../_core/constants/size.dart';
 import '../../../../widget/button/soft_color_red_button.dart';
@@ -34,7 +35,9 @@ class AccountColumn extends ConsumerWidget {
         ),
         const SizedBox(height: 30,),
         SoftColorRedButton(text: '탈퇴 요청하기', funPageRoute: () {
-          ref.read(accountClosureProvider).accountClose();
+          return showDialog(context: context, barrierDismissible: true, builder: (context) {
+            return ClosureModal();
+          },); ClosureModal();
         }),
       ],
     );

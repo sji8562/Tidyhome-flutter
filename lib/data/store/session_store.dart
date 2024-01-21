@@ -30,11 +30,11 @@ class SessionStore extends SessionUser {
 
   SessionStore(this.ref);
 
-  void setUser(){
-    this.user = User(1, "1234");
-    this.jwt = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b2sta2V5IiwiaWQiOjEsInRlbCI6IjEyMzQiLCJleHAiOjE3MjM3Nzk5NDB9.y43ng2W_NWFqOyeIHvh2oMSI6SSPvvaUXt1CeWM9XdOXfqCve3WAc2XnRwg3Snc4yjI3JA4FO6SIVkpgFIhFQg";
-    this.isLogin = true;
-  }
+  // void setUser(){
+  //   this.user = User(1, "1234");
+  //   this.jwt = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b2sta2V5IiwiaWQiOjEsInRlbCI6IjEyMzQiLCJleHAiOjE3MjM3Nzk5NDB9.y43ng2W_NWFqOyeIHvh2oMSI6SSPvvaUXt1CeWM9XdOXfqCve3WAc2XnRwg3Snc4yjI3JA4FO6SIVkpgFIhFQg";
+  //   this.isLogin = true;
+  // }
 
   void delUser(){
     this.user = null;
@@ -186,7 +186,7 @@ class SessionStore extends SessionUser {
 
   Future<void> partnerUpdate(PartnerUpdateDTO request) async {
     // 1. 통신 코드
-    ResponseDTO responseDTO = await UserRepository().fetchPartnerUpdate(request);
+    ResponseDTO responseDTO = await UserRepository().fetchPartnerUpdate(request, jwt!);
 
     // 2. 비지니스 로직
     if (responseDTO.success == true) {

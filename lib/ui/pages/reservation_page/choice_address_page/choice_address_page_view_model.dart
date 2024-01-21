@@ -28,7 +28,7 @@ class ChoiceAddressPageViewModel extends StateNotifier<ChoiceAddressPageModel?> 
     print("Address notifyInit 실행");
     // 1. 통신 코드
     ResponseDTO responseDTO = await AddressRepository().fetchAddressList(
-        sessionStore.user!.id);
+        sessionStore.user!.id!, sessionStore.jwt!);
     print("AddressViewModel 통신코드실행 responseDTO : ${responseDTO.response}");
     List<Address> addresses = responseDTO.response;
     print("Address 파싱 responseDTO : ${addresses}");
@@ -63,7 +63,7 @@ class ChoiceAddressPageViewModel extends StateNotifier<ChoiceAddressPageModel?> 
         .read(sessionProvider)
         .user!
         .id!, findCheckedAddress(index));
-    ResponseDTO responseDTO = await AddressRepository().setFirstAddress(dto);
+    ResponseDTO responseDTO = await AddressRepository().setFirstAddress(dto, ref.read(sessionProvider)!.jwt!);
 
     // 2. 비지니스 로직
     if (responseDTO.success == true) {
@@ -83,7 +83,7 @@ class ChoiceAddressPageViewModel extends StateNotifier<ChoiceAddressPageModel?> 
 
   Future<void> addAddress(AddressSaveReqDTO dto) async {
     SessionStore sessionStore = ref.read(sessionProvider);
-    ResponseDTO responseDTO = await AddressRepository().savePost(dto);
+    ResponseDTO responseDTO = await AddressRepository().savePost(dto, sessionStore.jwt!);
 
     if (responseDTO.success == true) {
       Logger().d("responseDTO.success 성공 : ${responseDTO.success}");

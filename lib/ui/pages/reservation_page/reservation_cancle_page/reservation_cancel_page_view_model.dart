@@ -5,6 +5,7 @@ import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/data/dto/response_dto/response_dto.dart';
 import 'package:toyproject/data/model/cleaning_date.dart';
 import 'package:toyproject/data/repository/reservation_repository.dart';
+import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/main.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_list_page/reservation_list_page_view_model.dart';
 import '../../../../../data/model/home_work_apply_field.dart';
@@ -42,8 +43,8 @@ class ReservationCancelPageViewModel extends StateNotifier<ReservationCancelPage
     state = state!.copyWith(reservationId: id);
   }
 
-  void setCleaningDate(String value1, String value2, String value3, bool value4, int value5, int value6) {
-    state = state?.copyWith(cleaningDate: CleaningDate(value1, value2, value3, value4, value5, value6));
+  void setCleaningDate(String value1, String value2, String value3, String value4, bool value5, int value6, int value7) {
+    state = state?.copyWith(cleaningDate: CleaningDate(value1, value2, value3, value4, value5, value6, value7));
   }
 
   void addWhyChange(){
@@ -51,9 +52,19 @@ class ReservationCancelPageViewModel extends StateNotifier<ReservationCancelPage
     state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
   }
 
+  void delWhyChange(){
+    HomeWorkApplyField homeWorkApplyField = state!.homeWorkFields![0].copyWith(selectList: []);
+    state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+  }
+
   void addChangeOrCancel(){
     HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "다른 일정으로 변경도 가능합니다. 예약을 변경해드릴까요?", selectList: ["네, 변경할게요.", "아니오, 취소할게요."]);
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
+  }
+
+  void delChangeOrCancel(){
+    HomeWorkApplyField homeWorkApplyField = state!.homeWorkFields![1].copyWith(selectList: []);
+    state = state!.copyWith(homeWorkFields: [state!.homeWorkFields![0], homeWorkApplyField]);
   }
 
   void addWhenChange(){
@@ -111,13 +122,19 @@ class ReservationCancelPageViewModel extends StateNotifier<ReservationCancelPage
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
   }
 
+  void delServiceStartTime(){
+    HomeWorkApplyField homeWorkApplyField = state!.homeWorkFields![3].copyWith(selectList: []);
+    state = state!.copyWith(homeWorkFields: [state!.homeWorkFields![0], state!.homeWorkFields![1], state!.homeWorkFields![2], homeWorkApplyField]);
+
+  }
+
   void addHasPet(){
     HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "혹시 반려동물이 있으신가요?", selectList: ["예", "아니오"]);
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
   }
 
   void addNotice(){
-    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "아래 버튼을 누르시면 예약취소가 진행됩니다.");
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "아래 버튼을 누르시면 예약 취소 또는 변경이 진행됩니다.");
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
   }
 
@@ -135,7 +152,7 @@ class ReservationCancelPageViewModel extends StateNotifier<ReservationCancelPage
 
   Future<void> reservationCancel(int id) async {
     Logger().d("캔슬 통신 진입");
-    ResponseDTO responseDTO = await ReservationRepository().fetchReservationCancel(id);
+    ResponseDTO responseDTO = await ReservationRepository().fetchReservationCancel(id, ref.read(sessionProvider).jwt!);
 
     if(responseDTO.success == true){
       ScaffoldMessenger.of(mContext!).showSnackBar(
@@ -163,5 +180,5 @@ class ReservationCancelPageViewModel extends StateNotifier<ReservationCancelPage
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final reservationCancelProvider =
 StateNotifierProvider<ReservationCancelPageViewModel, ReservationCancelPageModel?>((ref) {
-  return ReservationCancelPageViewModel(ReservationCancelPageModel([], CleaningDate("", "", "", false, 0, 1), 1), ref) ..addWhyChange();
+  return ReservationCancelPageViewModel(ReservationCancelPageModel([], CleaningDate("", "", "", "",false, 0, 1), 1), ref) ..addWhyChange();
 });

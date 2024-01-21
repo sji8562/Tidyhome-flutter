@@ -33,14 +33,15 @@ class SmsCheckDTO {
 }
 
 class PartnerUpdateDTO {
+  final int id;
   final String userName;
   final String businessNumber;
   final String picUrl;
 
-  PartnerUpdateDTO(this.userName, this.businessNumber, this.picUrl);
+  PartnerUpdateDTO(this.id, this.userName, this.businessNumber, this.picUrl);
 
   Map<String, dynamic> toJson() =>
-      {"userName": userName, "businessNumber": businessNumber, "picUrl": picUrl};
+      {"id": id, "userName": userName, "businessNumber": businessNumber, "picUrl": picUrl};
 
 }
 

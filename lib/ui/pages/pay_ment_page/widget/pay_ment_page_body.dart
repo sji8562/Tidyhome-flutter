@@ -19,9 +19,9 @@ import '../../../../data/repository/payment_repository.dart';
 
 class PayMentPageBody extends ConsumerWidget {
   final int price;
-  final String name;
-  final int hour;
-  PayMentPageBody({super.key,required this.price, this.name = "귤귤", required this.hour});
+  final String serviceName;
+  final String optionName;
+  PayMentPageBody({super.key,required this.price, required this.serviceName, required this.optionName});
 
   Dio dio = Dio(); // Initialize the Dio instance
 
@@ -52,7 +52,7 @@ class PayMentPageBody extends ConsumerWidget {
       data: PaymentData(
         pg: 'kakaopay', // PG사
         payMethod: 'card', // 결제수단
-        name: name, // 주문명
+        name: serviceName + "(" +optionName + ")", // 주문명
         merchantUid: 'mid_${DateTime.now().millisecondsSinceEpoch}', // 주문번호
         amount: price, // 결제금액
         // buyerName: "${session.user!.tel}", // 구매자 이름

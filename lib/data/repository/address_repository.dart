@@ -8,10 +8,13 @@ import '../model/Address.dart';
 
 // V -> P(전역프로바이더, 뷰모델) -> R
 class AddressRepository {
-  Future<ResponseDTO> fetchAddressList(id) async {
+  Future<ResponseDTO> fetchAddressList(int id, String jwt) async {
     try {
       // 1. 통신
-      final response = await dio.get("/api/address/list/$id");
+      final response = await dio.get("/api/address/list/$id",options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }),);
       // 2. ResponseDTO 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapList = responseDTO.response;
@@ -23,12 +26,21 @@ class AddressRepository {
     }
   }
 
-  Future<ResponseDTO> savePost(AddressSaveReqDTO dto) async {
+  Future<ResponseDTO> savePost(AddressSaveReqDTO dto, String jwt) async {
+    Logger().d("-----jwt-------확인중");
+    Logger().d(jwt);
+    Logger().d(dto.userId);
+    Logger().d(dto.addressDetail);
+    Logger().d(dto.address);
     Logger().d("savePost 호출");
+
     // 통신은 무조건 try-catch
     try {
       // 1. 통신
-      final response = await dio.post("/api/address/add", data: dto.toJson());
+      final response = await dio.post("/api/address/add", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }), data: dto.toJson());
 
       Logger().d("save 통신코드 toJson : ${dto.toJson()}");
       Logger().d("save 통신코드 response : ${response}");
@@ -45,10 +57,13 @@ class AddressRepository {
     }
   }
 
-  Future<ResponseDTO> setFirstAddress(SetFirstAddressDTO dto) async {
+  Future<ResponseDTO> setFirstAddress(SetFirstAddressDTO dto, String jwt) async {
     try {
       // 1. 통신
-      final response = await dio.post("/api/address/add/first-address", data: dto.toJson());
+      final response = await dio.post("/api/address/add/first-address", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }), data: dto.toJson());
       // 2. ResponseDTO 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       return responseDTO;

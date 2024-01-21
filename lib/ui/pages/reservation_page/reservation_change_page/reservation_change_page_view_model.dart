@@ -5,6 +5,7 @@ import 'package:toyproject/data/dto/request_dto/reservation/reservation_request.
 import 'package:toyproject/data/dto/response_dto/response_dto.dart';
 import 'package:toyproject/data/model/cleaning_date.dart';
 import 'package:toyproject/data/repository/reservation_repository.dart';
+import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/main.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_detail_page/reservation_detail_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_list_page/reservation_list_page_view_model.dart';
@@ -46,6 +47,11 @@ class ReservationChangePageViewModel extends StateNotifier<ReservationChangePage
 
   void addWhyChange(){
     HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "어떤 이유 때문에 변경하시나요?", selectList: ["일정이 생겨서", "날짜, 시간 입력 실수", "기타"]);
+    state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+  }
+
+  void delWhyChange(){
+    HomeWorkApplyField homeWorkApplyField = state!.homeWorkFields![0].copyWith(selectList: []);
     state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
   }
 
@@ -104,6 +110,12 @@ class ReservationChangePageViewModel extends StateNotifier<ReservationChangePage
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
   }
 
+  void delServiceStartTime(){
+    HomeWorkApplyField homeWorkApplyField = state!.homeWorkFields![2].copyWith(selectList: []);
+    state = state!.copyWith(homeWorkFields: [state!.homeWorkFields![0], state!.homeWorkFields![1], homeWorkApplyField]);
+
+  }
+
   void addHasPet(){
     HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "혹시 반려동물이 있으신가요?", selectList: ["예", "아니오"]);
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
@@ -126,13 +138,13 @@ class ReservationChangePageViewModel extends StateNotifier<ReservationChangePage
     );
   }
 
-  void setCleaningDate(String value1, String value2, String value3, bool value4, int value5, int value6) {
-    state = state?.copyWith(cleaningDate: CleaningDate(value1, value2, value3, value4, value5, value6));
+  void setCleaningDate(String value1, String value2, String value3, String value4, bool value5, int value6, int value7) {
+    state = state?.copyWith(cleaningDate: CleaningDate(value1, value2, value3, value4, value5, value6, value7));
   }
 
   Future<void>
   reservationChange(ReservationUpdateDTO request) async {
-    ResponseDTO responseDTO = await ReservationRepository().fetchReservationUpdate(request);
+    ResponseDTO responseDTO = await ReservationRepository().fetchReservationUpdate(request, ref.read(sessionProvider).jwt!);
     if(responseDTO.success == true){
       ScaffoldMessenger.of(mContext!).showSnackBar(
         SnackBar(
@@ -159,5 +171,5 @@ class ReservationChangePageViewModel extends StateNotifier<ReservationChangePage
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final reservationChangeProvider =
 StateNotifierProvider<ReservationChangePageViewModel, ReservationChangePageModel?>((ref) {
-  return ReservationChangePageViewModel(ReservationChangePageModel([], CleaningDate("", "", "", false, 0, 1), 1), ref) ..addWhyChange();
+  return ReservationChangePageViewModel(ReservationChangePageModel([], CleaningDate("", "", "", "", false, 0, 1), 1), ref) ..addWhyChange();
 });

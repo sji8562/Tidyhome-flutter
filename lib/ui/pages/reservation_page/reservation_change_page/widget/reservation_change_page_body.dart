@@ -105,6 +105,7 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
                                         if(index == 0 && isButtonEnabled1){
                                           ref.read(reservationChangeProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                           Future.delayed(Duration(seconds: 2), () {
+                                            ref.read(reservationChangeProvider.notifier).delWhyChange();
                                             ref.read(reservationChangeProvider.notifier).addWhenChange();
                                           });
                                           isButtonEnabled1 = false;
@@ -113,6 +114,7 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
                                           ref.read(reservationChangeProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                           isButtonEnabled2 = false;
                                           Future.delayed(Duration(seconds: 1), () {
+                                            ref.read(reservationChangeProvider.notifier).delServiceStartTime();
                                             ref.read(reservationChangeProvider.notifier).addNotice();
                                           });
                                         }
@@ -198,8 +200,8 @@ class _ReservationChangePageBodyState extends ConsumerState<ReservationChangePag
           ref.read(reservationChangeProvider.notifier).updateAnswer(index, formattedDate);
           Navigator.pop(context);
           await Future.delayed(Duration(seconds: 1), () {
-            Logger().d(ref.read(reservationChangeProvider)!.cleaningDate!.soYoTime);
-            ref.read(reservationChangeProvider.notifier).addServiceStartTime(extractNumberFromTimeString(ref.read(reservationChangeProvider)!.cleaningDate!.soYoTime));
+            Logger().d(extractHour(ref.read(reservationChangeProvider)!.cleaningDate!.soYoTime));
+            ref.read(reservationChangeProvider.notifier).addServiceStartTime(extractHour(ref.read(reservationChangeProvider)!.cleaningDate!.soYoTime));
           });
         }
       },

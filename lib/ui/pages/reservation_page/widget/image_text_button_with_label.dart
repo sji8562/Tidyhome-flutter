@@ -7,12 +7,12 @@ class ImageAndTextAndButtonWithLabel extends StatelessWidget {
   final String icon_name;
   final String title;
   final String? button_text;
-  final bool is_active;
+  final bool? isActive;
   final acting;
   final jColor;
 
 
-  const ImageAndTextAndButtonWithLabel({super.key, required this.icon_name, required this.title, this.button_text, this.is_active = false, this.acting, this.jColor});
+  const ImageAndTextAndButtonWithLabel({super.key, required this.icon_name, required this.title, this.button_text, this.isActive, this.acting, this.jColor});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class ImageAndTextAndButtonWithLabel extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
-                  button_text ?? '없음', style: TextStyle(color: button_text == null || button_text == '없음' ? basicColorB9 : primaryColor),
+                  button_text ?? '없음', style: TextStyle(color: button_text == null || button_text == '없음' || isActive == false ? basicColorB9 : primaryColor),
                 ),
               ),
               color: bgAndLineColor,

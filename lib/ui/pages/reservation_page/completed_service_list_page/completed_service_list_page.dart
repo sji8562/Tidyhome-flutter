@@ -39,25 +39,39 @@ class CompletedServiceListPage extends ConsumerWidget {
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child:
-          ListView.builder(
-              itemCount: reservations.length,
-              itemBuilder: (context, index) {
-                return
-                  Column(
+          Column(
+            children: [
+              if (reservations.isEmpty)
+                const Column(
                   children: [
-                    InkWell(
-                        onTap: () {
-                          int id = reservations[index].reservationId;
-                          ref.read(reservationDetailProvider(id).notifier).fetchReservationDetail(id);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationDetailPage(id: reservations[index].reservationId)));
-                        },
-                        child: ReservationListTab(service_type: reservations[index].firstCategory,
-                          service_date: reservations[index].reservationDate + ' ' + reservations[index].reservationTime,
-                          is_done: reservations[index].status == 3,) // 1 예약 완료, 2 예약 취소, 3 서비스 완료, 4 환불 완료
-                    ),
+                    ExclamationmarkTitle(
+                        title: '완료된 서비스가 아직 없어요.'),
+                    CustomDividerThin(),
                   ],
-                );
-              })
+                ),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: reservations.length,
+                    itemBuilder: (context, index) {
+                      return
+                        Column(
+                        children: [
+                          InkWell(
+                              onTap: () {
+                                int id = reservations[index].reservationId;
+                                ref.read(reservationDetailProvider(id).notifier).fetchReservationDetail(id);
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationDetailPage(id: reservations[index].reservationId)));
+                              },
+                              child: ReservationListTab(service_type: reservations[index].firstCategory,
+                                service_date: reservations[index].reservationDate + ' ' + reservations[index].reservationTime,
+                                is_done: reservations[index].status == 3,) // 1 예약 완료, 2 예약 취소, 3 서비스 완료, 4 환불 완료
+                          ),
+                        ],
+                      );
+                    }),
+              ),
+            ],
+          )
       ),
     );
   }

@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:toyproject/ui/pages/pay_ment_page/widget/pay_ment_page_body.dart';
 
 class PayMentPage extends StatelessWidget {
-  const PayMentPage({super.key});
+  int price;
+  String serviceName;
+  String optionName;
+  PayMentPage(this.price, this.serviceName, this.optionName, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PayMentPageBody(hour: 2,price: 1000),
+      body: PayMentPageBody(price: price, serviceName: serviceName, optionName: optionName),
     );
   }
 }

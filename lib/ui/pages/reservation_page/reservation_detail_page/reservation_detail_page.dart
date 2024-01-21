@@ -67,7 +67,8 @@ class ReservationDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ReservationDetailPageModel? reservationDetailPageModel = ref.watch(reservationDetailProvider(id));
-
+    Logger().d("id값 잘 넘어왔나");
+    Logger().d(id);
     //null 처리 : 상태값이 null일 경우, gif가 출력됨
     if(reservationDetailPageModel?.reservationDetail == null) {
       return Loading();
@@ -148,27 +149,34 @@ class ReservationDetailPage extends ConsumerWidget {
                 ),
 
                 // TODO 완료 또는 취소된 내역이면 아래 (일정 변경하기 ~ 결제수단) 없애기
-
-                CustomDividerThin(),
-                ImageAndTextAndButton(title: '일정 변경하기', icon_name: 'cross_arrow.PNG', acting: (){
+                if(reservationDetail.status == 2)
+                  CustomDividerThin(),
+                if(reservationDetail.status == 2)
+                  ImageAndTextAndButton(title: '일정 변경하기', icon_name: 'cross_arrow.PNG', acting: (){
                   ref.read(reservationChangeProvider.notifier).setReservationId(reservationDetailPageModel!.reservationDetail!.reservationId);
                   ref.read(reservationChangeProvider.notifier).setCleaningDate(
+                    reservationDetail.firstCategory,
                     reservationDetail.reservationDate,
                     reservationDetail.option,
                     reservationDetail.reservationTime,
                     reservationDetail.pet,
-                    1, 1);
+                    1,1
+                   );
                   Navigator.pushNamed(context, Move.ReservationChangePage);
                 },),
-                CustomDividerThin(),
+                if(reservationDetail.status == 2)
+                  CustomDividerThin(),
+                if(reservationDetail.status == 2)
                 ImageAndTextAndButton(title: '일정 취소하기', icon_name: 'clear_icon.PNG', acting: (){
                   ref.read(reservationCancelProvider.notifier).setReservationId(reservationDetailPageModel!.reservationDetail!.reservationId);
                   ref.read(reservationCancelProvider.notifier).setCleaningDate(
+                      reservationDetail.firstCategory,
                       reservationDetail.reservationDate,
                       reservationDetail.option,
                       reservationDetail.reservationTime,
                       reservationDetail.pet,
-                      1, 1);
+                      1,1
+                  );
                   Navigator.pushNamed(context, Move.ReservationCancelPage);
                 },),
 
@@ -184,8 +192,12 @@ class ReservationDetailPage extends ConsumerWidget {
 
                 ImageAndTextAndButtonWithLabel(title: '출입방법', icon_name: 'home_icon.PNG',
                     button_text: reservationDetail.enter == "" || reservationDetail.enter == null ? "없음" : reservationDetail.enter,
+                  isActive: reservationDetail.status == 2 ? true : false,
                   acting: () {
-                    // Navigator.pushNamed(context, Move.EnterAccessMethodsAfterPage);a
+                    if(reservationDetail.status == 3 || reservationDetail.status == 4){
+                      return;
+                    }
+                      // Navigator.pushNamed(context, Move.EnterAccessMethodsAfterPage);a
                     Navigator.push(context, MaterialPageRoute(builder: (context) => EnterAccessMethodsAfterPage(id)));
                   }
                 ),
@@ -194,7 +206,11 @@ class ReservationDetailPage extends ConsumerWidget {
 
                 ImageAndTextAndButtonWithLabel(title: '기타 요청사항', icon_name: 'message_icon.png',
                     button_text: reservationDetail.otherRequest == "" || reservationDetail.otherRequest == null ? "없음" : reservationDetail.otherRequest,
+                    isActive: reservationDetail.status == 2 ? true : false,
                     acting: () {
+                      if(reservationDetail.status == 3 || reservationDetail.status == 4){
+                        return;
+                      }
                       // Navigator.pushNamed(context, Move.EnterOtherRequestsAfterPage);
                       Navigator.push(context, MaterialPageRoute(builder: (context) => EnterOtherRequestsAfterPage(id)));
                     }

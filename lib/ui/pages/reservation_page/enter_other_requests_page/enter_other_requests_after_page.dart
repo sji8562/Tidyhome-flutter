@@ -50,46 +50,54 @@ class EnterOtherRequestsAfterPage extends ConsumerWidget {
                   Text('특히 신경쓸 곳'),
                   SizedBox(height: 5.0,),
 
-                  TextField(
-                    controller: carefulETC,
-                    maxLines: null, // 다중 행으로 설정하려면 null 또는 원하는 줄 수를 지정
-                    maxLength: 150,
-                    textAlignVertical: TextAlignVertical.top,
-                    decoration: InputDecoration(
-                      hintText: '예) 화장실과 주방청소 신경 써주세요.',
-                      hintStyle: TextStyle(color: disableColor, fontSize: 12.0),
-                      // hintTextDirection: ,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: disableColor), // 상하좌우 회색 경계선
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)), // Optional: 모서리 둥글게 만들기
+                  SizedBox(
+                    height: 80,
+                    child: TextField(
+                      controller: carefulETC,
+                      maxLines: null, // 다중 행으로 설정하려면 null 또는 원하는 줄 수를 지정
+                      maxLength: 150,
+                      textAlignVertical: TextAlignVertical.top,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                        hintText: '예) 화장실과 주방청소 신경 써주세요.',
+                        hintStyle: TextStyle(color: disableColor, fontSize: 12.0),
+                        // hintTextDirection: ,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: disableColor), // 상하좌우 회색 경계선
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)), // Optional: 모서리 둥글게 만들기
+                        ),
                       ),
+                      // onChanged: (text) {
+                      //   // 텍스트가 변경될 때 실행되는 콜백 함수
+                      //   print('Typed text: $text');
+                      // },
                     ),
-                    // onChanged: (text) {
-                    //   // 텍스트가 변경될 때 실행되는 콜백 함수
-                    //   print('Typed text: $text');
-                    // },
                   ),
 
                   SizedBox(height: 20.0,),
 
                   Text('기타 요청사항'),
                   SizedBox(height: 5.0,),
-                  TextField(
-                    controller: requestETC,
-                    maxLines: null, // 다중 행으로 설정하려면 null 또는 원하는 줄 수를 지정
-                    maxLength: 150,
-                    decoration: InputDecoration(
-                      hintText: '예) 빨래는 돌리지 않아도 됩니다.',
-                      hintStyle: TextStyle(color: disableColor, fontSize: 12.0),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: disableColor), // 상하좌우 회색 경계선
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)), // Optional: 모서리 둥글게 만들기
+                  SizedBox(
+                    height: 80,
+                    child: TextField(
+                      controller: requestETC,
+                      maxLines: null, // 다중 행으로 설정하려면 null 또는 원하는 줄 수를 지정
+                      maxLength: 150,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                        hintText: '예) 빨래는 돌리지 않아도 됩니다.',
+                        hintStyle: TextStyle(color: disableColor, fontSize: 12.0),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: disableColor), // 상하좌우 회색 경계선
+                          borderRadius: BorderRadius.all(Radius.circular(5.0)), // Optional: 모서리 둥글게 만들기
+                        ),
                       ),
+                      // onChanged: (text) {
+                      //   // 텍스트가 변경될 때 실행되는 콜백 함수
+                      //   print('Typed text: $text');
+                      // },
                     ),
-                    // onChanged: (text) {
-                    //   // 텍스트가 변경될 때 실행되는 콜백 함수
-                    //   print('Typed text: $text');
-                    // },
                   ),
 
                   SizedBox(height: 20.0,),

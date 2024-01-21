@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:toyproject/_core/constants/Define.dart';
 import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
+import 'package:toyproject/ui/pages/service_detail_page/applience_page/applience_page.dart';
+import 'package:toyproject/ui/pages/service_detail_page/housekeeper_page/housekeeper_page.dart';
+import 'package:toyproject/ui/pages/service_detail_page/movement_page/movement_page.dart';
 import 'package:toyproject/ui/pages/service_detail_page/widget/title_and_fee.dart';
 import 'package:toyproject/ui/widget/arrow_app_bar.dart';
 import 'package:toyproject/ui/widget/button/color_button.dart';
@@ -41,25 +44,25 @@ class _HouseKeeperPageState extends State<OfficePage>
                   WhiteColorButton(
                       text: '가사도우미',
                       funPageRoute: () {
-                        Navigator.pushNamed(context, Move.HouseKeeperPage);
+                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HouseKeeperPage(),));
                       }),
                   const SizedBox(height: 5.0),
                   ColorButton(
                       text: '사무실 청소',
                       funPageRoute: () {
-                        Navigator.pushNamed(context, Move.OfficePage);
+                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) =>OfficePage(),));
                       }),
                   const SizedBox(height: 5.0),
                   WhiteColorButton(
                       text: '이사청소',
                       funPageRoute: () {
-                        Navigator.pushNamed(context, Move.MovementPage);
+                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => MovementPage()));
                       }),
                   SizedBox(height: 5.0),
                   WhiteColorButton(
                       text: '가전/침대청소',
                       funPageRoute: () {
-                        Navigator.pushNamed(context, Move.AppliencePage);
+                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => AppliencePage()));
                       }),
                   Padding(
                     padding: const EdgeInsets.symmetric(

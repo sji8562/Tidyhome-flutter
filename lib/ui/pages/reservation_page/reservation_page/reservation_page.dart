@@ -27,7 +27,9 @@ class ReservationPage extends ConsumerWidget {
             (ref.read(choiceAddressProvider.notifier).findFirstAddress()?.addressDetail ?? "설정");
 
     return Scaffold(
-      appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: "",),
+      appBar: ArrowAppBar(leading: Icons.keyboard_backspace, title: "", moveRoute: (){
+        Navigator.pushNamed(context, Move.MainPage);
+      },),
       body: Column(
         children: [
           Container(
