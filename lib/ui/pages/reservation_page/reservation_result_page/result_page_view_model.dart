@@ -48,6 +48,10 @@ class ResultPageViewModel extends StateNotifier<ResultPageModel?> {
     state = state?.copyWith(cleaningDate: CleaningDate(value1, value2, value3, value4, value5, value6, value7));
   }
 
+  void setInitState(){
+    state = ResultPageModel(howToOpen: "", doorPassword: "", carefulETC: "", requestETC: "");
+  }
+
 }
 
 final resultPageProvider = StateNotifierProvider<ResultPageViewModel, ResultPageModel?>((ref) {
