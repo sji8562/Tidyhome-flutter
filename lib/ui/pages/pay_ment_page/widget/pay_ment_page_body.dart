@@ -10,6 +10,7 @@ import 'package:toyproject/data/dto/response_dto/response_dto.dart';
 import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/ui/pages/pay_ment_page/pay_ment_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_confirm_page/confrim_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_result_page/result_page_view_model.dart';
 
 import '../../../../_core/constants/move.dart';
@@ -69,7 +70,8 @@ class PayMentPageBody extends ConsumerWidget {
           PaymentRequestDTO requestDTO =
           PaymentRequestDTO(ref.read(choiceAddressProvider.notifier).findFirstAddress()!.id,
               (extractHour(ref.read(resultPageProvider)!.cleaningDate!.soYoTime) / 2).toInt(), ref.read(resultPageProvider)!.cleaningDate!.dateTime,
-              ref.read(resultPageProvider)!.cleaningDate!.startToEndTime, ref.read(resultPageProvider)!.cleaningDate!.hasPet);
+              ref.read(resultPageProvider)!.cleaningDate!.startToEndTime, ref.read(resultPageProvider)!.cleaningDate!.hasPet,
+          ref.read(resultPageProvider)!.howToOpen, ref.read(resultPageProvider)!.doorPassword, ref.read(resultPageProvider)!.carefulETC, ref.read(resultPageProvider)!.requestETC, 2);
           ref.read(paymentProvider.notifier).fetchPayment(requestDTO);
           Logger().d("니가 문제냐?");
           //서버에 실패했다는 alert창 띄우기

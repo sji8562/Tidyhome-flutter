@@ -55,8 +55,9 @@ class ReservationDetail {
 
   @override
   String toString() {
-    return 'ReservationDetail{address: $address, addressDetail: $addressDetail, reservationDate: $reservationDate, reservationTime: $reservationTime, pet: $pet, price: $price, firstCategory: $firstCategory, secondCategory: $secondCategory, option: $option, status: $status}';
+    return 'ReservationDetail{address: $address, addressDetail: $addressDetail, reservationDate: $reservationDate, reservationTime: $reservationTime, pet: $pet, price: $price, firstCategory: $firstCategory, secondCategory: $secondCategory, option: $option, status: $status, enter: $enter, enterPassword: $enterPassword, special: $special, otherRequest: $otherRequest}';
   }
+
 
   // String getFormattedDateWithYear() {
   //   return DateFormat("yyyy년 M월 d일").format(reservationDate);
