@@ -38,17 +38,16 @@ class ReservationDetail {
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   ReservationDetail.fromJson(Map<String, dynamic> json)
       : reservationId = json["reservationId"],
-        status = json["status"],
-        address = json["address"],
-        addressDetail = json["addressDetail"],
-        // reservationDate = DateTime.parse(json["reservationDate"]),
-        reservationDate = json["reservationDate"],
-        reservationTime = json["reservationTime"],
-        pet = json["pet"],
-        enter = json["enter"],
-        enterPassword = json["enterPassword"],
-        special = json["special"],
-        otherRequest = json["otherRequest"],
+        status = json["status"] ?? 2,
+        address = json["address"] ?? "",
+        addressDetail = json["addressDetail"] ?? "",
+        reservationDate = json["reservationDate"] ?? "",
+        reservationTime = json["reservationTime"] ?? "",
+        pet = json["pet"] ?? false,
+        enter = json["enter"] ?? "",
+        enterPassword = json["enterPassword"] ?? "",
+        special = json["special"] ?? "",
+        otherRequest = json["otherRequest"] ?? "",
         price = json["price"],
         firstCategory = json["firstCategory"],
         secondCategory = json["secondCategory"],
@@ -56,7 +55,7 @@ class ReservationDetail {
 
   @override
   String toString() {
-    return 'ReservationDetail{address: $address, addressDetail: $addressDetail, reservationDate: $reservationDate, reservationTime: $reservationTime, pet: $pet, price: $price, firstCategory: $firstCategory, secondCategory: $secondCategory, option: $option}';
+    return 'ReservationDetail{address: $address, addressDetail: $addressDetail, reservationDate: $reservationDate, reservationTime: $reservationTime, pet: $pet, price: $price, firstCategory: $firstCategory, secondCategory: $secondCategory, option: $option, status: $status}';
   }
 
   // String getFormattedDateWithYear() {

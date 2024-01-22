@@ -10,6 +10,7 @@ import 'package:toyproject/ui/pages/pay_ment_page/pay_ment_page_view_model.dart'
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_after_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_list_page/reservation_list_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_result_page/result_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button_with_label.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/reservation_success.dart';
@@ -124,10 +125,7 @@ class _ResultPageBodyState extends ConsumerState<ResultConfirmBody> {
                           children: [
                             textBody6('결제 완료 금액'),
 
-                            textBody6(
-                                resultPageModel!.cleaningDate!.areaSize > 0 ?
-                                "${formatNumberWithComma(extractPrice(resultPageModel!.cleaningDate!.soYoTime) * resultPageModel!.cleaningDate!.areaSize)} 원"
-                                    : "${formatNumberWithComma(extractPrice(resultPageModel!.cleaningDate?.soYoTime ?? "0원"))}원")
+                            textBody6("${formatNumberWithComma(extractPrice(resultPageModel!.cleaningDate!.soYoTime))}원")
                           ],
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         ),
@@ -163,6 +161,7 @@ class _ResultPageBodyState extends ConsumerState<ResultConfirmBody> {
             child: Container(
               // TODO move to 예약 내역
                 child: ColorButtonFullWith(text: '확인', action: (){
+                  ref.read(reservationProvider.notifier).fetchReservation();
                   Navigator.pushNamed(context, Move.ReservationListPage);
                 })
             )

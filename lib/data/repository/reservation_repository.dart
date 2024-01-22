@@ -8,11 +8,14 @@ import 'package:toyproject/data/model/reservationDetail.dart';
 
 class ReservationRepository {
   // 예약 내역 조회
-  Future<ResponseDTO> fetchReservation() async {
+  Future<ResponseDTO> fetchReservation(int id, String jwt) async {
     Logger().d("fetchReservation 진입");
     try {
       Response<dynamic> response =
-      await dio.get("/reservation/list");
+      await dio.get("/reservation/list/all/$id", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }));
       Logger().d("예약내역 리스트 요청 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       Logger().d("예약내역 리스트 요청 통신 진입1111111111111111");
@@ -31,11 +34,14 @@ class ReservationRepository {
   }
 
   // 완료된 서비스 내역 조회
-  Future<ResponseDTO> fetchCompletedReservation() async {
+  Future<ResponseDTO> fetchCompletedReservation(int id, String jwt) async {
     Logger().d("fetchCompletedReservation 진입");
     try {
       Response<dynamic> response =
-      await dio.get("/reservation/list/completed");
+      await dio.get("/reservation/list/completed/$id", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }));
       Logger().d("완료된 서비스 리스트 요청 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapList = responseDTO.response;
@@ -52,15 +58,20 @@ class ReservationRepository {
   }
 
   // 예약 내역 상세
-  Future<ResponseDTO> fetchReservationDetail(id) async {
+  Future<ResponseDTO> fetchReservationDetail(int id, String jwt) async {
     Logger().d("fetchReservationDetail 진입");
     try {
-      Response<dynamic> response = await dio.get("/reservation/list/$id");
+      Response<dynamic> response = await dio.get("/reservation/list/$id", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }));
       Logger().d("fetchReservationDetail 진입 111111111111");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       Logger().d("fetchReservationDetail 진입 222222222222");
-      Logger().d(responseDTO.response.toString());
+      Logger().d(responseDTO.response);
       responseDTO.response = ReservationDetail.fromJson(responseDTO.response);
+      ReservationDetail reservationDetail = responseDTO.response;
+      Logger().d(reservationDetail.toString());
       Logger().d("fetchReservationDetail 진입 333333333333");
       return responseDTO;
     } catch (e) {
@@ -86,10 +97,13 @@ class ReservationRepository {
   // }
 
   Future<ResponseDTO> fetchReservationUpdate(
-      ReservationUpdateDTO request) async {
+      ReservationUpdateDTO request, String jwt) async {
     try {
       Response<dynamic> response = await dio.post(
-          "/reservation/list/${request.id}/update", data: request.toJson());
+          "/reservation/list/${request.id}/update", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }), data: request.toJson());
       Logger().d("fetchReservationUpdate진입 111111111111");
       Logger().d(request.toJson());
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
@@ -103,10 +117,13 @@ class ReservationRepository {
     }
   }
 
-  Future<ResponseDTO> fetchReservationCancel(int id) async {
+  Future<ResponseDTO> fetchReservationCancel(int id, String jwt) async {
     try {
       final response = await dio.post(
-          "/reservation/cancel/$id");
+          "/reservation/cancel/$id", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }));
       Logger().d("fetchReservationCancel진입 111111111111");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       Logger().d("fetchReservationCancel진입 222222222222");
@@ -119,11 +136,14 @@ class ReservationRepository {
     }
   }
 
-    Future<ResponseDTO> deleteEnterAccessMethods(reservationId) async {
+    Future<ResponseDTO> deleteEnterAccessMethods(int reservationId, String jwt) async {
       try {
         Logger().d("출입 방법 삭제 호출");
         Response<dynamic> response = await dio.post(
-            "/reservation/list/$reservationId/enter/delete");
+            "/reservation/list/$reservationId/enter/delete", options: Options(headers: {
+          "Authorization": "Bearer $jwt",
+          // 다른 필요한 헤더도 추가할 수 있습니다.
+        }));
         Logger().d("결과 ================ 1111111");
         Logger().d(response);
         ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
@@ -135,11 +155,14 @@ class ReservationRepository {
       }
     }
 
-  Future<ResponseDTO> fetchEnterAccessMethodsSave(EnterAccessUpdateDTO request) async {
+  Future<ResponseDTO> fetchEnterAccessMethodsSave(EnterAccessUpdateDTO request, String jwt) async {
     try {
       Logger().d("출입 방법 업데이트 호출");
       Response<dynamic> response = await dio.post(
-          "/reservation/list/${request.reservationId}/enter", data: request.toJson());
+          "/reservation/list/${request.reservationId}/enter", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }), data: request.toJson());
       Logger().d("출입 방법 업데이트 1111111");
       Logger().d(response);
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
@@ -151,11 +174,14 @@ class ReservationRepository {
     }
   }
 
-  Future<ResponseDTO> deleteOtherRequestMethods(reservationId) async {
+  Future<ResponseDTO> deleteOtherRequestMethods(reservationId, String jwt) async {
     try {
       Logger().d("기타 요청사항 삭제 호출");
       Response<dynamic> response = await dio.post(
-          "/reservation/list/$reservationId/request/delete");
+          "/reservation/list/$reservationId/request/delete", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }));
       Logger().d("결과 ================ 1111111");
       Logger().d(response);
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
@@ -167,11 +193,14 @@ class ReservationRepository {
     }
   }
 
-  Future<ResponseDTO> fetchUpdateOtherRequestMethods(OtherRequestUpdateDTO request) async {
+  Future<ResponseDTO> fetchUpdateOtherRequestMethods(OtherRequestUpdateDTO request, String jwt) async {
     try {
       Logger().d("기타 요청사항 업데이트 호출");
       Response<dynamic> response = await dio.post(
-          "/reservation/list/${request.reservationId}/request", data: request.toJson());
+          "/reservation/list/${request.reservationId}/request", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }), data: request.toJson());
       Logger().d("기타 요청사항 업데이트 호출 1111111");
       Logger().d(response);
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);

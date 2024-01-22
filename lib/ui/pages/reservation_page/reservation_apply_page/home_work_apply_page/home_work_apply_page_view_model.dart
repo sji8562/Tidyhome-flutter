@@ -7,6 +7,7 @@ import 'package:toyproject/data/model/option_price.dart';
 import 'package:toyproject/data/repository/option_repository.dart';
 import 'package:toyproject/data/repository/payment_repository.dart';
 import 'package:toyproject/data/repository/reservation_repository.dart';
+import 'package:toyproject/data/store/session_store.dart';
 
 import '../../../../../data/model/home_work_apply_field.dart';
 
@@ -31,24 +32,27 @@ class HomeWorkApplyPageModel  {
 
 // 2. 창고
 class HomeWorkApplyPageViewModel extends StateNotifier<HomeWorkApplyPageModel?> {
-  HomeWorkApplyPageViewModel(super.state);
+  Ref ref;
+  HomeWorkApplyPageViewModel(super.state, this.ref);
 
     Future<void> roadOptions() async {
-      ResponseDTO responseDTO = await OptionRepository().fetchOptionList(1);
+      ResponseDTO responseDTO = await OptionRepository().fetchOptionList(1, ref.read(sessionProvider)!.jwt!);
       state = state!.copyWith(options: responseDTO.response);
+      addServiceTime();
+    }
 
+    void addServiceTime() {
       List<String> selectList = state!.options!.map((option) {
         return '${option.name} / ${formatNumberWithComma(option.price)}원';
       }).toList();
-      HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: selectList);
-      state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+    HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: selectList);
+    state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+  }
 
-    }
-
-  //   void addServiceTime() {
-  //   HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "서비스 시간은 얼마나 필요하신가요?", selectList: ["2시간/38,900원", "4시간/51,900원", "6시간/64,900원", "8시간/112,900원"]);
-  //   state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
-  // }
+  void delServiceTime(){
+    HomeWorkApplyField homeWorkApplyField = state!.homeWorkFields![0].copyWith(selectList: []);
+    state = state!.copyWith(homeWorkFields: [homeWorkApplyField]);
+  }
 
   void addServiceDate() {
     HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "청소는 언제로 도와드릴까요? (클릭)");
@@ -95,6 +99,11 @@ class HomeWorkApplyPageViewModel extends StateNotifier<HomeWorkApplyPageModel?> 
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
   }
 
+  void delServiceStartTime(){
+    HomeWorkApplyField homeWorkApplyField = state!.homeWorkFields![2].copyWith(selectList: []);
+      state = state!.copyWith(homeWorkFields: [state!.homeWorkFields![0], state!.homeWorkFields![1], homeWorkApplyField]);
+  }
+
   void addHasPet(){
     HomeWorkApplyField homeWorkApplyField = HomeWorkApplyField(question: "혹시 반려동물이 있으신가요?", selectList: ["예", "아니오"]);
     state = state!.copyWith(homeWorkFields: [...state!.homeWorkFields!, homeWorkApplyField]);
@@ -126,5 +135,5 @@ class HomeWorkApplyPageViewModel extends StateNotifier<HomeWorkApplyPageModel?> 
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
 final homeWorkApplyProvider =
 StateNotifierProvider<HomeWorkApplyPageViewModel, HomeWorkApplyPageModel?>((ref) {
-  return HomeWorkApplyPageViewModel(HomeWorkApplyPageModel([], []))..roadOptions();
+  return HomeWorkApplyPageViewModel(HomeWorkApplyPageModel([], []), ref)..roadOptions();
 });

@@ -61,7 +61,7 @@ List<ServiceLocation> koreaCity = [
   ServiceLocation(
       '서울',
       [
-        SubCity('강남구', true),
+        SubCity('강남구', false),
         SubCity('강동구', false),
         SubCity('강북구', false),
         SubCity('강서구', false),

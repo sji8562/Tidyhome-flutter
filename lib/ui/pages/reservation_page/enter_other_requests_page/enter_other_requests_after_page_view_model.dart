@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:toyproject/data/dto/request_dto/reservation/reservation_request.dart';
 import 'package:toyproject/data/dto/response_dto/response_dto.dart';
 import 'package:toyproject/data/repository/reservation_repository.dart';
+import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/main.dart';
 
 class EnterOtherRequestsAfterPageModel {
@@ -13,12 +14,13 @@ class EnterOtherRequestsAfterPageModel {
 
 // 창고
 class EnterOtherRequestsAfterPageViewModel extends StateNotifier<EnterOtherRequestsAfterPageModel?> {
+  Ref ref;
   final mContext = navigatorKey.currentContext;
-  EnterOtherRequestsAfterPageViewModel(super._state);
+  EnterOtherRequestsAfterPageViewModel(super._state, this.ref);
 
   Future<void> deleteEnterOtherRequestsMethods(reservationId) async {
     Logger().d("deleteEnterOtherRequestsMethods 진입");
-    ResponseDTO responseDTO = await ReservationRepository().deleteOtherRequestMethods(reservationId);
+    ResponseDTO responseDTO = await ReservationRepository().deleteOtherRequestMethods(reservationId, ref.read(sessionProvider).jwt!);
 
     if(responseDTO.success == true) {
       ScaffoldMessenger.of(mContext!).showSnackBar(
@@ -36,7 +38,7 @@ class EnterOtherRequestsAfterPageViewModel extends StateNotifier<EnterOtherReque
   }
   Future<void> updateOtherRequestsMethods(OtherRequestUpdateDTO request) async {
     Logger().d("뷰모델 updateOtherRequestsMethods 진입");
-    ResponseDTO responseDTO = await ReservationRepository().fetchUpdateOtherRequestMethods(request);
+    ResponseDTO responseDTO = await ReservationRepository().fetchUpdateOtherRequestMethods(request, ref.read(sessionProvider).jwt!);
     if(responseDTO.success == true) {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         SnackBar(
@@ -57,5 +59,5 @@ class EnterOtherRequestsAfterPageViewModel extends StateNotifier<EnterOtherReque
 // 창고 관리자
 final enterOtherRequestsProvider =
 StateNotifierProvider<EnterOtherRequestsAfterPageViewModel, EnterOtherRequestsAfterPageModel?>((ref) {
-  return EnterOtherRequestsAfterPageViewModel(EnterOtherRequestsAfterPageModel());
+  return EnterOtherRequestsAfterPageViewModel(EnterOtherRequestsAfterPageModel(), ref);
 });

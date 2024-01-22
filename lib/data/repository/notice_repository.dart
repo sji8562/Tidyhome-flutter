@@ -7,11 +7,14 @@ import '../model/notice.dart';
 
 class NoticeRepository {
   // 공지사항 조회
-  Future<ResponseDTO> fetchNotice() async {
+  Future<ResponseDTO> fetchNotice(String jwt) async {
     Logger().d("fetchNotice 진입");
     try {
       Response<dynamic> response =
-      await dio.get("/api/notice/list");
+      await dio.get("/api/notice/list", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }));
       Logger().d("공지사항 리스트 요청 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapList = responseDTO.response;
@@ -26,10 +29,13 @@ class NoticeRepository {
   }
 
   // 공지사항 상세보기
-  Future<ResponseDTO> fetchNoticeDetail(id) async {
+  Future<ResponseDTO> fetchNoticeDetail(id, String jwt) async {
     Logger().d("fetchNoticeDetail 진입");
     try {
-      Response<dynamic> response = await dio.get("/api/notice/list/$id");
+      Response<dynamic> response = await dio.get("/api/notice/list/$id", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }));
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       responseDTO.response = Notice.fromJson(responseDTO.response);
       return responseDTO;

@@ -106,6 +106,7 @@ class _ReservationCancelPageBodyState extends ConsumerState<ReservationCancelPag
                                         if(index == 0 && isButtonEnabled1){
                                           ref.read(reservationCancelProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                           Future.delayed(Duration(seconds: 2), () {
+                                            ref.read(reservationCancelProvider.notifier).delWhyChange();
                                             ref.read(reservationCancelProvider.notifier).addChangeOrCancel();
                                           });
                                           isButtonEnabled1 = false;
@@ -115,6 +116,7 @@ class _ReservationCancelPageBodyState extends ConsumerState<ReservationCancelPag
                                           isButtonEnabled2 = false;
                                           isDateSelected = false;
                                           Future.delayed(Duration(seconds: 1), () {
+                                            ref.read(reservationCancelProvider.notifier).delChangeOrCancel();
                                             ref.read(reservationCancelProvider.notifier).addWhenChange();
                                           });
                                         }
@@ -124,6 +126,7 @@ class _ReservationCancelPageBodyState extends ConsumerState<ReservationCancelPag
                                           Future.delayed(Duration(seconds: 1), () {
                                             //버튼4의 false는 취소신청 버튼이 나오게 하는 조건임.
                                             isButtonEnabled4 = false;
+                                            ref.read(reservationCancelProvider.notifier).delChangeOrCancel();
                                             ref.read(reservationCancelProvider.notifier).addNotice();
                                           });
                                         }
@@ -132,6 +135,7 @@ class _ReservationCancelPageBodyState extends ConsumerState<ReservationCancelPag
                                           isButtonEnabled3 = false;
                                           Future.delayed(Duration(seconds: 1), () {
                                             isButtonEnabled4 = false;
+                                            ref.read(reservationCancelProvider.notifier).delServiceStartTime();
                                             ref.read(reservationCancelProvider.notifier).addNotice();
                                           });
                                         }
@@ -224,7 +228,7 @@ class _ReservationCancelPageBodyState extends ConsumerState<ReservationCancelPag
           ref.read(reservationCancelProvider.notifier).updateAnswer(index, formattedDate);
           Navigator.pop(context);
           await Future.delayed(Duration(seconds: 1), () {
-            ref.read(reservationCancelProvider.notifier).addServiceStartTime(extractNumberFromTimeString(ref.read(reservationCancelProvider)!.cleaningDate!.soYoTime!)
+            ref.read(reservationCancelProvider.notifier).addServiceStartTime(extractHour(ref.read(reservationCancelProvider)!.cleaningDate!.soYoTime!)
             );
           });
         }

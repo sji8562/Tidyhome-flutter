@@ -110,7 +110,7 @@ class Move {
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
     //SONG
-    Move.PaymentPage: (context) => PayMentPage(),
+    // Move.PaymentPage: (context) => PayMentPage(),
     //JEONG
     Move.SplashPage: (context) => SplashPage(),
     Move.StartPage: (context) => StartPage(),

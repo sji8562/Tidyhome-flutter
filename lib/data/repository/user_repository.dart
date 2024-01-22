@@ -119,11 +119,13 @@ class UserRepository {
   }
 
   // 회원 탈퇴
-  Future<ResponseDTO> fetchCloseAccount() async {
+  Future<ResponseDTO> fetchCloseAccount(int id, String jwt) async {
     try {
       Logger().d("회원 탈퇴 호출");
-      Response<dynamic> response = await dio.post("/api/users/delete"
-          // , data: {"tel" : "1234"}
+      Response<dynamic> response = await dio.post("/api/users/delete/$id", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      })
       );
       Logger().d("결과 ================ 1111111");
       Logger().d(response);
@@ -136,10 +138,14 @@ class UserRepository {
   }
 
   // 파트너 업데이트
-  Future<ResponseDTO> fetchPartnerUpdate(PartnerUpdateDTO request) async {
+  Future<ResponseDTO> fetchPartnerUpdate(PartnerUpdateDTO request, String jwt) async {
     try {
       Logger().d("fetchPartnerUpdate 요청됨");
       Response<dynamic> response = await dio.post<dynamic>("/api/partner/update",
+          options: Options(headers: {
+            "Authorization": "Bearer $jwt",
+            // 다른 필요한 헤더도 추가할 수 있습니다.
+          }),
           data: request.toJson());
 
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);

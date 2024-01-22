@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:toyproject/data/dto/request_dto/reservation/reservation_request.dart';
 import 'package:toyproject/data/dto/response_dto/response_dto.dart';
 import 'package:toyproject/data/repository/reservation_repository.dart';
+import 'package:toyproject/data/store/session_store.dart';
 import 'package:toyproject/main.dart';
 
 class EnterAccessMethodsPageModel {
@@ -14,11 +15,12 @@ class EnterAccessMethodsPageModel {
 // 창고
 class EnterAccessMethodsPageViewModel extends StateNotifier<EnterAccessMethodsPageModel?> {
   final mContext = navigatorKey.currentContext;
-  EnterAccessMethodsPageViewModel(super._state);
+  Ref ref;
+  EnterAccessMethodsPageViewModel(super._state, this.ref);
 
   Future<void> deleteEnterAccessMethods(reservationId) async {
     Logger().d("deleteEnterAccessMethods 진입");
-    ResponseDTO responseDTO = await ReservationRepository().deleteEnterAccessMethods(reservationId);
+    ResponseDTO responseDTO = await ReservationRepository().deleteEnterAccessMethods(reservationId, ref.read(sessionProvider).jwt!);
 
     if(responseDTO.success == true) {
       ScaffoldMessenger.of(mContext!).showSnackBar(
@@ -36,7 +38,7 @@ class EnterAccessMethodsPageViewModel extends StateNotifier<EnterAccessMethodsPa
   }
   Future<void> updateEnterAccessMethods(EnterAccessUpdateDTO request) async {
     Logger().d("뷰모델 updateEnterAccessMethods 진입");
-    ResponseDTO responseDTO = await ReservationRepository().fetchEnterAccessMethodsSave(request);
+    ResponseDTO responseDTO = await ReservationRepository().fetchEnterAccessMethodsSave(request, ref.read(sessionProvider).jwt!);
 
     if(responseDTO.success == true) {
       ScaffoldMessenger.of(mContext!).showSnackBar(
@@ -58,5 +60,5 @@ class EnterAccessMethodsPageViewModel extends StateNotifier<EnterAccessMethodsPa
 // 창고 관리자
 final enterAccessMethodsProvider =
     StateNotifierProvider<EnterAccessMethodsPageViewModel, EnterAccessMethodsPageModel?>((ref) {
-      return EnterAccessMethodsPageViewModel(EnterAccessMethodsPageModel());
+      return EnterAccessMethodsPageViewModel(EnterAccessMethodsPageModel(), ref);
     });

@@ -22,7 +22,7 @@ class ReservationListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(sessionProvider).setUser();
+    // ref.read(sessionProvider).setUser();
     ReservationPageModel? reservationPageModel = ref.watch(reservationProvider);
     Logger().d("*-*-*-*-*-*-*");
     Logger().d(reservationPageModel!.reservationList.toString());

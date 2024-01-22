@@ -6,10 +6,12 @@ import 'package:toyproject/_core/constants/color.dart';
 import 'package:toyproject/_core/constants/move.dart';
 import 'package:toyproject/_core/constants/style.dart';
 import 'package:toyproject/_core/utils/extract_time_util.dart';
+import 'package:toyproject/ui/pages/pay_ment_page/pay_ment_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_address_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_page.dart';
 import 'package:toyproject/ui/pages/reservation_page/enter_access_methods_page/enter_access_methods_after_page_view_model.dart';
 import 'package:toyproject/ui/pages/reservation_page/reservation_result_page/result_page_view_model.dart';
+import 'package:toyproject/ui/pages/reservation_page/reservation_result_page/widget/reservation_proceed.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/image_text_button_with_label.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/reservation_success.dart';
 import 'package:toyproject/ui/widget/blue_small_text_button.dart';
@@ -49,7 +51,7 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
         SingleChildScrollView(
           child: Column(
             children: [
-              ReservationSuccess(),
+              ReservationProceed(),
 
               const CustomDivider(),
 
@@ -119,10 +121,7 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
                           children: [
                             textBody6('결제 예정 금액'),
 
-                            textBody6(
-                                resultPageModel!.cleaningDate!.areaSize > 0 ?
-                                "${formatNumberWithComma(extractPrice(resultPageModel!.cleaningDate!.soYoTime) * resultPageModel!.cleaningDate!.areaSize)} 원"
-                                    : "${formatNumberWithComma(extractPrice(resultPageModel!.cleaningDate?.soYoTime ?? "0원"))}원")
+                            textBody6("${formatNumberWithComma(extractPrice(resultPageModel!.cleaningDate!.soYoTime))}원")
                           ],
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         ),
@@ -157,7 +156,7 @@ class _ResultPageBodyState extends ConsumerState<ResultPageBody> {
         Positioned(bottom: 0,
             child: Container(
                 child: ColorButtonFullWith(text: '확인', action: (){
-                  Navigator.pushNamed(context, Move.PaymentPage);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PayMentPage(extractPrice(resultPageModel!.cleaningDate!.soYoTime), resultPageModel.cleaningDate!.serviceName, resultPageModel.cleaningDate!.soYoTime) ));
                 })
             )
         ),

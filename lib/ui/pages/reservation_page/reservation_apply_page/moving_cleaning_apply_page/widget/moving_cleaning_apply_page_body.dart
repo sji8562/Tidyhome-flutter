@@ -116,6 +116,7 @@ class _MovingCleaningApplyPageBodyState extends ConsumerState<MovingCleaningAppl
                                           optionIndex = index2;
                                           ref.read(movingCleaningApplyProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                           Future.delayed(Duration(seconds: 2), () {
+                                            ref.read(movingCleaningApplyProvider.notifier).delServiceTime();
                                             ref.read(movingCleaningApplyProvider.notifier).addAreaSize();
                                           });
                                           isButtonEnabled1 = false;
@@ -125,6 +126,7 @@ class _MovingCleaningApplyPageBodyState extends ConsumerState<MovingCleaningAppl
                                           ref.read(movingCleaningApplyProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                           isButtonEnabled3 = false;
                                           Future.delayed(Duration(seconds: 2), () {
+                                            ref.read(movingCleaningApplyProvider.notifier).delServiceStartTime();
                                             ref.read(movingCleaningApplyProvider.notifier).addHasPet();
                                           });
                                         }
@@ -204,7 +206,7 @@ class _MovingCleaningApplyPageBodyState extends ConsumerState<MovingCleaningAppl
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: ColorButton(text: "예약 신청", funPageRoute: (){
-              ref.read(resultPageProvider.notifier).setCleaningDate(homeWorkFields[2]!.inputAnswer!,
+              ref.read(resultPageProvider.notifier).setCleaningDate("이사청소", homeWorkFields[2]!.inputAnswer!,
                   homeWorkFields[0]!.inputAnswer!, homeWorkFields[3]!.inputAnswer!, homeWorkFields[4]!.inputAnswer! == "예" ? true : false, parseInt(homeWorkFields[1]!.inputAnswer!), optionIndex+1);
               Navigator.pushNamed(context, Move.ReservationResultPage);
             }),

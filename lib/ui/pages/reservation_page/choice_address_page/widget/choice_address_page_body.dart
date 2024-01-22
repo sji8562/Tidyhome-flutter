@@ -7,6 +7,8 @@ import 'package:toyproject/ui/pages/reservation_page/choice_address_page/choice_
 import 'package:toyproject/ui/pages/reservation_page/choice_address_page/widget/address_detail_setting.dart';
 import 'package:toyproject/ui/pages/reservation_page/widget/choice_address_tab.dart';
 import 'package:toyproject/ui/widget/button/soft_color_button.dart';
+import 'package:toyproject/ui/widget/divider/custom_divider_thin.dart';
+import 'package:toyproject/ui/widget/exclamationmark_title.dart';
 import 'package:toyproject/ui/widget/loading.dart';
 
 class ChoiceAddressPageBody extends ConsumerWidget {
@@ -23,7 +25,6 @@ class ChoiceAddressPageBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Map<String, String> formData = {};
-    ref.read(sessionProvider).setUser();
     ChoiceAddressPageModel? choiceAddressPageModel = ref.watch(choiceAddressProvider);
     if (choiceAddressPageModel?.addressList == null) {
       return const Loading();
@@ -31,6 +32,14 @@ class ChoiceAddressPageBody extends ConsumerWidget {
     List<Address> addresses = choiceAddressPageModel!.addressList!;
     return Stack(
       children: [
+        if (addresses.isEmpty)
+          const Column(
+            children: [
+              ExclamationmarkTitle(
+                  title: '등록된 주소가 없어요. 주소를 등록해주세요!'),
+              CustomDividerThin(),
+            ],
+          ),
         ListView.builder(
           itemCount: addresses.length, // length
           itemBuilder: (context, index) {

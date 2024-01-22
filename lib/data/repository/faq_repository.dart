@@ -8,11 +8,14 @@ import '../model/notice.dart';
 
 class FaqRepository {
   // 공지사항 조회
-  Future<ResponseDTO> fetchFaq(partId) async {
+  Future<ResponseDTO> fetchFaq(partId, String jwt) async {
     Logger().d("fetchFaq 진입");
     try {
       Response<dynamic> response =
-      await dio.get("/api/faq/1/list/$partId");
+      await dio.get("/api/faq/1/list/$partId", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }));
       Logger().d("자주 묻는 질문 리스트 요청 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapList = responseDTO.response;

@@ -6,11 +6,14 @@ import 'package:toyproject/data/model/option_price.dart';
 
 class OptionRepository{
   // 공지사항 조회
-  Future<ResponseDTO> fetchOptionList(int id) async {
+  Future<ResponseDTO> fetchOptionList(int id, String jwt) async {
     Logger().d("fetchNotice 진입");
     try {
       Response<dynamic> response =
-      await dio.get("/api/option/detail?secondCategoryId=$id");
+      await dio.get("/api/option/detail?secondCategoryId=$id", options: Options(headers: {
+        "Authorization": "Bearer $jwt",
+        // 다른 필요한 헤더도 추가할 수 있습니다.
+      }));
       Logger().d("옵션 통신 진입");
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       List<dynamic> mapList = responseDTO.response["optionPrices"];

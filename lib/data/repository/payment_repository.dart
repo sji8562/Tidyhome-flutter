@@ -9,11 +9,15 @@ import '../dto/request_dto/payment/payment_request.dart';
 import '../dto/response_dto/response_dto.dart';
 
 class PaymentRepository {
-  Future<ResponseDTO> fetchPayment(PaymentRequestDTO dto) async {
+  Future<ResponseDTO> fetchPayment(PaymentRequestDTO dto, String jwt) async {
     try {
       Logger().d("들어오니?");
       final response = await dio.post(
         "/reservation/save",
+          options: Options(headers: {
+            "Authorization": "Bearer $jwt",
+            // 다른 필요한 헤더도 추가할 수 있습니다.
+          }),
         data: dto.toJson(),
       );
       Logger().d("와주라 제발");

@@ -27,9 +27,15 @@ class _HomeWorkApplyPageBodyState extends ConsumerState<HomeWorkApplyPageBody> {
   bool isButtonEnabled3 = true;
   bool isButtonEnabled4 = true;
   int optionIndex = 0;
-
-
+  final ScrollController _controller = ScrollController();
   final List<TextEditingController> _homeWorkControllers = [];
+
+  void scrollToBottom() {
+    // MediaQuery를 통해 화면의 높이를 구함
+    double screenHeight = MediaQuery.of(context).size.height;
+    // 스크롤을 최하단으로 이동
+    _controller.jumpTo(screenHeight);
+  }
 
   //유효성 검사 항목을 index에 따라 동적으로 선택하는 함수
   Function? getDynamicValidator(int index) {
@@ -66,6 +72,7 @@ class _HomeWorkApplyPageBodyState extends ConsumerState<HomeWorkApplyPageBody> {
       children: [
         Expanded(
           child: ListView.builder(
+            controller: _controller,
             itemCount: homeWorkFields.length,
             itemBuilder: (context, index) {
               _homeWorkControllers.addAll(List.generate(3, (_) => TextEditingController()));
@@ -110,6 +117,7 @@ class _HomeWorkApplyPageBodyState extends ConsumerState<HomeWorkApplyPageBody> {
                                         optionIndex = index2;
                                         ref.read(homeWorkApplyProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                         Future.delayed(Duration(seconds: 2), () {
+                                          ref.read(homeWorkApplyProvider.notifier).delServiceTime();
                                           ref.read(homeWorkApplyProvider.notifier).addServiceDate();
                                         });
                                         isButtonEnabled1 = false;
@@ -118,6 +126,7 @@ class _HomeWorkApplyPageBodyState extends ConsumerState<HomeWorkApplyPageBody> {
                                         ref.read(homeWorkApplyProvider.notifier).updateAnswer(index, homeWorkFields[index].selectList![index2]);
                                         isButtonEnabled2 = false;
                                         Future.delayed(Duration(seconds: 2), () {
+                                          ref.read(homeWorkApplyProvider.notifier).delServiceStartTime();
                                           ref.read(homeWorkApplyProvider.notifier).addHasPet();
                                         });
                                       }
@@ -168,9 +177,8 @@ class _HomeWorkApplyPageBodyState extends ConsumerState<HomeWorkApplyPageBody> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: ColorButton(text: "예약 신청", funPageRoute: (){
-                ref.read(resultPageProvider.notifier).
-                setCleaningDate(homeWorkFields[1]!.inputAnswer!, homeWorkFields[0]!.inputAnswer!,
-                    homeWorkFields[2]!.inputAnswer!, homeWorkFields[3]!.inputAnswer! == "예" ? true : false, 0, optionIndex+1);
+                ref.read(resultPageProvider.notifier).setCleaningDate("가사도우미", homeWorkFields[1]!.inputAnswer!, homeWorkFields[0]!.inputAnswer!,
+                    homeWorkFields[2]!.inputAnswer!, homeWorkFields[3]!.inputAnswer! == "예" ? true : false, 0, optionIndex + 1);
                 Navigator.pushNamed(context, Move.ReservationResultPage);
               }),
             )

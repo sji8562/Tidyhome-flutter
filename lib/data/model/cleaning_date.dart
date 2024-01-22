@@ -1,4 +1,5 @@
 class CleaningDate {
+  String serviceName;
   String dateTime;
   String soYoTime;
   String startToEndTime;
@@ -7,5 +8,5 @@ class CleaningDate {
   int optionId;
 
 
-  CleaningDate(this.dateTime, this.soYoTime, this.startToEndTime, this.hasPet, this.areaSize, this.optionId);
+  CleaningDate(this.serviceName, this.dateTime, this.soYoTime, this.startToEndTime, this.hasPet, this.areaSize, this.optionId);
 }
